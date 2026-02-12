@@ -1,0 +1,1 @@
+# Receipts App - Receipt Generation and Management

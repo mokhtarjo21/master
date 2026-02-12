@@ -1,0 +1,47 @@
+INFO 2026-02-12 05:45:28,693 autoreload 6588 123929385906304 Watching for file changes with StatReloader
+INFO 2026-02-12 05:52:32,258 autoreload 6940 125713879105664 Watching for file changes with StatReloader
+INFO 2026-02-12 05:53:50,652 autoreload 6990 127128484270208 Watching for file changes with StatReloader
+INFO 2026-02-12 05:55:47,218 autoreload 6990 127128484270208 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 05:55:48,269 autoreload 7044 131468198264960 Watching for file changes with StatReloader
+INFO 2026-02-12 05:57:38,668 autoreload 7181 127775739519104 Watching for file changes with StatReloader
+INFO 2026-02-12 05:58:26,418 autoreload 7181 127775739519104 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 05:58:27,972 autoreload 7230 132718480846976 Watching for file changes with StatReloader
+INFO 2026-02-12 05:59:13,235 autoreload 7230 132718480846976 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 05:59:14,685 autoreload 7250 138388490629248 Watching for file changes with StatReloader
+INFO 2026-02-12 05:59:28,837 autoreload 7250 138388490629248 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 05:59:30,378 autoreload 7257 139615365521536 Watching for file changes with StatReloader
+INFO 2026-02-12 05:59:48,641 autoreload 7264 127490255249536 Watching for file changes with StatReloader
+INFO 2026-02-12 06:00:14,390 autoreload 7280 137030777327744 Watching for file changes with StatReloader
+INFO 2026-02-12 06:04:41,678 autoreload 7384 140017333256320 Watching for file changes with StatReloader
+INFO 2026-02-12 06:07:54,681 autoreload 7384 140017333256320 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:07:56,141 autoreload 7493 136011756769408 Watching for file changes with StatReloader
+INFO 2026-02-12 06:07:58,394 autoreload 7493 136011756769408 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:07:59,819 autoreload 7497 132249013932160 Watching for file changes with StatReloader
+INFO 2026-02-12 06:08:02,170 autoreload 7497 132249013932160 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:08:03,617 autoreload 7499 136781597667456 Watching for file changes with StatReloader
+INFO 2026-02-12 06:08:35,537 autoreload 7499 136781597667456 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:08:36,932 autoreload 7510 123765023830144 Watching for file changes with StatReloader
+INFO 2026-02-12 06:08:48,783 autoreload 7510 123765023830144 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:08:50,271 autoreload 7516 137383567908992 Watching for file changes with StatReloader
+INFO 2026-02-12 06:08:52,306 autoreload 7516 137383567908992 /home/mekhotek/Downloads/master app/project/attendance/admin.py changed, reloading.
+INFO 2026-02-12 06:08:53,828 autoreload 7518 127170654392448 Watching for file changes with StatReloader
+INFO 2026-02-12 06:09:47,229 autoreload 7518 127170654392448 /home/mekhotek/Downloads/master app/project/students/admin.py changed, reloading.
+INFO 2026-02-12 06:09:48,772 autoreload 7603 136853616824448 Watching for file changes with StatReloader
+INFO 2026-02-12 06:10:42,919 autoreload 7603 136853616824448 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 06:10:44,333 autoreload 7626 138159977713792 Watching for file changes with StatReloader
+INFO 2026-02-12 06:10:46,679 autoreload 7626 138159977713792 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 06:10:48,118 autoreload 7628 126773658689664 Watching for file changes with StatReloader
+INFO 2026-02-12 06:13:15,487 autoreload 7628 126773658689664 /home/mekhotek/Downloads/master app/project/groups/models.py changed, reloading.
+INFO 2026-02-12 06:13:16,989 autoreload 7682 135305423290496 Watching for file changes with StatReloader
+INFO 2026-02-12 06:13:51,169 autoreload 7682 135305423290496 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 06:13:52,669 autoreload 7700 135421491216512 Watching for file changes with StatReloader
+INFO 2026-02-12 06:16:41,665 autoreload 7700 135421491216512 /home/mekhotek/Downloads/master app/project/smart_teacher_assistant/settings.py changed, reloading.
+INFO 2026-02-12 06:16:43,453 autoreload 7804 138198984986752 Watching for file changes with StatReloader
+INFO 2026-02-12 06:21:09,348 autoreload 7931 124080613113984 Watching for file changes with StatReloader
+WARNING 2026-02-12 06:21:23,777 log 7931 124080447551168 Not Found: /
+WARNING 2026-02-12 06:21:52,686 log 7931 124080447551168 Not Found: /api/auth
+WARNING 2026-02-12 06:21:59,125 log 7931 124080447551168 Not Found: /api/auth/
+WARNING 2026-02-12 06:22:47,928 log 7931 124080447551168 Method Not Allowed: /api/auth/teacher-login/
+WARNING 2026-02-12 06:22:48,116 log 7931 124080439158464 Not Found: /favicon.ico
+WARNING 2026-02-12 06:24:18,152 log 7931 124080447551168 Not Found: /api/auth
+WARNING 2026-02-12 06:24:29,450 log 7931 124080447551168 Not Found: /api/auth/
