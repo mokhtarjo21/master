@@ -1,0 +1,1 @@
+# Smart Insights App - Analytics and Intelligence Engine
