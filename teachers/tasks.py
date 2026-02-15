@@ -66,7 +66,7 @@ def calculate_teacher_stats(teacher, date_obj, stat_type):
     """Calculate statistics for a teacher for given date and type"""
     from students.models import Student
     from groups.models import Group
-    from sessions.models import Session
+    from teaching_sessions.models import Session
     from attendance.models import Attendance
     from payments.models import Payment
     

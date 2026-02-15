@@ -70,7 +70,7 @@ class BulkAttendanceSerializer(serializers.Serializer):
     )
     
     def validate_session_id(self, value):
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         try:
             session = Session.objects.get(id=value)
             # Ensure teacher owns the session

@@ -126,7 +126,9 @@ class StudentQRSerializer(serializers.Serializer):
     def validate_student_id(self, value):
         from students.models import Student
         try:
-            student = Student.objects.get(id=value, is_active=True)
+            print(value)
+            student = Student.objects.get(id=value)
+            print(student)
             return value
         except Student.DoesNotExist:
             raise serializers.ValidationError('Student not found')

@@ -139,8 +139,9 @@ class Student(models.Model):
             base_price = base_price * (1 - self.student_discount / 100)
         
         # Apply group discount if student is in a group
-        groups = self.student_groups.filter(is_active=True)
-        for group in groups:
+        student_groups = self.student_groups.filter(is_active=True)
+        for student_group in student_groups:
+            group = student_group.group
             if group.group_discount > 0:
                 # Only apply if student discount is lower or doesn't exist
                 group_discount_amount = base_price * (group.group_discount / 100)
@@ -159,8 +160,10 @@ class Student(models.Model):
         elif self.subscription_type == 'monthly':
             # Calculate monthly remaining based on groups
             total_monthly = Decimal('0')
-            for group in self.student_groups.filter(is_active=True):
-                monthly_price = self.calculate_discount_price(group.monthly_price or self.monthly_price)
+            for student_group in self.student_groups.filter(is_active=True):
+                # Use group price if available, otherwise fallback to student's base price
+                price_to_use = student_group.group.monthly_price if student_group.group.monthly_price > 0 else self.monthly_price
+                monthly_price = self.calculate_discount_price(price_to_use)
                 total_monthly += monthly_price
             
             total_paid_monthly = self.get_monthly_payments_total()

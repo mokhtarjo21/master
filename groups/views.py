@@ -232,7 +232,7 @@ class GroupViewSet(viewsets.ModelViewSet):
             end_date = date.fromisoformat(end_date)
         
         # Session statistics
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         sessions = Session.objects.filter(
             group=group,
             date__gte=start_date,

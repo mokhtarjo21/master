@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from django.db.models import Q, Count, Sum
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-
+from django.db import models
 from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents
 from .models import Student, Parent, StudentParentLink, StudentGroup
 from .serializers import (
@@ -301,26 +301,34 @@ class StudentParentLinkViewSet(viewsets.ModelViewSet):
     serializer_class = StudentParentLinkSerializer
     permission_classes = [IsTeacher]
     
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['student', 'parent'],
+                name='unique_student_parent'
+            )
+        ]
     def get_queryset(self):
         return StudentParentLink.objects.filter(
             student__teacher=self.request.user
         ).select_related('student', 'parent')
     
+    from django.db import transaction
+
     def create(self, request, *args, **kwargs):
-        """Link student to parent"""
         serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
+        serializer.is_valid(raise_exception=True)
+
+        with transaction.atomic():
             link = serializer.save()
-            
-            # If this is set as primary contact, remove primary from other links for this student
+
             if link.is_primary_contact:
                 StudentParentLink.objects.filter(
                     student=link.student,
                     is_active=True
                 ).exclude(id=link.id).update(is_primary_contact=False)
-            
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class StudentGroupViewSet(viewsets.ModelViewSet):

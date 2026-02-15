@@ -27,7 +27,7 @@ class Attendance(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    session = models.ForeignKey('sessions.Session', on_delete=models.CASCADE, related_name='attendance_records')
+    session = models.ForeignKey('teaching_sessions.Session', on_delete=models.CASCADE, related_name='attendance_records')
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name='attendance_records')
     
     # Attendance Details
@@ -103,7 +103,7 @@ class AttendanceQRCode(models.Model):
     QR codes for attendance marking
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    session = models.ForeignKey('sessions.Session', on_delete=models.CASCADE, related_name='qr_codes')
+    session = models.ForeignKey('teaching_sessions.Session', on_delete=models.CASCADE, related_name='qr_codes')
     
     # QR Code Details
     qr_token = models.CharField(max_length=255, unique=True)

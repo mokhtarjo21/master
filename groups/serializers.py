@@ -2,6 +2,7 @@
 Group Serializers
 """
 from rest_framework import serializers
+from django.db import models
 from .models import Group, GroupSchedule, GroupMaterial, GroupAnnouncement
 
 
@@ -201,7 +202,7 @@ class GroupDetailSerializer(serializers.ModelSerializer):
         )
         
         # Session statistics
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         monthly_sessions = Session.objects.filter(
             group=obj,
             date__gte=current_month

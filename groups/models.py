@@ -96,7 +96,7 @@ class Group(models.Model):
     
     def get_next_session(self):
         """Get next scheduled session"""
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         from django.utils import timezone
         
         return Session.objects.filter(

@@ -94,11 +94,14 @@ def student_login(request):
         # Update last activity
         user.last_activity = timezone.now()
         user.save()
-        
+        from students.models import Student
+        student = Student.objects.get(user=user)
+        student_id = student.id
         return Response({
             'access': access_token,
             'refresh': str(refresh),
-            'user': UserSerializer(user).data
+            'user': UserSerializer(user).data,
+            'student_id': student_id
         })
     
     # Log failed attempt
@@ -179,6 +182,7 @@ def generate_student_qr(request):
                        status=status.HTTP_403_FORBIDDEN)
     
     serializer = StudentQRSerializer(data=request.data)
+    print(request.data)
     if serializer.is_valid():
         from students.models import Student
         student_id = serializer.validated_data['student_id']

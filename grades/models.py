@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
+from datetime import date
 import uuid
 
 
@@ -62,7 +63,7 @@ class Grade(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name='grades')
     grade_type = models.ForeignKey(GradeType, on_delete=models.CASCADE, related_name='grades')
-    session = models.ForeignKey('sessions.Session', on_delete=models.SET_NULL, null=True, blank=True, related_name='grades')
+    session = models.ForeignKey('teaching_sessions.Session', on_delete=models.SET_NULL, null=True, blank=True, related_name='grades')
     
     # Grade Details
     title = models.CharField(max_length=200)
@@ -81,7 +82,7 @@ class Grade(models.Model):
     letter_grade = models.CharField(max_length=5, blank=True, null=True)
     
     # Date
-    grade_date = models.DateField(default=timezone.now)
+    grade_date = models.DateField(default=date.today)
     
     # Additional Information
     notes = models.TextField(blank=True, null=True)

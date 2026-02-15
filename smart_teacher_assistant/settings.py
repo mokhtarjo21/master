@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-in-production')
 DEBUG = config('DEBUG', default=True, cast=bool)
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
-ALLOED_HOSTS =['mekhotek.pythonanywhere.com']
+ALLOWED_HOSTS = ['mekhotek.pythonanywhere.com', 'testserver', '127.0.0.1', 'localhost']
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,20 +36,20 @@ INSTALLED_APPS = [
     'students',
     'parents',
     'groups',
-    # 'sessions',
+    'teaching_sessions',
     'attendance',
     'payments',
     'receipts',
     'grades',
-    #'reports',
-    # 'notifications',
-    # 'smart_insights',
-    # 'rules_engine',
-    # 'settings_app',
-    # 'subscriptions',
-    # 'exports',
-    # 'sync',
-    # 'audit_logs',
+    'notifications',
+    'smart_insights',
+    'rules_engine',
+    'reports',
+    'settings_app',
+    'subscriptions',
+    'exports',
+    'sync',
+    'audit_logs',
 ]
 
 MIDDLEWARE = [

@@ -209,7 +209,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
         attendance_rate = (present_count / total_attendance * 100) if total_attendance > 0 else 0
         
         # Session metrics
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         sessions = Session.objects.filter(
             group__teacher=teacher,
             date__gte=start_date

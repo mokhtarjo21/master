@@ -45,3 +45,420 @@ WARNING 2026-02-12 06:22:47,928 log 7931 124080447551168 Method Not Allowed: /ap
 WARNING 2026-02-12 06:22:48,116 log 7931 124080439158464 Not Found: /favicon.ico
 WARNING 2026-02-12 06:24:18,152 log 7931 124080447551168 Not Found: /api/auth
 WARNING 2026-02-12 06:24:29,450 log 7931 124080447551168 Not Found: /api/auth/
+INFO 2026-02-14 20:56:00,558 autoreload 1180 7764 Watching for file changes with StatReloader
+INFO 2026-02-14 20:56:29,666 autoreload 1180 7764 G:\master app\master\notifications\serializers.py changed, reloading.
+INFO 2026-02-14 20:56:30,534 autoreload 10036 11780 Watching for file changes with StatReloader
+ERROR 2026-02-14 21:09:59,806 exception 2252 2576 Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+WARNING 2026-02-14 21:10:00,230 log 2252 2576 Bad Request: /api/auth/profile/
+WARNING 2026-02-14 21:10:38,646 log 10956 17024 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:10:38,668 log 10956 17024 Not Found: /api/sessions/sessions/
+ERROR 2026-02-14 21:10:38,790 log 10956 17024 Internal Server Error: /api/attendance/attendance/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\attendance\views.py", line 33, in get_queryset
+    return Attendance.objects.filter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1464, in build_filter
+    self.check_related_objects(join_info.final_field, value, join_info.opts)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1275, in check_related_objects
+    self.check_query_object_type(value, opts, field)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1252, in check_query_object_type
+    raise ValueError(
+ValueError: Cannot query "test_teacher_6ff07c@example.com": Must be "Session" instance.
+WARNING 2026-02-14 21:11:45,386 log 12176 5772 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:11:45,408 log 12176 5772 Not Found: /api/sessions/sessions/
+WARNING 2026-02-14 21:11:45,495 log 12176 5772 Not Found: /api/subscriptions/subscription/
+WARNING 2026-02-14 21:13:12,445 log 2468 9308 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:13:12,461 log 2468 9308 Not Found: /api/sessions/
+WARNING 2026-02-14 21:13:30,587 log 14388 15848 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:13:30,720 log 14388 15848 Not Found: /api/sessions/
+WARNING 2026-02-14 21:13:48,766 log 10992 1512 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:13:48,889 log 10992 1512 Not Found: /api/sessions/
+WARNING 2026-02-14 21:14:20,566 log 12092 2724 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:14:20,746 log 12092 2724 Not Found: /api/sessions/
+WARNING 2026-02-14 21:14:46,749 log 11336 2524 Bad Request: /api/auth/teacher-login/
+WARNING 2026-02-14 21:18:37,444 log 4028 13940 Bad Request: /api/auth/teacher-login/
+ERROR 2026-02-14 21:23:04,780 log 14568 3764 Internal Server Error: /api/teachers/profile/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\teachers\views.py", line 48, in dashboard
+    groups_qs = teacher.groups.filter(is_active=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'is_active' into field. Choices are: id, name, permissions, user
+WARNING 2026-02-14 21:23:32,809 log 13772 16108 Method Not Allowed: /api/students/
+WARNING 2026-02-14 21:24:54,928 log 12312 2524 Method Not Allowed: /api/groups/
+ERROR 2026-02-14 21:25:27,840 log 5368 11544 Internal Server Error: /api/groups/3b915702-28fe-4b9e-a8ee-0d38d7de2a88/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "G:\master app\master\groups\serializers.py", line 198, in get_statistics
+    present=Count('id', filter=models.Q(status='present')),
+                               ^^^^^^
+NameError: name 'models' is not defined
+WARNING 2026-02-14 21:25:49,166 log 2948 11804 Forbidden: /api/sessions/b6e80612-6f46-47d6-9b39-ab9343b0b37a/start_session/
+WARNING 2026-02-14 21:25:49,172 log 2948 11804 Forbidden: /api/sessions/b6e80612-6f46-47d6-9b39-ab9343b0b37a/take_attendance/
+WARNING 2026-02-14 21:27:07,692 log 8780 15328 Bad Request: /api/payments/
+WARNING 2026-02-14 21:27:21,280 log 3180 14344 Forbidden: /api/receipts/149a4326-048a-4f9a-948b-eb7ec79935d7/generate_pdf/
+WARNING 2026-02-14 21:28:50,657 log 16412 15808 Bad Request: /api/grades/
+ERROR 2026-02-14 21:29:10,517 log 3796 2772 Internal Server Error: /api/grades/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\grades\views.py", line 117, in create
+    return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\fields.py", line 1252, in to_representation
+    assert not isinstance(value, datetime.datetime), (
+AssertionError: Expected a `date`, but got a `datetime`. Refusing to coerce, as this may mean losing timezone information. Use a custom read-only field and deal with timezone issues explicitly.
+INFO 2026-02-14 21:56:13,208 autoreload 16664 10076 Watching for file changes with StatReloader
+INFO 2026-02-14 21:56:38,209 autoreload 10296 3612 Watching for file changes with StatReloader
+INFO 2026-02-14 22:02:30,228 autoreload 12924 856 Watching for file changes with StatReloader
+INFO 2026-02-15 16:33:58,486 autoreload 7268 6392 Watching for file changes with StatReloader
+WARNING 2026-02-15 16:35:53,196 log 7268 13816 Bad Request: /api/auth/student-login/
+WARNING 2026-02-15 16:37:03,542 log 7268 13816 Not Found: /api/auth/teacher-logout/
+WARNING 2026-02-15 16:38:14,471 log 7268 13816 Not Found: /api/auth/teacher-logout/
+WARNING 2026-02-15 16:38:44,789 log 7268 13816 Not Found: /api/auth/teacher-logout/
+WARNING 2026-02-15 16:39:12,145 log 7268 13816 Not Found: /api/auth/teacher-logout/
+WARNING 2026-02-15 16:40:17,791 log 7268 13816 Method Not Allowed: /api/auth/profile/
+WARNING 2026-02-15 16:42:05,819 log 7268 2620 Not Found: /api/auth/generate-student-qr/
+WARNING 2026-02-15 16:44:38,308 log 7268 11540 Not Found: /api/auth/generate-student-qr/
+WARNING 2026-02-15 16:45:29,806 log 7268 11540 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:49:25,340 log 7268 3196 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:49:29,096 log 7268 3196 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:49:48,925 log 7268 3196 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:51:37,066 log 7268 10140 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:51:39,246 log 7268 10140 Bad Request: /api/auth/generate-qr/
+INFO 2026-02-15 16:54:06,273 autoreload 7268 6392 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 16:54:07,721 autoreload 7588 9652 Watching for file changes with StatReloader
+INFO 2026-02-15 16:54:15,790 autoreload 7588 9652 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 16:54:16,887 autoreload 4976 3248 Watching for file changes with StatReloader
+INFO 2026-02-15 16:54:20,458 autoreload 4976 3248 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 16:54:21,660 autoreload 1328 9828 Watching for file changes with StatReloader
+ERROR 2026-02-15 16:54:31,259 log 1328 6976 Internal Server Error: /api/auth/generate-qr/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\accounts\views.py", line 182, in generate_student_qr
+    print(request.data)
+          ^^
+NameError: name 're' is not defined
+INFO 2026-02-15 16:55:37,361 autoreload 3088 17204 Watching for file changes with StatReloader
+WARNING 2026-02-15 16:55:45,950 log 3088 12428 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 16:57:39,900 log 3088 14924 Bad Request: /api/auth/generate-qr/
+INFO 2026-02-15 16:59:07,375 autoreload 3088 17204 G:\master app\master\accounts\serializers.py changed, reloading.
+INFO 2026-02-15 16:59:08,490 autoreload 2404 6088 Watching for file changes with StatReloader
+WARNING 2026-02-15 16:59:17,105 log 2404 14296 Bad Request: /api/auth/generate-qr/
+INFO 2026-02-15 17:04:13,403 autoreload 2404 6088 G:\master app\master\accounts\serializers.py changed, reloading.
+INFO 2026-02-15 17:04:14,679 autoreload 4312 15244 Watching for file changes with StatReloader
+ERROR 2026-02-15 17:04:30,636 log 4312 15304 Internal Server Error: /api/auth/generate-qr/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\accounts\views.py", line 183, in generate_student_qr
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 426, in run_validation
+    value = self.to_internal_value(data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 485, in to_internal_value
+    validated_value = validate_method(validated_value)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\accounts\serializers.py", line 129, in validate_student_id
+    print(value)
+    ^^
+NameError: name 'pr' is not defined
+INFO 2026-02-15 17:04:50,051 autoreload 9072 14268 Watching for file changes with StatReloader
+WARNING 2026-02-15 17:04:56,218 log 9072 10148 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 17:06:15,993 log 9072 10148 Bad Request: /api/auth/generate-qr/
+INFO 2026-02-15 17:08:04,278 autoreload 9072 14268 G:\master app\master\accounts\serializers.py changed, reloading.
+INFO 2026-02-15 17:08:05,397 autoreload 14236 5988 Watching for file changes with StatReloader
+INFO 2026-02-15 17:08:09,027 autoreload 14236 5988 G:\master app\master\accounts\serializers.py changed, reloading.
+INFO 2026-02-15 17:08:10,130 autoreload 14772 7232 Watching for file changes with StatReloader
+WARNING 2026-02-15 17:08:15,575 log 14772 9636 Bad Request: /api/auth/generate-qr/
+INFO 2026-02-15 17:16:49,360 autoreload 14772 7232 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 17:16:50,542 autoreload 8236 5256 Watching for file changes with StatReloader
+INFO 2026-02-15 17:16:54,115 autoreload 8236 5256 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 17:16:55,308 autoreload 1448 1480 Watching for file changes with StatReloader
+INFO 2026-02-15 17:18:00,591 autoreload 11196 3848 Watching for file changes with StatReloader
+WARNING 2026-02-15 17:19:51,867 log 11196 15952 Not Found: /api/auth/teacher-logout/
+WARNING 2026-02-15 17:22:37,771 log 11196 2492 Not Found: /api/teachers/profile//
+WARNING 2026-02-15 17:29:24,978 log 11196 4052 Not Found: /api/students/6c45cd87-9d0c-4bb9-b5cf-4bae1a354838/profile/
+ERROR 2026-02-15 17:30:09,527 log 11196 4052 Internal Server Error: /api/students/f6087544-628b-40c2-ace2-df8009d01072/profile/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\students\views.py", line 80, in profile
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "G:\master app\master\students\serializers.py", line 264, in get_attendance_summary
+    present=Count('id', filter=models.Q(status='present')),
+                               ^^^^^^
+NameError: name 'models' is not defined
+INFO 2026-02-15 17:32:19,061 autoreload 11196 3848 G:\master app\master\students\serializers.py changed, reloading.
+INFO 2026-02-15 17:32:21,197 autoreload 9540 14672 Watching for file changes with StatReloader
+WARNING 2026-02-15 17:34:00,087 log 9540 8092 Not Found: /api/students/parents/
+WARNING 2026-02-15 17:34:24,836 log 9540 8092 Method Not Allowed: /api/students/parents/
+INFO 2026-02-15 17:37:32,800 autoreload 9540 14672 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:37:33,818 autoreload 2996 8864 Watching for file changes with StatReloader
+INFO 2026-02-15 17:38:23,719 autoreload 2996 8864 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:38:24,782 autoreload 5956 15172 Watching for file changes with StatReloader
+INFO 2026-02-15 17:38:29,556 autoreload 5956 15172 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:38:30,591 autoreload 7760 9204 Watching for file changes with StatReloader
+INFO 2026-02-15 17:38:45,780 autoreload 4624 7508 Watching for file changes with StatReloader
+INFO 2026-02-15 17:39:11,969 autoreload 4624 7508 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:39:12,917 autoreload 13680 9608 Watching for file changes with StatReloader
+INFO 2026-02-15 17:39:24,209 autoreload 13680 9608 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:39:25,242 autoreload 11088 11884 Watching for file changes with StatReloader
+INFO 2026-02-15 17:40:35,024 autoreload 11088 11884 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:40:36,155 autoreload 15840 17340 Watching for file changes with StatReloader
+INFO 2026-02-15 17:40:42,090 autoreload 15840 17340 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:40:43,200 autoreload 15472 12996 Watching for file changes with StatReloader
+INFO 2026-02-15 17:41:22,222 autoreload 15472 12996 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:41:23,267 autoreload 11428 15892 Watching for file changes with StatReloader
+INFO 2026-02-15 17:41:33,557 autoreload 11428 15892 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:41:34,555 autoreload 4116 8124 Watching for file changes with StatReloader
+INFO 2026-02-15 17:41:42,705 autoreload 4116 8124 G:\master app\master\students\views.py changed, reloading.
+INFO 2026-02-15 17:41:43,753 autoreload 4112 5012 Watching for file changes with StatReloader

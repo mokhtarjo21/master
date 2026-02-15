@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 router = DefaultRouter()
-router.register(r'attendance', views.AttendanceViewSet, basename='attendance')
+router.register(r'', views.AttendanceViewSet, basename='attendance')
 router.register(r'summaries', views.AttendanceSummaryViewSet, basename='attendance-summaries')
 router.register(r'alerts', views.AttendanceAlertViewSet, basename='attendance-alerts')
 

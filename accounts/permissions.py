@@ -68,7 +68,30 @@ class ReadOnlyForStudentsAndParents(permissions.BasePermission):
     
     def has_object_permission(self, request, view, obj):
         if request.user.user_type == 'teacher':
-            return hasattr(obj, 'teacher') and obj.teacher == request.user
+            if hasattr(obj, 'teacher'):
+                return obj.teacher == request.user
+            elif hasattr(obj, 'group') and hasattr(obj.group, 'teacher'):
+                return obj.group.teacher == request.user
+            # Check Session related
+            elif hasattr(obj, 'session') and hasattr(obj.session, 'group') and hasattr(obj.session.group, 'teacher'):
+                return obj.session.group.teacher == request.user
+            
+            # Check Student related (Payment, Receipt, etc)
+            student = None
+            if hasattr(obj, 'student'):
+                student = obj.student
+            elif hasattr(obj, 'payment') and hasattr(obj.payment, 'student'):
+                student = obj.payment.student
+            
+            if student:
+                # Check direct teacher assignment
+                if hasattr(student, 'teacher') and student.teacher == request.user:
+                    return True
+                # Check group enrollment
+                if hasattr(student, 'student_groups'):
+                    return student.student_groups.filter(group__teacher=request.user, is_active=True).exists()
+            
+            return False
         
         if request.user.user_type in ['student', 'parent']:
             if request.method not in permissions.SAFE_METHODS:

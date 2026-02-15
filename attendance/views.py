@@ -85,7 +85,7 @@ class AttendanceViewSet(viewsets.ModelViewSet):
             session_id = serializer.validated_data['session_id']
             attendance_records = serializer.validated_data['attendance_records']
             
-            from sessions.models import Session
+            from teaching_sessions.models import Session
             session = Session.objects.get(id=session_id)
             
             created_count = 0
@@ -237,7 +237,7 @@ class AttendanceViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         try:
             session = Session.objects.get(id=session_id, group__teacher=request.user)
         except Session.DoesNotExist:

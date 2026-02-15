@@ -45,11 +45,11 @@ class TeacherProfileViewSet(viewsets.ModelViewSet):
         total_students = students_qs.count()
         
         # Group statistics  
-        groups_qs = teacher.groups.filter(is_active=True)
+        groups_qs = teacher.teaching_groups.filter(is_active=True)
         total_groups = groups_qs.count()
         
         # Session statistics
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         today_sessions = Session.objects.filter(
             group__teacher=teacher,
             date=today,
@@ -95,7 +95,7 @@ class TeacherProfileViewSet(viewsets.ModelViewSet):
         )
         
         # Upcoming sessions
-        from sessions.models import Session
+        from teaching_sessions.models import Session
         upcoming_sessions = Session.objects.filter(
             group__teacher=teacher,
             date__gte=today,

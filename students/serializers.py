@@ -255,6 +255,7 @@ class StudentProfileSerializer(serializers.ModelSerializer):
         from django.utils import timezone
         
         # Current month attendance
+        from django.db import models
         current_month = timezone.now().date().replace(day=1)
         monthly_attendance = Attendance.objects.filter(
             student=obj,
