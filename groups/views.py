@@ -137,23 +137,25 @@ class GroupViewSet(viewsets.ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Check if student is already in group
-            if StudentGroup.objects.filter(
+            # Add student to group or reactivate if exists
+            enrollment, created = StudentGroup.objects.get_or_create(
                 student=student,
                 group=group,
-                is_active=True
-            ).exists():
-                return Response(
-                    {'error': 'Student is already in this group'}, 
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            
-            # Add student to group
-            StudentGroup.objects.create(
-                student=student,
-                group=group
+                defaults={'is_active': True}
             )
             
+            if not created:
+                # Enrollment already exists
+                if enrollment.is_active:
+                    return Response(
+                        {'error': 'Student is already in this group'}, 
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                else:
+                    # Reactivate inactive enrollment
+                    enrollment.is_active = True
+                    enrollment.save()
+                    return Response({'message': 'Student enrollment reactivated successfully'})
             # Update group student count
             group.save()
             

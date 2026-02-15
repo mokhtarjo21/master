@@ -720,3 +720,7 @@ Traceback (most recent call last):
     return super().execute(query, params)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.IntegrityError: UNIQUE constraint failed: student_groups.student_id, student_groups.group_id
+INFO 2026-02-15 18:19:47,406 autoreload 7776 272 G:\master app\master\groups\views.py changed, reloading.
+INFO 2026-02-15 18:19:48,561 autoreload 548 952 Watching for file changes with StatReloader
+INFO 2026-02-15 18:20:22,460 autoreload 548 952 G:\master app\master\groups\views.py changed, reloading.
+INFO 2026-02-15 18:20:24,032 autoreload 8204 15520 Watching for file changes with StatReloader
