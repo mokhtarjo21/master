@@ -17,6 +17,12 @@ class AppSettingsSerializer(serializers.ModelSerializer):
             'email_enabled', 'whatsapp_enabled', 'push_enabled', 'sms_enabled',
             'attendance_alerts', 'payment_alerts', 'grade_alerts',
             'low_attendance_rate', 'consecutive_absences', 'overdue_payment_days', 'low_grade_threshold',
+            # Security Settings
+            'two_factor_enabled', 'session_timeout_minutes', 'auto_logout_enabled', 'require_pin_for_danger_zone',
+            # Session Defaults
+            'default_session_duration', 'working_hours_start', 'working_hours_end', 'weekend_days',
+            # Notification Advanced
+            'notification_quiet_start', 'notification_quiet_end', 'digest_notifications', 'digest_frequency',
             'subscription', 'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']

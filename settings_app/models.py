@@ -39,10 +39,35 @@ class AppSettings(models.Model):
     grade_alerts = models.BooleanField(default=True)
     
     # Alert Thresholds
+    
+    # Alert Thresholds
     low_attendance_rate = models.IntegerField(default=70)
     consecutive_absences = models.IntegerField(default=3)
     overdue_payment_days = models.IntegerField(default=7)
     low_grade_threshold = models.IntegerField(default=60)
+    
+    # Security Settings
+    two_factor_enabled = models.BooleanField(default=False, help_text="Enable two-factor authentication")
+    session_timeout_minutes = models.IntegerField(default=60, help_text="Session timeout in minutes")
+    auto_logout_enabled = models.BooleanField(default=True, help_text="Auto logout after timeout")
+    require_pin_for_danger_zone = models.BooleanField(default=True, help_text="Require PIN for dangerous operations")
+    
+    # Session Defaults
+    default_session_duration = models.IntegerField(default=60, help_text="Default session duration in minutes")
+    working_hours_start = models.TimeField(default='08:00', help_text="Start of working hours")
+    working_hours_end = models.TimeField(default='20:00', help_text="End of working hours")
+    weekend_days = models.CharField(max_length=20, default='FRI,SAT', help_text="Weekend days (comma-separated)")
+    
+    # Notification Advanced Settings
+    notification_quiet_start = models.TimeField(null=True, blank=True, help_text="Start of quiet hours")
+    notification_quiet_end = models.TimeField(null=True, blank=True, help_text="End of quiet hours")
+    digest_notifications = models.BooleanField(default=False, help_text="Send digest instead of realtime")
+    digest_frequency = models.CharField(
+        max_length=10, 
+        choices=[('daily', 'Daily'), ('weekly', 'Weekly')],
+        default='daily',
+        help_text="Frequency of digest notifications"
+    )
     
     # System
     created_at = models.DateTimeField(auto_now_add=True)
