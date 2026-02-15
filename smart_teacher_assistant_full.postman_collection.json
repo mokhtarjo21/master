@@ -4032,6 +4032,638 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Rules Engine & Automation",
+            "item": [
+                {
+                    "name": "Rules",
+                    "item": [
+                        {
+                            "name": "List Rules",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/?rule_type=attendance&is_active=true",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        ""
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "rule_type",
+                                            "value": "attendance",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "trigger_event",
+                                            "value": "student_absent",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "is_active",
+                                            "value": "true",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "description": "Get all rules with optional filters"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create Rule",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        ""
+                                    ]
+                                },
+                                "description": "Create a new automation rule",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"إشعار الغياب المتكرر\",\n    \"description\": \"إرسال إشعار للأهل عند غياب الطالب 3 أيام متتالية\",\n    \"rule_type\": \"attendance\",\n    \"trigger_event\": \"student_absent\",\n    \"conditions\": {\n        \"consecutive_absences\": {\n            \"operator\": \"greater_than\",\n            \"value\": 3\n        }\n    },\n    \"actions\": [\n        {\n            \"type\": \"send_notification\",\n            \"recipient_type\": \"parent\",\n            \"title\": \"تنبيه غياب\",\n            \"message\": \"الطالب {student_name} غائب منذ {consecutive_absences} أيام\"\n        },\n        {\n            \"type\": \"create_alert\",\n            \"severity\": \"high\",\n            \"message\": \"غياب متكرر: {student_name}\"\n        }\n    ],\n    \"priority\": 1,\n    \"is_active\": true\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Rule Details",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/{{rule_id}}/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "{{rule_id}}",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get specific rule details"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Rule",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/{{rule_id}}/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "{{rule_id}}",
+                                        ""
+                                    ]
+                                },
+                                "description": "Update an existing rule",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"is_active\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Rule",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/{{rule_id}}/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "{{rule_id}}",
+                                        ""
+                                    ]
+                                },
+                                "description": "Delete a rule"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Test Rule",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/{{rule_id}}/test/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "{{rule_id}}",
+                                        "test",
+                                        ""
+                                    ]
+                                },
+                                "description": "Test rule with sample data",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"test_data\": {\n        \"student_name\": \"أحمد محمد\",\n        \"consecutive_absences\": 4,\n        \"date\": \"2026-02-15\"\n    }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Toggle Rule Active",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/{{rule_id}}/toggle_active/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "{{rule_id}}",
+                                        "toggle_active",
+                                        ""
+                                    ]
+                                },
+                                "description": "Toggle rule active/inactive status"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Bulk Toggle Rules",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/bulk_toggle/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "bulk_toggle",
+                                        ""
+                                    ]
+                                },
+                                "description": "Toggle multiple rules at once",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"rule_ids\": [\"rule-id-1\", \"rule-id-2\"],\n    \"is_active\": true\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Rules Statistics",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rules/statistics/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rules",
+                                        "statistics",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get rules statistics and analytics"
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Rule Executions",
+                    "item": [
+                        {
+                            "name": "List Executions",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/executions/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "executions",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get rule execution history"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Recent Executions",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/executions/recent/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "executions",
+                                        "recent",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get recent rule executions (last 24 hours)"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Failed Executions",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/executions/failed/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "executions",
+                                        "failed",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get failed rule executions for debugging"
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Rule Templates",
+                    "item": [
+                        {
+                            "name": "List Templates",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/templates/?category=automation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "templates",
+                                        ""
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "category",
+                                            "value": "automation",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "description": "Get available rule templates"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create Rule from Template",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/templates/{{template_id}}/create_rule/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "templates",
+                                        "{{template_id}}",
+                                        "create_rule",
+                                        ""
+                                    ]
+                                },
+                                "description": "Create a new rule from template",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"customizations\": {\n        \"conditions\": {\n            \"threshold\": 5\n        }\n    }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Rule Sets",
+                    "item": [
+                        {
+                            "name": "List Rule Sets",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rule-sets/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rule-sets",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get all rule sets"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Create Rule Set",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rule-sets/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rule-sets",
+                                        ""
+                                    ]
+                                },
+                                "description": "Create a new rule set",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"قواعد الحضور\",\n    \"description\": \"مجموعة القواعد المتعلقة بالحضور والغياب\",\n    \"execution_order\": \"sequential\",\n    \"is_active\": true\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Get Rules in Set",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rule-sets/{{ruleset_id}}/rules/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rule-sets",
+                                        "{{ruleset_id}}",
+                                        "rules",
+                                        ""
+                                    ]
+                                },
+                                "description": "Get all rules in a rule set"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Execute Rule Set",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/rules/rule-sets/{{ruleset_id}}/execute/",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "rules",
+                                        "rule-sets",
+                                        "{{ruleset_id}}",
+                                        "execute",
+                                        ""
+                                    ]
+                                },
+                                "description": "Execute all rules in the set",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"trigger_event\": \"student_absent\",\n    \"context\": {\n        \"student_name\": \"أحمد محمد\",\n        \"consecutive_absences\": 4\n    }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "variable": [

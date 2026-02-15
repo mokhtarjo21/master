@@ -22,12 +22,24 @@ class Rule(models.Model):
     ]
     
     TRIGGER_EVENTS = [
-        ('attendance_marked', 'Attendance Marked'),
-        ('payment_received', 'Payment Received'),
+        # Attendance Events
+        ('student_absent', 'Student Absent'),
+        ('student_late', 'Student Late'),
+        
+        # Payment Events
+        ('payment_created', 'Payment Created'),
         ('payment_overdue', 'Payment Overdue'),
-        ('grade_added', 'Grade Added'),
-        ('session_completed', 'Session Completed'),
-        ('student_registered', 'Student Registered'),
+        ('payment_completed', 'Payment Completed'),
+        
+        # Grade Events
+        ('grade_recorded', 'Grade Recorded'),
+        ('low_grade', 'Low Grade'),
+        ('excellent_grade', 'Excellent Grade'),
+        
+        # Session Events
+        ('session_created', 'Session Created'),
+        
+        # System Events (future)
         ('daily_check', 'Daily Check'),
         ('weekly_check', 'Weekly Check'),
         ('monthly_check', 'Monthly Check'),

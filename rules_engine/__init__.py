@@ -1,1 +1,1 @@
-# Rules Engine App - Business Rules and Automation
+default_app_config = 'rules_engine.apps.RulesEngineConfig'
