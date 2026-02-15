@@ -197,13 +197,13 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/auth/generate-student-qr/",
+              "raw": "{{base_url}}/auth/generate-qr/",
               "host": [
                 "{{base_url}}"
               ],
               "path": [
                 "auth",
-                "generate-student-qr",
+                "generate-qr",
                 ""
               ]
             },
@@ -2260,7 +2260,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/attendance/bulk_create/",
+              "raw": "{{base_url}}/attendance/bulk_create/",
               "host": [
                 "{{base_url}}"
               ],
@@ -2295,7 +2295,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/attendance/scan_qr/",
+              "raw": "{{base_url}}/attendance/scan_qr/",
               "host": [
                 "{{base_url}}"
               ],
@@ -2330,7 +2330,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/attendance/summary/?student={student_id}",
+              "raw": "{{base_url}}/attendance/summary/?student={student_id}",
               "host": [
                 "{{base_url}}"
               ],
@@ -2362,7 +2362,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/attendance/today/",
+              "raw": "{{base_url}}/attendance/today/",
               "host": [
                 "{{base_url}}"
               ],
@@ -2501,14 +2501,14 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/{payment_id}/add_payment/",
+                  "raw": "{{base_url}}/payments/{{payment_id}}/add_payment/",
                   "host": [
                     "{{base_url}}"
                   ],
                   "path": [
                     "api",
                     "payments",
-                    "{payment_id}",
+                    "{{payment_id}}",
                     "add_payment"
                   ]
                 },
@@ -2537,7 +2537,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/{payment_id}/apply_discount/",
+                  "raw": "{{base_url}}/payments/{payment_id}/apply_discount/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2573,7 +2573,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/overdue/",
+                  "raw": "{{base_url}}/payments/overdue/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2604,7 +2604,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/due_soon/",
+                  "raw": "{{base_url}}/payments/due_soon/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2635,7 +2635,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/summary/",
+                  "raw": "{{base_url}}/payments/summary/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2666,7 +2666,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/bulk_action/",
+                  "raw": "{{base_url}}/payments/bulk_action/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2701,7 +2701,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/monthly_report/?month=3&year=2026",
+                  "raw": "{{base_url}}/payments/monthly_report/?month=3&year=2026",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2733,7 +2733,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/payments/generate_monthly_payments/",
+                  "raw": "{{base_url}}/payments/generate_monthly_payments/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2874,7 +2874,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/receipts/stats/",
+                  "raw": "{{base_url}}/receipts/stats/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2905,7 +2905,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/receipts/bulk_generate/",
+                  "raw": "{{base_url}}/receipts/bulk_generate/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -2940,7 +2940,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/receipts/{receipt_id}/regenerate/",
+                  "raw": "{{base_url}}/receipts/{receipt_id}/regenerate/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -3237,7 +3237,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/grades/{grade_id}/",
+              "raw": "{{base_url}}/grades/{grade_id}/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3272,7 +3272,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/grades/{grade_id}/",
+              "raw": "{{base_url}}/grades/{grade_id}/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3303,7 +3303,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/grades/student/{student_id}/",
+              "raw": "{{base_url}}/grades/student/{student_id}/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3335,7 +3335,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/grades/stats/?student={student_id}",
+              "raw": "{{base_url}}/grades/stats/?student={student_id}",
               "host": [
                 "{{base_url}}"
               ],
@@ -3367,7 +3367,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/grades/bulk_create/",
+              "raw": "{{base_url}}/grades/bulk_create/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3634,7 +3634,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/notifications/bulk_create/",
+              "raw": "{{base_url}}/notifications/bulk_create/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3669,7 +3669,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/notifications/send_whatsapp/",
+              "raw": "{{base_url}}/notifications/send_whatsapp/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3704,7 +3704,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/notifications/pending/",
+              "raw": "{{base_url}}/notifications/pending/",
               "host": [
                 "{{base_url}}"
               ],
@@ -3735,7 +3735,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/notifications/sent/",
+              "raw": "{{base_url}}/notifications/sent/",
               "host": [
                 "{{base_url}}"
               ],
@@ -4489,7 +4489,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/students/",
+                  "raw": "{{base_url}}/settings/danger-zone/students/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4521,7 +4521,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/payments/",
+                  "raw": "{{base_url}}/settings/danger-zone/payments/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4553,7 +4553,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/grades/",
+                  "raw": "{{base_url}}/settings/danger-zone/grades/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4585,7 +4585,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/sessions/",
+                  "raw": "{{base_url}}/settings/danger-zone/sessions/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4617,7 +4617,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/attendance/",
+                  "raw": "{{base_url}}/settings/danger-zone/attendance/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4649,7 +4649,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/receipts/",
+                  "raw": "{{base_url}}/settings/danger-zone/receipts/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -4681,7 +4681,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/api/settings/danger-zone/reset-all/",
+                  "raw": "{{base_url}}/settings/danger-zone/reset-all/",
                   "host": [
                     "{{base_url}}"
                   ],
@@ -6937,7 +6937,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/sync/status/",
+              "raw": "{{base_url}}/sync/status/",
               "host": [
                 "{{base_url}}"
               ],
@@ -6968,7 +6968,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/sync/conflicts/",
+              "raw": "{{base_url}}/sync/conflicts/",
               "host": [
                 "{{base_url}}"
               ],
@@ -6999,7 +6999,7 @@
               }
             ],
             "url": {
-              "raw": "{{base_url}}/api/sync/resolve_conflict/",
+              "raw": "{{base_url}}/sync/resolve_conflict/",
               "host": [
                 "{{base_url}}"
               ],

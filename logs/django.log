@@ -1175,3 +1175,99 @@ INFO 2026-02-15 19:43:51,165 autoreload 7388 1696 G:\master app\master\groups\vi
 INFO 2026-02-15 19:43:52,517 autoreload 2172 2996 Watching for file changes with StatReloader
 INFO 2026-02-15 19:44:33,646 autoreload 2172 2996 G:\master app\master\attendance\__init__.py changed, reloading.
 INFO 2026-02-15 19:44:34,729 autoreload 14096 5712 Watching for file changes with StatReloader
+INFO 2026-02-15 22:40:15,640 autoreload 1496 13800 Watching for file changes with StatReloader
+ERROR 2026-02-15 22:41:45,883 log 1496 3000 Internal Server Error: /api/auth/student-login/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\accounts\views.py", line 98, in student_login
+    student = Student.objects.get(user=user)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+students.models.Student.DoesNotExist: Student matching query does not exist.
+INFO 2026-02-15 22:50:25,754 autoreload 1496 13800 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:50:26,908 autoreload 7684 15292 Watching for file changes with StatReloader
+INFO 2026-02-15 22:50:31,876 autoreload 6220 13540 Watching for file changes with StatReloader
+INFO 2026-02-15 22:53:05,897 autoreload 7684 15292 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:53:06,104 autoreload 6220 13540 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:53:07,382 autoreload 11116 16008 Watching for file changes with StatReloader
+INFO 2026-02-15 22:53:07,638 autoreload 3328 1524 Watching for file changes with StatReloader
+INFO 2026-02-15 22:53:09,583 autoreload 3328 1524 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:53:10,680 autoreload 10284 11736 Watching for file changes with StatReloader
+INFO 2026-02-15 22:54:01,928 autoreload 10284 11736 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:54:03,368 autoreload 10752 6532 Watching for file changes with StatReloader
+INFO 2026-02-15 22:54:16,850 autoreload 10752 6532 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:54:17,804 autoreload 4572 13308 Watching for file changes with StatReloader
+INFO 2026-02-15 22:54:34,735 autoreload 4572 13308 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:54:35,835 autoreload 9832 3264 Watching for file changes with StatReloader
+INFO 2026-02-15 22:54:59,353 autoreload 9832 3264 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:55:00,425 autoreload 7684 11336 Watching for file changes with StatReloader
+INFO 2026-02-15 22:56:09,347 autoreload 7684 11336 G:\master app\master\accounts\views.py changed, reloading.
+INFO 2026-02-15 22:56:10,581 autoreload 13412 11204 Watching for file changes with StatReloader
+INFO 2026-02-15 22:56:19,308 autoreload 16564 6856 Watching for file changes with StatReloader
+WARNING 2026-02-15 22:56:44,969 log 13412 14020 Unauthorized: /api/auth/logout/
+WARNING 2026-02-15 22:57:51,642 log 13412 11836 Forbidden: /api/auth/logout/
+WARNING 2026-02-15 22:58:32,869 log 13412 11836 Not Found: /api/auth/generate-student-qr/
+WARNING 2026-02-15 22:59:32,085 log 13412 11836 Forbidden: /api/auth/generate-qr/
+WARNING 2026-02-15 23:00:04,532 log 13412 11836 Bad Request: /api/auth/generate-qr/
+WARNING 2026-02-15 23:18:35,724 log 13412 14736 Not Found: /api/api/sync/resolve_conflict
+WARNING 2026-02-15 23:19:41,903 log 13412 12580 Not Found: /api/api/sync/resolve_conflicts
+INFO 2026-02-15 23:20:01,208 autoreload 444 9528 Watching for file changes with StatReloader
+WARNING 2026-02-15 23:20:08,025 log 13412 12580 Not Found: /api/api/sync/resolve_conflicts
+WARNING 2026-02-15 23:20:18,826 log 13412 12580 Not Found: /api/api/sync/resolve_conflicts
+WARNING 2026-02-15 23:20:20,901 log 13412 12580 Not Found: /api/api/sync/resolve_conflicts
+INFO 2026-02-15 23:32:03,596 autoreload 6896 4452 Watching for file changes with StatReloader
+WARNING 2026-02-15 23:41:02,692 log 6896 1172 Bad Request: /api/students/student-groups/
+WARNING 2026-02-15 23:41:59,099 log 6896 1172 Bad Request: /api/students/student-groups/
+WARNING 2026-02-15 23:42:46,541 log 6896 1172 Forbidden: /api/parents/dashboard/
+WARNING 2026-02-15 23:43:26,744 log 6896 1172 Unauthorized: /api/parents/dashboard/
+WARNING 2026-02-15 23:44:00,602 log 6896 1172 Unauthorized: /api/groups/
+WARNING 2026-02-15 23:44:57,262 log 6896 1172 Bad Request: /api/groups/a6ff8964-9bff-4185-8e0c-2bf2e0e9de10/add_student/
+WARNING 2026-02-15 23:46:01,924 log 6896 1172 Bad Request: /api/payments/
+WARNING 2026-02-15 23:47:54,746 log 6896 1172 Not Found: /api/api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment
+ERROR 2026-02-15 23:50:50,952 log 6896 1192 Internal Server Error: /api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+WARNING 2026-02-15 23:51:21,835 log 6896 13012 Unauthorized: /api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment/
+WARNING 2026-02-15 23:51:52,081 log 6896 13012 Unauthorized: /api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment/
+WARNING 2026-02-15 23:51:56,821 log 6896 13012 Unauthorized: /api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment/
+WARNING 2026-02-15 23:54:27,716 log 6896 5756 Unauthorized: /api/payments/overdue/
+WARNING 2026-02-15 23:54:43,328 log 6896 1500 Unauthorized: /api/payments/due_soon/

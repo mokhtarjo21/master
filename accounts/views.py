@@ -94,15 +94,26 @@ def student_login(request):
         # Update last activity
         user.last_activity = timezone.now()
         user.save()
-        from students.models import Student
-        student = Student.objects.get(user=user)
-        student_id = student.id
-        return Response({
+        if user.user_type == 'student':
+            try:
+                from students.models import Student
+                student = Student.objects.get(user=user)
+                response_data['student_id'] = str(student.id)
+               
+            except Student.DoesNotExist:
+                # Student record doesn't exist yet, return without student_id
+                pass
+        # Build response based on user type
+        response_data = {
             'access': access_token,
             'refresh': str(refresh),
-            'user': UserSerializer(user).data,
-            'student_id': student_id
-        })
+            'user': UserSerializer(user).data
+            
+        }
+        
+        
+        
+        return Response(response_data)
     
     # Log failed attempt
     if 'user' in serializer.validated_data:
