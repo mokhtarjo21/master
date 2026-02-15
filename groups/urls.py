@@ -6,10 +6,10 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 router = DefaultRouter()
-router.register(r'', views.GroupViewSet, basename='groups')
 router.register(r'schedules', views.GroupScheduleViewSet, basename='group-schedules')
 router.register(r'materials', views.GroupMaterialViewSet, basename='group-materials')
 router.register(r'announcements', views.GroupAnnouncementViewSet, basename='group-announcements')
+router.register(r'', views.GroupViewSet, basename='groups')
 
 urlpatterns = [
     path('', include(router.urls)),

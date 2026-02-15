@@ -74,7 +74,7 @@ class TeacherProfile(models.Model):
     
     def can_add_group(self):
         """Check if teacher can add more groups"""
-        current_count = self.user.groups.filter(is_active=True).count()
+        current_count = self.user.teaching_groups.filter(is_active=True).count()
         return current_count < self.max_groups
 
 
