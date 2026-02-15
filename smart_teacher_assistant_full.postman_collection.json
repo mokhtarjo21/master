@@ -2537,14 +2537,14 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{base_url}}/payments/{payment_id}/apply_discount/",
+                  "raw": "{{base_url}}/payments/{{payment_id}}/apply_discount/",
                   "host": [
                     "{{base_url}}"
                   ],
                   "path": [
                     "api",
                     "payments",
-                    "{payment_id}",
+                    "{{payment_id}}",
                     "apply_discount"
                   ]
                 },
@@ -2815,7 +2815,7 @@
                 "description": "",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n    \"payment\": \"{{payment_id}}\"\n}",
+                  "raw": "{\n    \"payment\": \"{{{payment_id}}}\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
