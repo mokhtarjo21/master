@@ -463,3 +463,7 @@ INFO 2026-02-15 17:41:34,555 autoreload 4116 8124 Watching for file changes with
 INFO 2026-02-15 17:41:42,705 autoreload 4116 8124 G:\master app\master\students\views.py changed, reloading.
 INFO 2026-02-15 17:41:43,753 autoreload 4112 5012 Watching for file changes with StatReloader
 WARNING 2026-02-15 17:41:57,485 log 4112 1480 Method Not Allowed: /api/students/parents/
+WARNING 2026-02-15 17:49:38,931 log 3332 5252 Method Not Allowed: /api/students/parents/
+INFO 2026-02-15 17:50:04,324 autoreload 4112 5012 G:\master app\master\students\urls.py changed, reloading.
+INFO 2026-02-15 17:50:10,291 autoreload 636 2752 Watching for file changes with StatReloader
+INFO 2026-02-15 17:53:47,402 autoreload 6940 17276 Watching for file changes with StatReloader

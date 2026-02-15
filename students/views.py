@@ -301,21 +301,14 @@ class StudentParentLinkViewSet(viewsets.ModelViewSet):
     serializer_class = StudentParentLinkSerializer
     permission_classes = [IsTeacher]
     
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['student', 'parent'],
-                name='unique_student_parent'
-            )
-        ]
     def get_queryset(self):
         return StudentParentLink.objects.filter(
             student__teacher=self.request.user
         ).select_related('student', 'parent')
     
-    from django.db import transaction
-
     def create(self, request, *args, **kwargs):
+        from django.db import transaction
+        
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
