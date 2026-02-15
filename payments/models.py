@@ -41,6 +41,14 @@ class Payment(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey('students.Student', on_delete=models.CASCADE, related_name='payments')
+    group = models.ForeignKey(
+        'groups.Group',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='payments',
+        help_text='المجموعة المرتبطة بهذه الدفعة'
+    )
     
     # Payment Details
     payment_type = models.CharField(max_length=20, choices=PAYMENT_TYPES, default='monthly')
@@ -88,6 +96,8 @@ class Payment(models.Model):
         db_table = 'payments'
         indexes = [
             models.Index(fields=['student', 'status']),
+            models.Index(fields=['group', 'status']),
+            models.Index(fields=['student', 'group']),
             models.Index(fields=['due_date', 'status']),
             models.Index(fields=['payment_date']),
             models.Index(fields=['payment_type', 'status']),

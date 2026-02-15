@@ -23,6 +23,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     """Main payment serializer"""
     student_name = serializers.CharField(source='student.name', read_only=True)
     student_code = serializers.CharField(source='student.code', read_only=True)
+    group_name = serializers.CharField(source='group.name', read_only=True)
     is_overdue = serializers.SerializerMethodField()
     days_overdue = serializers.SerializerMethodField()
     transactions = PaymentTransactionSerializer(many=True, read_only=True)
@@ -30,7 +31,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = [
-            'id', 'student', 'student_name', 'student_code',
+            'id', 'student', 'student_name', 'student_code', 'group', 'group_name',
             'payment_type', 'amount', 'amount_paid', 'remaining_amount',
             'payment_method', 'status', 'due_date', 'payment_date',
             'period_start', 'period_end', 'reference_number',
@@ -56,7 +57,7 @@ class PaymentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = [
-            'student', 'payment_type', 'amount', 'payment_method',
+            'student', 'group', 'payment_type', 'amount', 'payment_method',
             'due_date', 'period_start', 'period_end', 'notes'
         ]
     

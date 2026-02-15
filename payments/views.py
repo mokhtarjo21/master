@@ -24,7 +24,7 @@ class PaymentViewSet(viewsets.ModelViewSet):
     """Payment management viewset"""
     permission_classes = [ReadOnlyForStudentsAndParents]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['status', 'payment_type', 'payment_method', 'student']
+    filterset_fields = ['status', 'payment_type', 'payment_method', 'student', 'group']
     search_fields = ['student__name', 'student__code', 'reference_number']
     ordering_fields = ['due_date', 'amount', 'created_at']
     ordering = ['-created_at']
@@ -344,6 +344,44 @@ class PaymentViewSet(viewsets.ModelViewSet):
         }
         
         return Response(report_data)
+    
+    @action(detail=False, methods=['post'])
+    def generate_monthly_payments(self, request):
+        """Auto-generate monthly payments for all students"""
+        if request.user.user_type != 'teacher':
+            return Response(
+                {'error': 'Only teachers can generate payments'}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        from .utils import sync_monthly_payments_for_teacher
+        
+        month = request.data.get('month')
+        year = request.data.get('year')
+        
+        # Use current month/year if not provided
+        if not month or not year:
+            today = timezone.now().date()
+            month = month or today.month
+            year = year or today.year
+        
+        try:
+            stats = sync_monthly_payments_for_teacher(
+                teacher=request.user,
+                month=int(month),
+                year=int(year)
+            )
+            
+            return Response({
+                'message': 'Monthly payments generated successfully',
+                'stats': stats,
+                'period': f'{year}-{month:02d}'
+            })
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to generate payments: {str(e)}'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class PaymentPlanViewSet(viewsets.ModelViewSet):

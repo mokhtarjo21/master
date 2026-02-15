@@ -2242,6 +2242,139 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Bulk Create Attendance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/bulk_create/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "attendance",
+                "bulk_create"
+              ]
+            },
+            "description": "Create attendance records for multiple students",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"session-uuid\",\n  \"attendance_records\": [\n    {\n      \"student_id\": \"student1-uuid\",\n      \"status\": \"present\"\n    },\n    {\n      \"student_id\": \"student2-uuid\",\n      \"status\": \"absent\"\n    }\n  ]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Scan QR Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/scan_qr/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "attendance",
+                "scan_qr"
+              ]
+            },
+            "description": "Mark attendance by scanning student QR code",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qr_code\": \"ST-1234567\",\n  \"session_id\": \"session-uuid\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Attendance Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/summary/?student={student_id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "attendance",
+                "summary",
+                "?student={student_id}"
+              ]
+            },
+            "description": "Get attendance summary statistics"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Today's Attendance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/today/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "attendance",
+                "today"
+              ]
+            },
+            "description": "Get attendance for today's sessions"
+          },
+          "response": []
         }
       ]
     },
@@ -2350,6 +2483,273 @@
                 "description": ""
               },
               "response": []
+            },
+            {
+              "name": "Add Payment to Existing",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/{payment_id}/add_payment/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "{payment_id}",
+                    "add_payment"
+                  ]
+                },
+                "description": "Add partial payment to existing payment record",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 500.0,\n  \"payment_method\": \"cash\",\n  \"notes\": \"Partial payment\",\n  \"transaction_reference\": \"TXN-123\"\n}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Apply Discount",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/{payment_id}/apply_discount/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "{payment_id}",
+                    "apply_discount"
+                  ]
+                },
+                "description": "Apply discount to a payment",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"discount_amount\": 100.0,\n  \"reason\": \"Early payment discount\"\n}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Overdue Payments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/overdue/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "overdue"
+                  ]
+                },
+                "description": "Get all overdue payments"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Due Soon Payments",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/due_soon/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "due_soon"
+                  ]
+                },
+                "description": "Get payments due in next 7 days"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Payment Summary",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/summary/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "summary"
+                  ]
+                },
+                "description": "Get payment statistics and summary"
+              },
+              "response": []
+            },
+            {
+              "name": "Bulk Action on Payments",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/bulk_action/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "bulk_action"
+                  ]
+                },
+                "description": "Perform bulk actions on multiple payments",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_ids\": [\n    \"uuid1\",\n    \"uuid2\"\n  ],\n  \"action\": \"mark_paid\",\n  \"payment_method\": \"cash\"\n}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Monthly Report",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/monthly_report/?month=3&year=2026",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "monthly_report",
+                    "?month=3&year=2026"
+                  ]
+                },
+                "description": "Get monthly payment report"
+              },
+              "response": []
+            },
+            {
+              "name": "Generate Monthly Payments",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/generate_monthly_payments/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "generate_monthly_payments"
+                  ]
+                },
+                "description": "Auto-generate monthly payments for all students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"month\": 3,\n  \"year\": 2026\n}"
+                }
+              },
+              "response": []
             }
           ]
         },
@@ -2454,6 +2854,104 @@
                   ]
                 },
                 "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Get Receipt Statistics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/receipts/stats/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "receipts",
+                    "stats"
+                  ]
+                },
+                "description": "Get receipt generation statistics"
+              },
+              "response": []
+            },
+            {
+              "name": "Bulk Generate Receipts",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/receipts/bulk_generate/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "receipts",
+                    "bulk_generate"
+                  ]
+                },
+                "description": "Generate receipts for multiple payments",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_ids\": [\n    \"payment1-uuid\",\n    \"payment2-uuid\"\n  ]\n}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Regenerate Receipt PDF",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/receipts/{receipt_id}/regenerate/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "receipts",
+                    "{receipt_id}",
+                    "regenerate"
+                  ]
+                },
+                "description": "Regenerate PDF for a receipt"
               },
               "response": []
             }
@@ -2721,6 +3219,171 @@
               "response": []
             }
           ]
+        },
+        {
+          "name": "Update Grade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/{grade_id}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "{grade_id}"
+              ]
+            },
+            "description": "Update a grade record",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"score_obtained\": 95,\n  \"total_score\": 100,\n  \"notes\": \"Excellent work\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Grade",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/{grade_id}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "{grade_id}"
+              ]
+            },
+            "description": "Delete a grade record"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Student Grades",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/student/{student_id}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "student",
+                "{student_id}"
+              ]
+            },
+            "description": "Get all grades for a specific student"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Grade Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/stats/?student={student_id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "stats",
+                "?student={student_id}"
+              ]
+            },
+            "description": "Get grade statistics and averages"
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Create Grades",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/bulk_create/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "bulk_create"
+              ]
+            },
+            "description": "Create grades for multiple students",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grades\": [\n    {\n      \"student_id\": \"student1-uuid\",\n      \"grade_type\": \"homework\",\n      \"score_obtained\": 90,\n      \"total_score\": 100\n    }\n  ]\n}"
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -2951,6 +3614,138 @@
                 }
               }
             }
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Create Notifications",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/bulk_create/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications",
+                "bulk_create"
+              ]
+            },
+            "description": "Create notifications for multiple recipients",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notification_type\": \"payment_reminder\",\n  \"recipients\": [\n    \"parent1-uuid\",\n    \"parent2-uuid\"\n  ],\n  \"title\": \"Payment Reminder\",\n  \"message\": \"Please pay outstanding fees\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send WhatsApp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/send_whatsapp/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications",
+                "send_whatsapp"
+              ]
+            },
+            "description": "Send notification via WhatsApp",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notification_id\": \"notification-uuid\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pending Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/pending/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications",
+                "pending"
+              ]
+            },
+            "description": "Get all pending (unsent) notifications"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sent Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/sent/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications",
+                "sent"
+              ]
+            },
+            "description": "Get all sent notifications"
           },
           "response": []
         }
@@ -3673,6 +4468,235 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Danger Zone",
+          "item": [
+            {
+              "name": "Delete All Students",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/students/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "students"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all student records"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete All Payments",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/payments/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "payments"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all payment records"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete All Grades",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/grades/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "grades"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all grade records"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete All Sessions",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/sessions/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "sessions"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all session records"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete All Attendance",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/attendance/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "attendance"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all attendance records"
+              },
+              "response": []
+            },
+            {
+              "name": "Delete All Receipts",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/receipts/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "receipts"
+                  ]
+                },
+                "description": "⚠️ DANGER: Delete all receipt records"
+              },
+              "response": []
+            },
+            {
+              "name": "Reset All Data",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/settings/danger-zone/reset-all/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "settings",
+                    "danger-zone",
+                    "reset-all"
+                  ]
+                },
+                "description": "⚠️⚠️⚠️ EXTREME DANGER: Delete ALL data"
+              },
+              "response": []
+            }
+          ]
         }
       ]
     },
@@ -5001,6 +6025,995 @@
               ]
             },
             "description": "Delete an export record"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions & Plans",
+      "item": [
+        {
+          "name": "Get Current Subscription",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "subscriptions",
+                ""
+              ]
+            },
+            "description": "Get teacher's current subscription with usage details"
+          },
+          "response": []
+        },
+        {
+          "name": "List Available Plans",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/plans/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "subscriptions",
+                "plans",
+                ""
+              ]
+            },
+            "description": "Get all available subscription plans"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Plan Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/plans/{{plan_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "subscriptions",
+                "plans",
+                "{{plan_id}}",
+                ""
+              ]
+            },
+            "description": "Get specific plan details"
+          },
+          "response": []
+        },
+        {
+          "name": "Check Usage",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/subscriptions/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "subscriptions",
+                ""
+              ]
+            },
+            "description": "Check current usage (students, groups, storage) and limits"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Smart Insights & Analytics",
+      "item": [
+        {
+          "name": "Insights",
+          "item": [
+            {
+              "name": "List Insights",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/insights/?category=financial&priority=high",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "insights",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "financial",
+                      "disabled": true
+                    },
+                    {
+                      "key": "priority",
+                      "value": "high",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Get all insights with optional filters"
+              },
+              "response": []
+            },
+            {
+              "name": "Get High Priority Insights",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/insights/high_priority/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "insights",
+                    "high_priority",
+                    ""
+                  ]
+                },
+                "description": "Get high and critical priority insights"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Insight Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/insights/{{insight_id}}/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "insights",
+                    "{{insight_id}}",
+                    ""
+                  ]
+                },
+                "description": "Get specific insight details"
+              },
+              "response": []
+            },
+            {
+              "name": "Mark Insight Action Taken",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/insights/{{insight_id}}/mark_action_taken/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "insights",
+                    "{{insight_id}}",
+                    "mark_action_taken",
+                    ""
+                  ]
+                },
+                "description": "Mark insight as acted upon",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"تم تطبيق التوصية وإرسال تذكيرات الدفع\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Alerts",
+          "item": [
+            {
+              "name": "List Alerts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/alerts/?alert_type=payment_overdue&severity=danger",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "alerts",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "alert_type",
+                      "value": "payment_overdue",
+                      "disabled": true
+                    },
+                    {
+                      "key": "severity",
+                      "value": "danger",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Get all alerts with optional filters"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Active Alerts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/alerts/active/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "alerts",
+                    "active",
+                    ""
+                  ]
+                },
+                "description": "Get active unresolved alerts"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Critical Alerts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/alerts/critical/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "alerts",
+                    "critical",
+                    ""
+                  ]
+                },
+                "description": "Get critical severity alerts"
+              },
+              "response": []
+            },
+            {
+              "name": "Resolve Alert",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/alerts/{{alert_id}}/resolve/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "alerts",
+                    "{{alert_id}}",
+                    "resolve",
+                    ""
+                  ]
+                },
+                "description": "Resolve a specific alert",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"تم التواصل مع الطالب وحل المشكلة\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Bulk Resolve Alerts",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/alerts/bulk_resolve/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "alerts",
+                    "bulk_resolve",
+                    ""
+                  ]
+                },
+                "description": "Resolve multiple alerts at once",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_ids\": [\n    \"alert-uuid-1\",\n    \"alert-uuid-2\",\n    \"alert-uuid-3\"\n  ],\n  \"notes\": \"تم حل جميع التنبيهات المختارة\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Suggestions",
+          "item": [
+            {
+              "name": "List Suggestions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/suggestions/?category=financial&priority=high",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "suggestions",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "financial",
+                      "disabled": true
+                    },
+                    {
+                      "key": "priority",
+                      "value": "high",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Get all suggestions with optional filters"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Quick Wins",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/suggestions/quick_wins/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "suggestions",
+                    "quick_wins",
+                    ""
+                  ]
+                },
+                "description": "Get low effort, high impact suggestions"
+              },
+              "response": []
+            },
+            {
+              "name": "Get Suggestion Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/suggestions/{{suggestion_id}}/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "suggestions",
+                    "{{suggestion_id}}",
+                    ""
+                  ]
+                },
+                "description": "Get specific suggestion details"
+              },
+              "response": []
+            },
+            {
+              "name": "Mark Suggestion Implemented",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/suggestions/{{suggestion_id}}/mark_implemented/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "suggestions",
+                    "{{suggestion_id}}",
+                    "mark_implemented",
+                    ""
+                  ]
+                },
+                "description": "Mark suggestion as implemented",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"تم تفعيل التذكيرات الآلية بنجاح\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Analytics",
+          "item": [
+            {
+              "name": "Get Dashboard Analytics",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/analytics/dashboard/?days=30",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "analytics",
+                    "dashboard",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "30"
+                    }
+                  ]
+                },
+                "description": "Get comprehensive dashboard analytics with trends"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Widgets",
+          "item": [
+            {
+              "name": "List Widgets",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/widgets/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "widgets",
+                    ""
+                  ]
+                },
+                "description": "Get all dashboard widgets"
+              },
+              "response": []
+            },
+            {
+              "name": "Create Widget",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/widgets/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "widgets",
+                    ""
+                  ]
+                },
+                "description": "Create new dashboard widget",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Students Overview\",\n  \"widget_type\": \"chart\",\n  \"description\": \"Student enrollment trends\",\n  \"data_source\": \"students\",\n  \"config\": {\n    \"chart_type\": \"line\",\n    \"x_axis\": \"date\",\n    \"y_axis\": \"count\"\n  },\n  \"refresh_interval\": 300,\n  \"position_x\": 0,\n  \"position_y\": 0,\n  \"width\": 2,\n  \"height\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Widget Layout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/widgets/update_layout/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "widgets",
+                    "update_layout",
+                    ""
+                  ]
+                },
+                "description": "Update widget positions (drag & drop)",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"widgets\": [\n    {\n      \"id\": \"widget-uuid-1\",\n      \"position_x\": 0,\n      \"position_y\": 0,\n      \"width\": 2,\n      \"height\": 1\n    },\n    {\n      \"id\": \"widget-uuid-2\",\n      \"position_x\": 2,\n      \"position_y\": 0,\n      \"width\": 1,\n      \"height\": 1\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Widget",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/insights/widgets/{{widget_id}}/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "widgets",
+                    "{{widget_id}}",
+                    ""
+                  ]
+                },
+                "description": "Delete a widget"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audit Logs & Activity Tracking",
+      "item": [
+        {
+          "name": "List Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/logs/?action=create&model_name=Student",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audit",
+                "logs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "create",
+                  "disabled": true
+                },
+                {
+                  "key": "model_name",
+                  "value": "Student",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all audit logs with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Audit Log Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/logs/{{log_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audit",
+                "logs",
+                "{{log_id}}",
+                ""
+              ]
+            },
+            "description": "Get specific audit log details"
+          },
+          "response": []
+        },
+        {
+          "name": "Activity Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/logs/activity_summary/?start_date=2026-02-01&end_date=2026-02-28",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audit",
+                "logs",
+                "activity_summary",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-02-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2026-02-28"
+                }
+              ]
+            },
+            "description": "Get activity summary with aggregations"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/logs/?search=أحمد",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audit",
+                "logs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "أحمد"
+                }
+              ]
+            },
+            "description": "Search logs by object name or username"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Sync",
+      "item": [
+        {
+          "name": "Get Sync Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/sync/status/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sync",
+                "status"
+              ]
+            },
+            "description": "Get current synchronization status"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sync Conflicts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/sync/conflicts/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sync",
+                "conflicts"
+              ]
+            },
+            "description": "Get unresolved sync conflicts"
+          },
+          "response": []
+        },
+        {
+          "name": "Resolve Sync Conflict",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/sync/resolve_conflict/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sync",
+                "resolve_conflict"
+              ]
+            },
+            "description": "Resolve a synchronization conflict",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conflict_id\": \"conflict-uuid\",\n  \"resolution\": \"use_server\"\n}"
+            }
           },
           "response": []
         }

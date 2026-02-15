@@ -11,7 +11,7 @@ import time
 from attendance.models import Attendance
 from payments.models import Payment
 from grades.models import Grade
-from teaching_sessions.models import TeachingSession
+from teaching_sessions.models import Session
 
 from .models import Rule, RuleExecution
 
@@ -230,7 +230,7 @@ def trigger_grade_rules(sender, instance, created, **kwargs):
 # SESSION SIGNALS
 # ============================================================================
 
-@receiver(post_save, sender=TeachingSession)
+@receiver(post_save, sender=Session)
 def trigger_session_rules(sender, instance, created, **kwargs):
     """
     Trigger rules when session is created
