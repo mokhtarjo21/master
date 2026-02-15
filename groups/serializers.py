@@ -17,9 +17,33 @@ class GroupScheduleSerializer(serializers.ModelSerializer):
             'effective_from', 'effective_until', 'is_active', 'created_at'
         ]
         read_only_fields = ['id', 'created_at']
+        extra_kwargs = {
+            'effective_from': {'required': False, 'allow_null': True},
+            'effective_until': {'required': False, 'allow_null': True}
+        }
     
     def get_weekday_name(self, obj):
         return dict(GroupSchedule.WEEKDAYS)[obj.weekday]
+    
+    def create(self, validated_data):
+        """Set group from request context"""
+        request = self.context.get('request')
+        
+        # Get group_id from request data or query params
+        group_id = request.data.get('group') or request.query_params.get('group')
+        
+        if not group_id:
+            raise serializers.ValidationError({'group': 'Group ID is required'})
+        
+        # Verify group belongs to teacher
+        from groups.models import Group
+        try:
+            group = Group.objects.get(id=group_id, teacher=request.user)
+            validated_data['group'] = group
+        except Group.DoesNotExist:
+            raise serializers.ValidationError({'group': 'Group not found'})
+        
+        return super().create(validated_data)
 
 
 class GroupMaterialSerializer(serializers.ModelSerializer):
@@ -32,7 +56,27 @@ class GroupMaterialSerializer(serializers.ModelSerializer):
             'id', 'title', 'description', 'material_type', 'file',
             'file_url', 'external_link', 'is_public', 'created_at', 'updated_at'
         ]
-        read_only_fields = ['id', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'uploaded_by']
+    
+    def create(self, validated_data):
+        """Set group and uploaded_by from request context"""
+        request = self.context.get('request')
+        
+        # Get group_id from request data or query params
+        group_id = request.data.get('group') or request.query_params.get('group')
+        
+        if not group_id:
+            raise serializers.ValidationError({'group': 'Group ID is required'})
+        
+        # Verify group belongs to teacher
+        from groups.models import Group
+        try:
+            group = Group.objects.get(id=group_id, teacher=request.user)
+            validated_data['group'] = group
+        except Group.DoesNotExist:
+            raise serializers.ValidationError({'group': 'Group not found'})
+        
+        return super().create(validated_data)
     
     def get_file_url(self, obj):
         if obj.file:
@@ -57,6 +101,26 @@ class GroupAnnouncementSerializer(serializers.ModelSerializer):
     
     def get_is_currently_published(self, obj):
         return obj.is_currently_published()
+    
+    def create(self, validated_data):
+        """Set group from request context"""
+        request = self.context.get('request')
+        
+        # Get group_id from request data or query params
+        group_id = request.data.get('group') or request.query_params.get('group')
+        
+        if not group_id:
+            raise serializers.ValidationError({'group': 'Group ID is required'})
+        
+        # Verify group belongs to teacher
+        from groups.models import Group
+        try:
+            group = Group.objects.get(id=group_id, teacher=request.user)
+            validated_data['group'] = group
+        except Group.DoesNotExist:
+            raise serializers.ValidationError({'group': 'Group not found'})
+        
+        return super().create(validated_data)
 
 
 class GroupSerializer(serializers.ModelSerializer):

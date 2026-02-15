@@ -163,7 +163,7 @@ class Student(models.Model):
             for student_group in self.student_groups.filter(is_active=True):
                 # Use group price if available, otherwise fallback to student's base price
                 price_to_use = student_group.group.monthly_price if student_group.group.monthly_price > 0 else self.monthly_price
-                monthly_price = self.calculate_discount_price(price_to_use)
+                monthly_price = Decimal(str(self.calculate_discount_price(price_to_use)))
                 total_monthly += monthly_price
             
             total_paid_monthly = self.get_monthly_payments_total()

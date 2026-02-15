@@ -2833,6 +2833,126 @@
                             "response": []
                         }
                     ]
+                },
+                {
+                    "name": "Send to Student",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/send_to_student/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "send_to_student",
+                                ""
+                            ]
+                        },
+                        "description": "Send notification to a single student",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"student_id\": \"{{student_id}}\",\n    \"title\": \"إشعار مهم\",\n    \"message\": \"هذا إشعار اختباري للطالب\",\n    \"notification_type\": \"announcement\",\n    \"channel\": \"whatsapp\",\n    \"send_immediately\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Send to Group",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/send_to_group/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "send_to_group",
+                                ""
+                            ]
+                        },
+                        "description": "Send notification to all students in a group",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"group_id\": \"{{group_id}}\",\n    \"title\": \"إعلان للمجموعة\",\n    \"message\": \"هذا إشعار جماعي لكل طلاب المجموعة\",\n    \"notification_type\": \"announcement\",\n    \"channel\": \"whatsapp\",\n    \"send_immediately\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Send to All Students",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/send_to_all/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "send_to_all",
+                                ""
+                            ]
+                        },
+                        "description": "Send notification to all active students",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"إعلان عام\",\n    \"message\": \"هذا إشعار لجميع الطلاب\",\n    \"notification_type\": \"announcement\",\n    \"channel\": \"whatsapp\",\n    \"send_immediately\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
                 }
             ]
         },

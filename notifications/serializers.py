@@ -55,7 +55,7 @@ class BulkNotificationSerializer(serializers.Serializer):
         required=False
     )
     title = serializers.CharField(max_length=200)
-    message = serializers.DictField()
+    message = serializers.CharField(style={'base_template': 'textarea.html'})
     notification_type = serializers.ChoiceField(choices=Notification.NOTIFICATION_TYPES)
     channel = serializers.ChoiceField(choices=Notification.CHANNELS, default='whatsapp')
     scheduled_at = serializers.DateTimeField(required=False)

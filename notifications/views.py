@@ -200,6 +200,152 @@ class NotificationViewSet(viewsets.ModelViewSet):
         serializer = NotificationSerializer(queryset, many=True)
         return Response(serializer.data)
     
+    @action(detail=False, methods=['post'])
+    def send_to_student(self, request):
+        """Send notification to a single student"""
+        from students.models import Student
+        
+        student_id = request.data.get('student_id')
+        title = request.data.get('title')
+        message = request.data.get('message')
+        notification_type = request.data.get('notification_type', 'announcement')
+        channel = request.data.get('channel', 'whatsapp')
+        send_immediately = request.data.get('send_immediately', False)
+        
+        if not all([student_id, title, message]):
+            return Response(
+                {'error': 'student_id, title, and message are required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            student = Student.objects.get(id=student_id, teacher=request.user, is_active=True)
+        except Student.DoesNotExist:
+            return Response({'error': 'Student not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        notification = Notification.objects.create(
+            teacher=request.user,
+            recipient_type='student',
+            recipient_id=student.id,
+            recipient_name=student.name,
+            recipient_phone=student.whatsapp_number or student.phone,
+            recipient_email=student.email,
+            title=title,
+            message=message,
+            notification_type=notification_type,
+            channel=channel
+        )
+        
+        if send_immediately:
+            notification.send()
+        
+        serializer = NotificationSerializer(notification)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    @action(detail=False, methods=['post'])
+    def send_to_group(self, request):
+        """Send notification to all students in a group"""
+        from groups.models import Group
+        
+        group_id = request.data.get('group_id')
+        title = request.data.get('title')
+        message = request.data.get('message')
+        notification_type = request.data.get('notification_type', 'announcement')
+        channel = request.data.get('channel', 'whatsapp')
+        send_immediately = request.data.get('send_immediately', False)
+        
+        if not all([group_id, title, message]):
+            return Response(
+                {'error': 'group_id, title, and message are required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            group = Group.objects.get(id=group_id, teacher=request.user, is_active=True)
+        except Group.DoesNotExist:
+            return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Get all active students in the group
+        student_groups = group.group_students.filter(is_active=True).select_related('student')
+        
+        notifications_created = []
+        for student_group in student_groups:
+            student = student_group.student
+            notification = Notification.objects.create(
+                teacher=request.user,
+                recipient_type='student',
+                recipient_id=student.id,
+                recipient_name=student.name,
+                recipient_phone=student.whatsapp_number or student.phone,
+                recipient_email=student.email,
+                title=title,
+                message=message,
+                notification_type=notification_type,
+                channel=channel,
+                metadata={'group_id': str(group.id), 'group_name': group.name}
+            )
+            
+            if send_immediately:
+                notification.send()
+            
+            notifications_created.append(notification)
+        
+        return Response({
+            'message': f'Created {len(notifications_created)} notifications for group {group.name}',
+            'notifications_created': len(notifications_created),
+            'group_name': group.name
+        }, status=status.HTTP_201_CREATED)
+    
+    @action(detail=False, methods=['post'])
+    def send_to_all(self, request):
+        """Send notification to all active students"""
+        from students.models import Student
+        
+        title = request.data.get('title')
+        message = request.data.get('message')
+        notification_type = request.data.get('notification_type', 'announcement')
+        channel = request.data.get('channel', 'whatsapp')
+        send_immediately = request.data.get('send_immediately', False)
+        
+        if not all([title, message]):
+            return Response(
+                {'error': 'title and message are required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        students = Student.objects.filter(teacher=request.user, is_active=True)
+        
+        if not students.exists():
+            return Response(
+                {'error': 'No active students found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        notifications_created = []
+        for student in students:
+            notification = Notification.objects.create(
+                teacher=request.user,
+                recipient_type='student',
+                recipient_id=student.id,
+                recipient_name=student.name,
+                recipient_phone=student.whatsapp_number or student.phone,
+                recipient_email=student.email,
+                title=title,
+                message=message,
+                notification_type=notification_type,
+                channel=channel
+            )
+            
+            if send_immediately:
+                notification.send()
+            
+            notifications_created.append(notification)
+        
+        return Response({
+            'message': f'Created {len(notifications_created)} notifications for all students',
+            'notifications_created': len(notifications_created)
+        }, status=status.HTTP_201_CREATED)
+    
     @action(detail=False, methods=['get'])
     def statistics(self, request):
         """Get notification statistics"""

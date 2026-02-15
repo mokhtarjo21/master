@@ -4,6 +4,7 @@ Class/Group management with different types and pricing
 """
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from decimal import Decimal
 import uuid
 
@@ -188,9 +189,9 @@ class GroupSchedule(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     
-    # Effective Period
-    effective_from = models.DateField()
-    effective_until = models.DateField(null=True, blank=True)
+    # Schedule timing
+    effective_from = models.DateField(null=True, blank=True, help_text="When this schedule becomes effective")
+    effective_until = models.DateField(null=True, blank=True, help_text="When this schedule expires")
     
     # System Fields
     is_active = models.BooleanField(default=True)
@@ -282,7 +283,7 @@ class GroupAnnouncement(models.Model):
     send_notification = models.BooleanField(default=True)
     
     # Scheduling
-    publish_at = models.DateTimeField()
+    publish_at = models.DateTimeField(default=timezone.now)
     expire_at = models.DateTimeField(null=True, blank=True)
     
     # System Fields

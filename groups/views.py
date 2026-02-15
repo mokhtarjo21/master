@@ -367,3 +367,36 @@ class GroupAnnouncementViewSet(viewsets.ModelViewSet):
             ).filter(
                 publish_at__lte=timezone.now()
             )
+    
+    def perform_create(self, serializer):
+        """Create announcement and send notifications if requested"""
+        announcement = serializer.save()
+        
+        # Send notifications to all students in the group if requested
+        if announcement.send_notification:
+            from notifications.models import Notification
+            
+            # Get all active students in the group
+            student_groups = announcement.group.group_students.filter(is_active=True).select_related('student')
+            
+            for student_group in student_groups:
+                student = student_group.student
+                Notification.objects.create(
+                    teacher=self.request.user,
+                    recipient_type='student',
+                    recipient_id=student.id,
+                    recipient_name=student.name,
+                    recipient_phone=student.whatsapp_number or student.phone,
+                    recipient_email=student.email,
+                    title=announcement.title,
+                    message=announcement.content,
+                    notification_type='announcement',
+                    channel='whatsapp',
+                    scheduled_at=announcement.publish_at,
+                    metadata={
+                        'announcement_id': str(announcement.id),
+                        'group_id': str(announcement.group.id),
+                        'group_name': announcement.group.name,
+                        'is_urgent': announcement.is_urgent
+                    }
+                )
