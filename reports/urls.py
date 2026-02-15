@@ -7,6 +7,7 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'reports', views.ReportViewSet, basename='report')
+router.register(r'templates', views.ReportTemplateViewSet, basename='template')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -3675,6 +3675,363 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Reports",
+            "item": [
+                {
+                    "name": "List Reports",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                ""
+                            ]
+                        },
+                        "description": "Get all reports for the logged-in teacher"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Report Status",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/{{report_id}}/status/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                "{{report_id}}",
+                                "status",
+                                ""
+                            ]
+                        },
+                        "description": "Get status and download URL for a specific report"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Generate Student Report",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/student_report/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                "student_report",
+                                ""
+                            ]
+                        },
+                        "description": "Generate comprehensive report for a specific student",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"report_type\": \"student_report\",\n    \"format\": \"json\",\n    \"period_start\": \"2026-01-01\",\n    \"period_end\": \"2026-02-15\",\n    \"filters\": {\n        \"student_id\": \"{{student_id}}\"\n    },\n    \"options\": {}\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Generate Financial Report",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/financial/?start_date=2026-01-01&end_date=2026-02-15&format=json",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                "financial",
+                                ""
+                            ],
+                            "query": [
+                                {
+                                    "key": "start_date",
+                                    "value": "2026-01-01"
+                                },
+                                {
+                                    "key": "end_date",
+                                    "value": "2026-02-15"
+                                },
+                                {
+                                    "key": "format",
+                                    "value": "json"
+                                }
+                            ]
+                        },
+                        "description": "Generate financial summary report with revenue, payments, and statistics"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Generate Attendance Report",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/attendance_report/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                "attendance_report",
+                                ""
+                            ]
+                        },
+                        "description": "Generate attendance statistics and records report",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"period_start\": \"2026-01-01\",\n    \"period_end\": \"2026-02-15\",\n    \"group_id\": null\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Generate Grades Report",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/reports/grade_report/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "reports",
+                                "grade_report",
+                                ""
+                            ]
+                        },
+                        "description": "Generate grades statistics and analysis report",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"period_start\": \"2026-01-01\",\n    \"period_end\": \"2026-02-15\",\n    \"subject\": null\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "List Report Templates",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/templates/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "templates",
+                                ""
+                            ]
+                        },
+                        "description": "Get all custom report templates"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Report Template",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/templates/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "templates",
+                                ""
+                            ]
+                        },
+                        "description": "Create a new custom report template",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"My Custom Report\",\n    \"report_type\": \"student_report\",\n    \"template_config\": {\n        \"include_grades\": true,\n        \"include_attendance\": true,\n        \"include_payments\": false\n    },\n    \"is_default\": false,\n    \"is_active\": true\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Report Template",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/templates/{{template_id}}/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "templates",
+                                "{{template_id}}",
+                                ""
+                            ]
+                        },
+                        "description": "Update an existing report template",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Updated Report Name\",\n    \"is_active\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Report Template",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reports/templates/{{template_id}}/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reports",
+                                "templates",
+                                "{{template_id}}",
+                                ""
+                            ]
+                        },
+                        "description": "Delete a report template"
+                    },
+                    "response": []
+                }
+            ]
         }
     ],
     "variable": [
