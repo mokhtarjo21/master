@@ -7023,7 +7023,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:8000/api",
+      "value": "https://master-productio.up.railway.app/api",
       "type": "string"
     },
     {

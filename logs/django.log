@@ -1271,3 +1271,81 @@ WARNING 2026-02-15 23:51:52,081 log 6896 13012 Unauthorized: /api/payments/210b7
 WARNING 2026-02-15 23:51:56,821 log 6896 13012 Unauthorized: /api/payments/210b71fd-3501-42e1-8960-493b2c78f281/add_payment/
 WARNING 2026-02-15 23:54:27,716 log 6896 5756 Unauthorized: /api/payments/overdue/
 WARNING 2026-02-15 23:54:43,328 log 6896 1500 Unauthorized: /api/payments/due_soon/
+INFO 2026-02-17 13:08:22,604 autoreload 14076 12916 Watching for file changes with StatReloader
+WARNING 2026-02-17 13:09:49,477 log 14076 10888 Unauthorized: /api/groups/
+WARNING 2026-02-17 13:10:59,170 log 14076 10888 Bad Request: /api/groups/e91e6388-8a56-4be0-9da1-ead550247f02/add_student/
+WARNING 2026-02-17 13:11:57,615 log 14076 10888 Bad Request: /api/groups/e91e6388-8a56-4be0-9da1-ead550247f02/add_student/
+WARNING 2026-02-17 13:13:45,755 log 14076 10888 Not Found: /api/api/payments/bulk_action
+ERROR 2026-02-17 13:13:55,035 log 14076 10888 Internal Server Error: /api/payments/bulk_action
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/payments/bulk_action/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+WARNING 2026-02-17 13:14:38,040 log 14076 15032 Unauthorized: /api/payments/bulk_action/
+WARNING 2026-02-17 13:24:07,431 log 14076 2572 Bad Request: /api/payments/bulk_action/
+INFO 2026-02-17 20:18:01,320 autoreload 3680 10772 Watching for file changes with StatReloader
+ERROR 2026-02-17 20:18:23,979 log 3680 10816 Internal Server Error: /api/sessions/
+Traceback (most recent call last):
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\teaching_sessions\views.py", line 76, in create
+    session = serializer.save()
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\serializers.py", line 962, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "G:\master app\master\teaching_sessions\models.py", line 87, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 892, in save_base
+    post_save.send(
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\dispatch\dispatcher.py", line 176, in send
+    return [
+           ^
+  File "C:\Users\Mekhotek\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in <listcomp>
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\master app\master\rules_engine\signals.py", line 249, in trigger_session_rules
+    'session_date': str(instance.session_date),
+                        ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Session' object has no attribute 'session_date'
+INFO 2026-02-17 20:19:36,271 autoreload 3680 10772 G:\master app\master\rules_engine\signals.py changed, reloading.
+INFO 2026-02-17 20:19:37,129 autoreload 8180 12868 Watching for file changes with StatReloader

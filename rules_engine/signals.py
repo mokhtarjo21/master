@@ -246,11 +246,12 @@ def trigger_session_rules(sender, instance, created, **kwargs):
         'group': instance.group,
         'group_id': str(instance.group.id),
         'group_name': instance.group.name,
-        'session_date': str(instance.session_date),
+        'session_date': str(instance.date),  # Fixed: date not session_date
         'start_time': str(instance.start_time) if instance.start_time else None,
         'end_time': str(instance.end_time) if instance.end_time else None,
-        'duration': instance.duration,
-        'topic': instance.topic or '',
+        'title': instance.title or '',
+        'description': instance.description or '',
+        'status': instance.status,
     }
     
     # Trigger session created event
