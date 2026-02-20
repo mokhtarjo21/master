@@ -189,7 +189,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         
         try:
             student_group = StudentGroup.objects.get(
-                student_id=student_id,
+                student_code=student_id,
                 group=group,
                 is_active=True
             )
