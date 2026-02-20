@@ -125,7 +125,7 @@ class GroupViewSet(viewsets.ModelViewSet):
         
         try:
             student = Student.objects.get(
-                id=student_id,
+                code=student_id,
                 teacher=request.user,
                 is_active=True
             )
