@@ -185,11 +185,16 @@ class GroupViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        from students.models import StudentGroup
+        from students.models import StudentGroup ,Student
         
         try:
+            student = Student.objects.get(
+                code=student_id,
+                teacher=request.user,
+                is_active=True
+            )
             student_group = StudentGroup.objects.get(
-                student_code=student_id,
+                student=student,
                 group=group,
                 is_active=True
             )
