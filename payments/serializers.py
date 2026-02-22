@@ -32,7 +32,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         model = Payment
         fields = [
             'id', 'student', 'student_name', 'student_code', 'group', 'group_name',
-            'payment_type', 'amount', 'amount_paid', 'remaining_amount',
+            'payment_type', 'amount', 'amount_paid', 'remaining_amount', 'session_count',
             'payment_method', 'status', 'due_date', 'payment_date',
             'period_start', 'period_end', 'reference_number',
             'transaction_id', 'discount_amount', 'discount_reason',
@@ -217,6 +217,21 @@ class PaymentSummarySerializer(serializers.Serializer):
     pending_count = serializers.IntegerField()
     overdue_count = serializers.IntegerField()
     paid_count = serializers.IntegerField()
+
+
+class BulkPaymentCreateSerializer(serializers.Serializer):
+    """Serializer for creating multiple payments in bulk"""
+    student_ids = serializers.ListField(
+        child=serializers.UUIDField(),
+        min_length=1
+    )
+    group_id = serializers.UUIDField(required=False, allow_null=True)
+    payment_type = serializers.ChoiceField(choices=Payment.PAYMENT_TYPES, default='monthly')
+    amount = serializers.DecimalField(max_digits=10, decimal_places=2)
+    session_count = serializers.IntegerField(default=0, min_value=0)
+    due_date = serializers.DateField()
+    period_start = serializers.DateField(required=False, allow_null=True)
+    period_end = serializers.DateField(required=False, allow_null=True)
 
 
 class BulkPaymentSerializer(serializers.Serializer):

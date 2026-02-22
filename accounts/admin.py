@@ -5,15 +5,22 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User, TeacherSession, StudentAccessLog
 
-
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     """Extended User Admin"""
-    list_display = ['username', 'email', 'user_type', 'center_name', 'student_code', 'is_active', 'last_activity']
+    
+    list_display = [
+        'username', 'email', 'user_type', 
+        'center_name', 'student_code', 
+        'is_active', 'last_activity'
+    ]
+
     list_filter = ['user_type', 'is_active', 'language', 'created_at']
     search_fields = ['username', 'email', 'center_name', 'student_code']
     ordering = ['-created_at']
-    
+
+    readonly_fields = ('last_activity',)
+
     fieldsets = BaseUserAdmin.fieldsets + (
         ('Profile', {
             'fields': ('user_type', 'language', 'center_name', 'student_code')
@@ -25,7 +32,6 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('last_activity', 'is_active_session')
         }),
     )
-
 
 @admin.register(TeacherSession)
 class TeacherSessionAdmin(admin.ModelAdmin):

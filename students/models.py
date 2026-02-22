@@ -50,7 +50,7 @@ class Student(models.Model):
     notes = models.TextField(blank=True, null=True)
     
     # Subscription & Financial
-    subscription_type = models.CharField(max_length=20, choices=SUBSCRIPTION_TYPES, default='monthly')
+    subscription_type = models.CharField(max_length=20, choices=SUBSCRIPTION_TYPES, default='per_session')
     subscription_status = models.CharField(max_length=20, choices=SUBSCRIPTION_STATUS, default='active')
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     per_session_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)

@@ -16,7 +16,7 @@ from .serializers import (
     PaymentSerializer, PaymentCreateSerializer, PaymentUpdateSerializer,
     AddPaymentSerializer, PaymentPlanSerializer, PaymentReminderSerializer,
     PaymentMethodSerializer, PaymentSummarySerializer, BulkPaymentSerializer,
-    PaymentTransactionSerializer
+    PaymentTransactionSerializer, BulkPaymentCreateSerializer
 )
 
 
@@ -239,6 +239,64 @@ class PaymentViewSet(viewsets.ModelViewSet):
         serializer = PaymentSummarySerializer(summary)
         return Response(serializer.data)
     
+    @action(detail=False, methods=['post'])
+    def bulk_create(self, request):
+        """Bulk create individual payments for multiple students"""
+        if request.user.user_type != 'teacher':
+            return Response(
+                {'error': 'Only teachers can perform bulk creation'}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        serializer = BulkPaymentCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            student_ids = serializer.validated_data['student_ids']
+            amount = serializer.validated_data['amount']
+            due_date = serializer.validated_data['due_date']
+            payment_type = serializer.validated_data.get('payment_type', 'monthly')
+            group_id = serializer.validated_data.get('group_id')
+            
+            # Verify students belong to teacher
+            from students.models import Student
+            from groups.models import Group
+            
+            students = Student.objects.filter(id__in=student_ids, teacher=request.user)
+            if students.count() != len(student_ids):
+                return Response(
+                    {'error': 'One or more students are invalid or not owned by you'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+                
+            group = None
+            if group_id:
+                try:
+                    group = Group.objects.get(id=group_id, teacher=request.user)
+                except Group.DoesNotExist:
+                    return Response({'error': 'Invalid group'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            created_count = 0
+            for student in students:
+                Payment.objects.create(
+                    student=student,
+                    group=group,
+                    payment_type=payment_type,
+                    amount=amount,
+                    session_count=serializer.validated_data.get('session_count', 0),
+                    due_date=due_date,
+                    period_start=serializer.validated_data.get('period_start'),
+                    period_end=serializer.validated_data.get('period_end'),
+                    notes=serializer.validated_data.get('notes', ''),
+                    created_by=request.user
+                )
+                created_count += 1
+                
+            return Response({
+                'message': f'Successfully created {created_count} payments', 
+                'created_count': created_count
+            }, status=status.HTTP_201_CREATED)
+            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     @action(detail=False, methods=['post'])
     def bulk_action(self, request):
         """Perform bulk actions on payments"""

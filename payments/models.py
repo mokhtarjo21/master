@@ -56,6 +56,9 @@ class Payment(models.Model):
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     remaining_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
+    # Session Details
+    session_count = models.PositiveIntegerField(default=0, help_text="Number of sessions this payment purchases")
+    
     # Payment Information
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='cash')
     status = models.CharField(max_length=20, choices=PAYMENT_STATUS, default='pending')
@@ -112,6 +115,13 @@ class Payment(models.Model):
         # Calculate remaining amount
         self.remaining_amount = self.amount - self.amount_paid
         
+        # Track if this is transitioning to paid
+        was_paid = False
+        if self.pk:
+            old_payment = Payment.objects.filter(pk=self.pk).first()
+            if old_payment and old_payment.status == 'paid':
+                was_paid = True
+        
         # Update status based on payment
         if self.amount_paid == 0:
             if self.due_date < timezone.now().date():
@@ -129,6 +139,17 @@ class Payment(models.Model):
             self.reference_number = self.generate_reference_number()
         
         super().save(*args, **kwargs)
+        
+        # If it just became paid, and pays for sessions, add those to the student
+        if self.status == 'paid' and not was_paid and self.session_count > 0:
+            self.student.remaining_sessions += self.session_count
+            self.student.total_sessions_bought += self.session_count
+            
+            # Auto-switch the student to per-session if they just paid for sessions
+            if self.student.subscription_type != 'per_session':
+                self.student.subscription_type = 'per_session'
+            
+            self.student.save(update_fields=['remaining_sessions', 'total_sessions_bought', 'subscription_type'])
         
         # Update student financial totals
         self.student.update_remaining_amount()
