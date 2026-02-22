@@ -13,9 +13,11 @@ import uuid
 from .models import User, TeacherSession, StudentAccessLog
 from .serializers import (
     TeacherLoginSerializer, StudentLoginSerializer,
-    UserSerializer, TeacherProfileSerializer, StudentQRSerializer
+    UserSerializer, TeacherProfileSerializer, StudentQRSerializer,
+    TeacherRegisterSerializer, GoogleLoginSerializer
 )
-
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 
 def get_client_ip(request):
     """Extract client IP address"""
@@ -25,6 +27,130 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def teacher_register(request):
+    """Standard Teacher Registration via PIN"""
+    serializer = TeacherRegisterSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        
+        # Generate JWT tokens
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        
+        # Create initial teacher session
+        session = TeacherSession.objects.create(
+            teacher=user,
+            session_token=str(uuid.uuid4()),
+            expires_at=timezone.now() + timezone.timedelta(minutes=settings.TEACHER_SESSION_TIMEOUT),
+            device_info=request.data.get('device_info', {})
+        )
+        
+        # Update user activity
+        user.is_active_session = True
+        user.last_activity = timezone.now()
+        user.save()
+        
+        return Response({
+            'access': access_token,
+            'refresh': str(refresh),
+            'user': TeacherProfileSerializer(user).data,
+            'session_token': session.session_token
+        }, status=status.HTTP_201_CREATED)
+        
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def teacher_google_login(request):
+    """Teacher Login/Signup via Google Auth"""
+    serializer = GoogleLoginSerializer(data=request.data)
+    if serializer.is_valid():
+        token = serializer.validated_data['id_token']
+        device_info = serializer.validated_data.get('device_info', {})
+        
+        try:
+            # Note: client_id is optional to strictly verify against your Google App config
+            # but usually recommended checking idinfo['aud'] against your client_id
+            idinfo = id_token.verify_oauth2_token(token, google_requests.Request())
+            
+            email = idinfo['email']
+            first_name = idinfo.get('given_name', '')
+            last_name = idinfo.get('family_name', '')
+            
+            # Check if user exists
+            user = User.objects.filter(email=email).first()
+            if not user:
+                # Create user automatically as a teacher
+                import secrets
+                
+                # We need a unique username if email is long, but email works as username mostly
+                base_username = email.split('@')[0]
+                username = base_username
+                while User.objects.filter(username=username).exists():
+                    username = f"{base_username}_{secrets.token_hex(4)}"
+                    
+                user = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=secrets.token_urlsafe(16),
+                    first_name=first_name,
+                    last_name=last_name,
+                    user_type='teacher',
+                    is_active=True
+                )
+                
+                # Set a generic PIN or skip, we might skip depending on business logic
+                # For Google users, they primarily log in with Google, but we need PIN for other API maybe
+                # We can leave teacher_pin as null if Google auth only or generate a random one
+                
+                from teachers.models import TeacherProfile, TeacherNotificationSettings
+                from django.utils import timezone
+                from datetime import timedelta
+                
+                TeacherProfile.objects.create(
+                    user=user,
+                    center_name=f"{first_name}'s Center",
+                    email=email,
+                    subscription_plan='trial',
+                    trial_end_date=timezone.now() + timedelta(days=30)
+                )
+                TeacherNotificationSettings.objects.create(teacher=user)
+                
+            elif user.user_type != 'teacher':
+                return Response({'error': 'Account is not a teacher account'}, status=status.HTTP_403_FORBIDDEN)
+                
+            # Log the user in
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            
+            session = TeacherSession.objects.create(
+                teacher=user,
+                session_token=str(uuid.uuid4()),
+                expires_at=timezone.now() + timezone.timedelta(minutes=settings.TEACHER_SESSION_TIMEOUT),
+                device_info=device_info
+            )
+            
+            user.is_active_session = True
+            user.last_activity = timezone.now()
+            user.save()
+            
+            return Response({
+                'access': access_token,
+                'refresh': str(refresh),
+                'user': TeacherProfileSerializer(user).data,
+                'session_token': session.session_token
+            })
+            
+        except ValueError as e:
+            # Invalid token
+            return Response({'error': 'Invalid Google token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])

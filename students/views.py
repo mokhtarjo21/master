@@ -8,7 +8,7 @@ from django.db.models import Q, Count, Sum
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db import models
-from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents
+from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription
 from .models import Student, Parent, StudentParentLink, StudentGroup
 from .serializers import (
     StudentSerializer, StudentCreateSerializer, StudentListSerializer,
@@ -19,7 +19,7 @@ from .serializers import (
 
 class StudentViewSet(viewsets.ModelViewSet):
     """Student management viewset"""
-    permission_classes = [ReadOnlyForStudentsAndParents]
+    permission_classes = [ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['subscription_type', 'subscription_status', 'is_active']
     search_fields = ['name', 'code', 'phone', 'email']

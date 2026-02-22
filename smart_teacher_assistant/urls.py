@@ -11,6 +11,7 @@ urlpatterns = [
     
     # Authentication URLs
     path('api/auth/', include('accounts.urls')),
+    path('api/admin/', include('accounts.admin_urls')),
     
     # Core App URLs
     path('api/teachers/', include('teachers.urls')),

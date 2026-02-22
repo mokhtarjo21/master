@@ -6,6 +6,8 @@ from . import views
 
 urlpatterns = [
     # Authentication endpoints
+    path('teacher-register/', views.teacher_register, name='teacher-register'),
+    path('teacher-google-login/', views.teacher_google_login, name='teacher-google-login'),
     path('teacher-login/', views.teacher_login, name='teacher-login'),
     path('student-login/', views.student_login, name='student-login'),
     path('logout/', views.teacher_logout, name='logout'),

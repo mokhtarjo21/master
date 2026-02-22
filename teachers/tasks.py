@@ -152,3 +152,57 @@ def calculate_teacher_stats(teacher, date_obj, stat_type):
         'absent_count': absent_count,
         'late_count': late_count,
     }
+
+
+@shared_task
+def notify_expiring_trials():
+    """Notify teachers whose trial is expiring in 3 days or 1 day"""
+    from teachers.models import TeacherProfile
+    from notifications.models import Notification
+    
+    now = timezone.now()
+    today_date = now.date()
+    
+    # 3 days warning
+    target_date_3 = today_date + timedelta(days=3)
+    expiring_in_3 = TeacherProfile.objects.filter(
+        subscription_plan='trial',
+        trial_end_date__date=target_date_3
+    )
+    
+    for profile in expiring_in_3:
+        Notification.objects.create(
+            teacher=profile.user,  # Using the teacher as the owner of the notification
+            recipient_type='teacher',
+            recipient_id=profile.user.id,
+            recipient_name=profile.user.first_name or profile.user.username,
+            recipient_email=profile.email or profile.user.email,
+            recipient_phone=profile.whatsapp_number or profile.phone_number,
+            title='Your Trial Expires in 3 Days',
+            message='Your 30-day free trial will expire in 3 days. Please upgrade to a paid subscription to continue using the platform without interruption.',
+            notification_type='system',
+            channel='email', # primary channel, could also be whatsapp if configured
+            status='pending'
+        )
+
+    # 1 day warning
+    target_date_1 = today_date + timedelta(days=1)
+    expiring_in_1 = TeacherProfile.objects.filter(
+        subscription_plan='trial',
+        trial_end_date__date=target_date_1
+    )
+    
+    for profile in expiring_in_1:
+        Notification.objects.create(
+            teacher=profile.user,
+            recipient_type='teacher',
+            recipient_id=profile.user.id,
+            recipient_name=profile.user.first_name or profile.user.username,
+            recipient_email=profile.email or profile.user.email,
+            recipient_phone=profile.whatsapp_number or profile.phone_number,
+            title='Your Trial Expires Tomorrow!',
+            message='Your 30-day free trial expires tomorrow! To avoid losing access to your students and classes, please subscribe to a premium plan today.',
+            notification_type='system',
+            channel='email',
+            status='pending'
+        )

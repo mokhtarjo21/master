@@ -22,12 +22,19 @@ class TeacherProfile(models.Model):
     email = models.EmailField(blank=True, null=True)
     
     # Subscription & Limits
-    subscription_plan = models.CharField(max_length=50, default='free', choices=[
+    subscription_plan = models.CharField(max_length=50, default='trial', choices=[
+        ('trial', 'Trial Period'),
         ('free', 'Free Plan'),
         ('basic', 'Basic Plan'),
         ('premium', 'Premium Plan'),
         ('enterprise', 'Enterprise Plan'),
     ])
+    
+    # Trial and Subscription Dates
+    trial_start_date = models.DateTimeField(auto_now_add=True)
+    trial_end_date = models.DateTimeField(null=True, blank=True)
+    subscription_end_date = models.DateTimeField(null=True, blank=True)
+    
     max_students = models.PositiveIntegerField(default=50)
     max_groups = models.PositiveIntegerField(default=20)
     
@@ -62,7 +69,33 @@ class TeacherProfile(models.Model):
         indexes = [
             models.Index(fields=['subscription_plan']),
             models.Index(fields=['created_at']),
+            models.Index(fields=['trial_end_date']),
+            models.Index(fields=['subscription_end_date']),
         ]
+    
+    def __str__(self):
+        return f"{self.center_name} - {self.user.username}"
+    
+    def is_active_subscription(self):
+        """Check if teacher has an active trial or paid subscription"""
+        from django.utils import timezone
+        now = timezone.now()
+        
+        # Trial period logic
+        if self.subscription_plan == 'trial':
+            if self.trial_end_date and now <= self.trial_end_date:
+                return True
+            return False
+            
+        # Free tier functionality (if needed forever)
+        if self.subscription_plan == 'free':
+            return True
+            
+        # Paid subscriptions logic
+        if self.subscription_end_date and now <= self.subscription_end_date:
+            return True
+            
+        return False
     
     def __str__(self):
         return f"{self.center_name} - {self.user.username}"

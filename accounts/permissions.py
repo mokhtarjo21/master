@@ -11,6 +11,28 @@ class IsTeacher(permissions.BasePermission):
         return request.user.is_authenticated and request.user.user_type == 'teacher'
 
 
+class IsActiveTeacherSubscription(permissions.BasePermission):
+    """Requires teacher to have an active trial or paid subscription to write/access."""
+    
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated or request.user.user_type != 'teacher':
+            return False
+            
+        # Allowing GET methods might be acceptable for read-only access after expiry,
+        # but the prompt implies block access. Let's block POST/PUT/PATCH/DELETE
+        # entirely if the subscription is inactive, while allowing GET.
+        # Alternatively block everything. Let's block everything for a hard paywall.
+        try:
+            profile = request.user.teacher_profile
+            if not profile.is_active_subscription():
+                self.message = "Subscription or trial has expired."
+                return False
+            return True
+        except Exception:
+            self.message = "Teacher profile not found."
+            return False
+
+
 class IsStudent(permissions.BasePermission):
     """Permission for student users only"""
     

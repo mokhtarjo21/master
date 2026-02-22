@@ -10,7 +10,7 @@ from datetime import date, timedelta
 from django_filters.rest_framework import DjangoFilterBackend
 from decimal import Decimal
 
-from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents
+from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription
 from .models import Payment, PaymentTransaction, PaymentPlan, PaymentReminder, PaymentMethod
 from .serializers import (
     PaymentSerializer, PaymentCreateSerializer, PaymentUpdateSerializer,
@@ -22,7 +22,7 @@ from .serializers import (
 
 class PaymentViewSet(viewsets.ModelViewSet):
     """Payment management viewset"""
-    permission_classes = [ReadOnlyForStudentsAndParents]
+    permission_classes = [ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['status', 'payment_type', 'payment_method', 'student', 'group']
     search_fields = ['student__name', 'student__code', 'reference_number']

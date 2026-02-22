@@ -3,3 +3,7 @@ node_modules
 logs\django.log
 django.log
 */django.log
+__pycache__
+# Python cache
+__pycache__/
+*.py[cod]

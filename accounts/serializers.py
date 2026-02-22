@@ -132,3 +132,68 @@ class StudentQRSerializer(serializers.Serializer):
             return value
         except Student.DoesNotExist:
             raise serializers.ValidationError('Student not found')
+
+
+class TeacherRegisterSerializer(serializers.ModelSerializer):
+    """Teacher registration using PIN"""
+    pin = serializers.CharField(max_length=10, write_only=True)
+    password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    
+    class Meta:
+        model = User
+        fields = [
+            'username', 'email', 'pin', 'password', 'center_name', 
+            'language', 'first_name', 'last_name'
+        ]
+    
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Username already exists")
+        return value
+        
+    def validate_email(self, value):
+        if value and User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email already exists")
+        return value
+        
+    def create(self, validated_data):
+        pin = validated_data.pop('pin')
+        # Handle optional password, generate one if not provided since AbstractUser requires it
+        password = validated_data.pop('password', None)
+        if not password:
+            import secrets
+            password = secrets.token_urlsafe(16)
+            
+        validated_data['user_type'] = 'teacher'
+        validated_data['is_active'] = True
+        
+        user = User.objects.create_user(
+            password=password,
+            **validated_data
+        )
+        
+        # Set the hashed PIN separately
+        user.set_teacher_pin(pin)
+        user.save()
+        
+        # Create profile and notification settings
+        from teachers.models import TeacherProfile, TeacherNotificationSettings
+        from django.utils import timezone
+        from datetime import timedelta
+        
+        TeacherProfile.objects.create(
+            user=user,
+            center_name=validated_data.get('center_name', ''),
+            email=validated_data.get('email', ''),
+            subscription_plan='trial',
+            trial_end_date=timezone.now() + timedelta(days=30)
+        )
+        TeacherNotificationSettings.objects.create(teacher=user)
+        
+        return user
+
+
+class GoogleLoginSerializer(serializers.Serializer):
+    """Google OAuth login/registration"""
+    id_token = serializers.CharField(required=True)
+    device_info = serializers.JSONField(required=False, default=dict)

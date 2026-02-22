@@ -14,6 +14,7 @@ class User(AbstractUser):
     Extended User model supporting multiple authentication types
     """
     USER_TYPES = [
+        ('admin', 'Administrator'),
         ('teacher', 'Teacher'),
         ('student', 'Student'),
         ('parent', 'Parent'),

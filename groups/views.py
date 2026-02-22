@@ -9,7 +9,7 @@ from django.utils import timezone
 from datetime import date, timedelta
 from django_filters.rest_framework import DjangoFilterBackend
 
-from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents
+from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription
 from .models import Group, GroupSchedule, GroupMaterial, GroupAnnouncement
 from .serializers import (
     GroupSerializer, GroupCreateSerializer, GroupListSerializer,
@@ -20,7 +20,7 @@ from .serializers import (
 
 class GroupViewSet(viewsets.ModelViewSet):
     """Group management viewset"""
-    permission_classes = [ReadOnlyForStudentsAndParents]
+    permission_classes = [ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['group_type', 'is_active', 'subject']
     search_fields = ['name', 'description', 'subject']

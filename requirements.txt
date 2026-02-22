@@ -34,3 +34,5 @@ tzdata==2025.3
 vine==5.1.0
 wcwidth==0.6.0
 gunicorn
+google-auth==2.28.1
+requests==2.31.0

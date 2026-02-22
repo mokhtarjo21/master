@@ -10,7 +10,7 @@ from django.utils import timezone
 from datetime import date, timedelta
 from django_filters.rest_framework import DjangoFilterBackend
 
-from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents
+from accounts.permissions import IsTeacher, ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription
 from .models import Attendance, AttendanceQRCode, AttendanceSummary, AttendanceAlert
 from .serializers import (
     AttendanceSerializer, AttendanceCreateSerializer, BulkAttendanceSerializer,
@@ -21,7 +21,7 @@ from .serializers import (
 
 class AttendanceViewSet(viewsets.ModelViewSet):
     """Attendance management viewset"""
-    permission_classes = [ReadOnlyForStudentsAndParents]
+    permission_classes = [ReadOnlyForStudentsAndParents, IsActiveTeacherSubscription]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['status', 'method', 'session__group']
     search_fields = ['student__name', 'student__code', 'session__title']
