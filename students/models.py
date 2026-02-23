@@ -49,12 +49,18 @@ class Student(models.Model):
     address = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     
+    DISCOUNT_TYPES = [
+        ('percentage', 'Percentage'),
+        ('fixed', 'Fixed Amount'),
+    ]
+
     # Subscription & Financial
     subscription_type = models.CharField(max_length=20, choices=SUBSCRIPTION_TYPES, default='per_session')
     subscription_status = models.CharField(max_length=20, choices=SUBSCRIPTION_STATUS, default='active')
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     per_session_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    student_discount = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # Percentage
+    student_discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Value: % or fixed amount
+    discount_type = models.CharField(max_length=20, choices=DISCOUNT_TYPES, default='percentage')  # How to apply the discount
     
     # Session Tracking
     remaining_sessions = models.PositiveIntegerField(default=0)
@@ -130,25 +136,31 @@ class Student(models.Model):
         self.user = user
     
     def calculate_discount_price(self, base_price=None):
-        """Calculate price after applying discounts"""
+        """Calculate price after applying discounts.
+        
+        discount_type='percentage': student_discount treated as % (0-100)
+        discount_type='fixed':      student_discount treated as a flat amount deduction
+        """
         if not base_price:
             base_price = self.monthly_price if self.subscription_type == 'monthly' else self.per_session_price
         
         # Apply student discount first
         if self.student_discount > 0:
-            base_price = base_price * (1 - self.student_discount / 100)
+            if self.discount_type == 'fixed':
+                base_price = max(Decimal('0'), base_price - self.student_discount)
+            else:  # percentage
+                base_price = base_price * (1 - self.student_discount / 100)
         
         # Apply group discount if student is in a group
         student_groups = self.student_groups.filter(is_active=True)
         for student_group in student_groups:
             group = student_group.group
             if group.group_discount > 0:
-                # Only apply if student discount is lower or doesn't exist
-                group_discount_amount = base_price * (group.group_discount / 100)
-                student_discount_amount = base_price * (self.student_discount / 100)
-                
-                if group_discount_amount > student_discount_amount:
-                    base_price = base_price * (1 - group.group_discount / 100)
+                # group_discount is always a percentage
+                group_discounted_price = base_price * (1 - group.group_discount / 100)
+                # Only apply group discount if it results in a lower price
+                if group_discounted_price < base_price:
+                    base_price = group_discounted_price
                     break
         
         return base_price

@@ -18,9 +18,11 @@ class SubscriptionPlan(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
     name = models.CharField(max_length=50)
+    name_ar = models.CharField(max_length=100, blank=True, null=True)  # Arabic name
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     billing_cycle = models.CharField(max_length=20, choices=BILLING_CYCLES, default='monthly')
+    duration_days = models.PositiveIntegerField(default=30, help_text='Plan duration in days (30=monthly, 365=yearly, 0=lifetime)')
     
     # Limits
     max_students = models.IntegerField(default=20)

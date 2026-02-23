@@ -19,9 +19,10 @@ class StudentSerializer(serializers.ModelSerializer):
             'id', 'name', 'code', 'phone', 'whatsapp_number', 'email',
             'date_of_birth', 'address', 'notes', 'subscription_type',
             'subscription_status', 'monthly_price', 'per_session_price',
-            'student_discount', 'remaining_sessions', 'total_sessions_bought',
-            'total_paid', 'remaining_amount', 'emergency_contact_name',
-            'emergency_contact_phone', 'is_active', 'registration_date',
+            'student_discount', 'discount_type', 'remaining_sessions',
+            'total_sessions_bought', 'total_paid', 'remaining_amount',
+            'emergency_contact_name', 'emergency_contact_phone',
+            'is_active', 'registration_date',
             'attendance_rate', 'groups', 'parents', 'effective_monthly_price',
             'created_at', 'updated_at'
         ]
@@ -68,20 +69,103 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class StudentCreateSerializer(serializers.ModelSerializer):
-    """Simplified serializer for student creation"""
-    
+    """
+    Serializer for student creation.
+    Supports:
+      - group_id: link student to a group on creation
+      - discount_value: numeric discount amount
+      - discount_type: 'percentage' or 'fixed'
+        * percentage + 100  → subscription_type automatically becomes 'free'
+        * fixed + any value → deducted from price, never triggers free plan
+    """
+    group_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    discount_value = serializers.DecimalField(
+        max_digits=10, decimal_places=2,
+        required=False, allow_null=True, default=None
+    )
+    discount_type = serializers.ChoiceField(
+        choices=[('percentage', 'Percentage'), ('fixed', 'Fixed Amount')],
+        required=False,
+        default='percentage'
+    )
+
     class Meta:
         model = Student
         fields = [
             'name', 'phone', 'whatsapp_number', 'email', 'date_of_birth',
             'address', 'notes', 'subscription_type', 'monthly_price',
             'per_session_price', 'student_discount', 'emergency_contact_name',
-            'emergency_contact_phone'
+            'emergency_contact_phone',
+            # new fields
+            'group_id', 'discount_value', 'discount_type',
         ]
-    
+
+    def validate(self, data):
+        discount_value = data.get('discount_value')
+        discount_type = data.get('discount_type', 'percentage')
+
+        if discount_value is not None:
+            if discount_value < 0:
+                raise serializers.ValidationError(
+                    {'discount_value': 'Discount value cannot be negative.'}
+                )
+            if discount_type == 'percentage' and discount_value > 100:
+                raise serializers.ValidationError(
+                    {'discount_value': 'Percentage discount cannot exceed 100%.'}
+                )
+
+        # Validate group_id belongs to teacher
+        group_id = data.get('group_id')
+        if group_id:
+            from groups.models import Group
+            request = self.context.get('request')
+            if not Group.objects.filter(id=group_id, teacher=request.user, is_active=True).exists():
+                raise serializers.ValidationError(
+                    {'group_id': 'Group not found or does not belong to you.'}
+                )
+
+        return data
+
     def create(self, validated_data):
+        from groups.models import Group
+        from decimal import Decimal
+
+        # Extract non-model fields
+        group_id = validated_data.pop('group_id', None)
+        discount_value = validated_data.pop('discount_value', None)
+        discount_type = validated_data.pop('discount_type', 'percentage')
+
+        # Apply discount logic
+        if discount_value is not None:
+            dv = Decimal(str(discount_value))
+            if discount_type == 'percentage':
+                # 100% percentage → free plan
+                if dv >= 100:
+                    validated_data['subscription_type'] = 'free'
+                    validated_data['student_discount'] = Decimal('100')
+                    validated_data['discount_type'] = 'percentage'
+                else:
+                    validated_data['student_discount'] = dv
+                    validated_data['discount_type'] = 'percentage'
+            else:
+                # Fixed amount: store as-is, never triggers free plan
+                validated_data['student_discount'] = dv
+                validated_data['discount_type'] = 'fixed'
+
         validated_data['teacher'] = self.context['request'].user
-        return Student.objects.create(**validated_data)
+        student = Student.objects.create(**validated_data)
+
+        # Enroll in group if provided
+        if group_id:
+            try:
+                group = Group.objects.get(id=group_id, teacher=student.teacher)
+                StudentGroup.objects.create(student=student, group=group)
+                # Recalculate remaining amount considering group price
+                student.update_remaining_amount()
+            except Group.DoesNotExist:
+                pass  # Already validated above, this is a safety net
+
+        return student
 
 
 class StudentListSerializer(serializers.ModelSerializer):

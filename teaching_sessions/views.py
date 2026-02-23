@@ -305,6 +305,129 @@ class SessionViewSet(viewsets.ModelViewSet):
         
         return Response(stats)
 
+    @action(detail=False, methods=['get'])
+    def weekly_schedule(self, request):
+        """
+        Full weekly calendar view grouped by Arabic day name.
+
+        Query params:
+          week_start  — YYYY-MM-DD (auto-snaps to Monday of that week)
+                        defaults to current week's Monday
+          group_id    — filter to a specific group
+        """
+        from groups.models import GroupSchedule
+        from django.db.models import Count, Q
+
+        ARABIC_DAYS = ['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس',
+                       'الجمعة', 'السبت', 'الأحد']
+
+        # ── Week range ────────────────────────────────────────────────────────
+        week_start_str = request.query_params.get('week_start')
+        if week_start_str:
+            try:
+                week_start = date.fromisoformat(week_start_str)
+                week_start = week_start - timedelta(days=week_start.weekday())
+            except ValueError:
+                return Response({'error': 'Invalid week_start. Use YYYY-MM-DD.'},
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            today_date = timezone.now().date()
+            week_start = today_date - timedelta(days=today_date.weekday())
+
+        week_end = week_start + timedelta(days=6)
+        today_date = timezone.now().date()
+
+        # ── Sessions ──────────────────────────────────────────────────────────
+        qs = self.get_queryset().filter(
+            date__gte=week_start, date__lte=week_end,
+        ).select_related('group').annotate(
+            attended_count=Count(
+                'attendance_records',
+                filter=Q(attendance_records__status='present')
+            )
+        )
+        group_id = request.query_params.get('group_id')
+        if group_id:
+            qs = qs.filter(group_id=group_id)
+
+        sessions_by_date = {}
+        for s in qs:
+            sessions_by_date.setdefault(s.date.isoformat(), []).append(s)
+
+        # ── Fixed group schedules ─────────────────────────────────────────────
+        fixed_qs = GroupSchedule.objects.filter(
+            group__teacher=request.user, is_active=True
+        ).select_related('group')
+        if group_id:
+            fixed_qs = fixed_qs.filter(group_id=group_id)
+
+        fixed_by_weekday = {}
+        for fs in fixed_qs:
+            fixed_by_weekday.setdefault(fs.weekday, []).append(fs)
+
+        # ── Build days ────────────────────────────────────────────────────────
+        days = []
+        summary = {'total_sessions': 0, 'completed': 0,
+                   'scheduled': 0, 'cancelled': 0, 'in_progress': 0}
+
+        for i in range(7):
+            day_date = week_start + timedelta(days=i)
+            weekday  = day_date.weekday()
+            date_key = day_date.isoformat()
+            day_sessions = sorted(
+                sessions_by_date.get(date_key, []),
+                key=lambda x: x.start_time
+            )
+
+            sessions_data = []
+            for s in day_sessions:
+                summary['total_sessions'] += 1
+                summary[s.status] = summary.get(s.status, 0) + 1
+                sessions_data.append({
+                    'id':             str(s.id),
+                    'title':          s.title,
+                    'group_name':     s.group.name,
+                    'group_id':       str(s.group.id),
+                    'group_type':     s.group.group_type,
+                    'subject':        s.group.subject or '',
+                    'start_time':     str(s.start_time),
+                    'end_time':       str(s.end_time),
+                    'status':         s.status,
+                    'classroom':      s.group.classroom or '',
+                    'online_link':    s.group.online_meeting_link or '',
+                    'students_count': s.group.current_students_count,
+                    'attended_count': s.attended_count,
+                })
+
+            # Fixed schedules not yet having a session this day
+            session_group_ids = {s.group_id for s in day_sessions}
+            fixed_data = [
+                {
+                    'group_name':  fs.group.name,
+                    'group_id':    str(fs.group.id),
+                    'start_time':  str(fs.start_time),
+                    'end_time':    str(fs.end_time),
+                    'has_session': fs.group_id in session_group_ids,
+                }
+                for fs in fixed_by_weekday.get(weekday, [])
+            ]
+
+            days.append({
+                'date':            date_key,
+                'day_name':        ARABIC_DAYS[weekday],
+                'day_index':       weekday,
+                'is_today':        day_date == today_date,
+                'session_count':   len(sessions_data),
+                'sessions':        sessions_data,
+                'fixed_schedules': fixed_data,
+            })
+
+        return Response({
+            'week_start': week_start.isoformat(),
+            'week_end':   week_end.isoformat(),
+            'days':       days,
+            'summary':    summary,
+        })
 
 class SessionReminderViewSet(viewsets.ModelViewSet):
     """Session reminder management"""

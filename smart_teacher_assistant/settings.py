@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'exports',
     'sync',
     'audit_logs',
+    'behavior',
 ]
 
 MIDDLEWARE = [

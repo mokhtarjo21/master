@@ -395,3 +395,85 @@ def extend_session(request):
     
     return Response({'error': 'Only teachers can extend sessions'}, 
                    status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def admin_login(request):
+    """
+    Admin login endpoint.
+
+    POST body:
+      { "username": "admin", "password": "Admin1234!" }
+
+    Returns JWT tokens + platform statistics snapshot.
+    Only users with user_type='admin' or is_superuser=True can access.
+    """
+    from django.contrib.auth import authenticate
+
+    username = request.data.get('username', '').strip()
+    password = request.data.get('password', '')
+
+    if not username or not password:
+        return Response(
+            {'error': 'Username and password are required.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    user = authenticate(request, username=username, password=password)
+
+    if user is None:
+        return Response(
+            {'error': 'Invalid credentials.'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+
+    if not (user.user_type == 'admin' or user.is_superuser or user.is_staff):
+        return Response(
+            {'error': 'Access denied. Admin account required.'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    if not user.is_active:
+        return Response(
+            {'error': 'Account is disabled.'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    # Generate JWT tokens
+    refresh = RefreshToken.for_user(user)
+
+    # Platform quick stats
+    try:
+        from students.models import Student
+        from groups.models import Group
+        from teachers.models import TeacherProfile
+        from accounts.models import User as UserModel
+
+        stats = {
+            'total_teachers': TeacherProfile.objects.count(),
+            'total_students': Student.objects.filter(is_active=True).count(),
+            'total_groups':   Group.objects.filter(is_active=True).count(),
+            'total_users':    UserModel.objects.count(),
+        }
+    except Exception:
+        stats = {}
+
+    # Update activity
+    user.last_activity = timezone.now()
+    user.save(update_fields=['last_activity'])
+
+    return Response({
+        'access':  str(refresh.access_token),
+        'refresh': str(refresh),
+        'user': {
+            'id':           str(user.id),
+            'username':     user.username,
+            'email':        user.email,
+            'full_name':    user.get_full_name(),
+            'user_type':    user.user_type,
+            'is_superuser': user.is_superuser,
+            'is_staff':     user.is_staff,
+        },
+        'platform_stats': stats,
+    }, status=status.HTTP_200_OK)

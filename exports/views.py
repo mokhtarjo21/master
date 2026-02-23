@@ -318,3 +318,121 @@ class ExportViewSet(viewsets.ModelViewSet):
             filename=f"{export.export_type}_{export.id}.{export.format}"
         )
 
+    @action(detail=False, methods=['post'])
+    def student_cards(self, request):
+        """
+        Generate a PDF sheet of student ID cards (3-column grid, RTL, Arabic).
+
+        POST body (JSON):
+          {
+            "student_ids": ["uuid1", "uuid2", ...],   // specific students
+            "group_id": "uuid"                         // OR all students in a group
+          }
+
+        At least one of the two must be provided.
+        Returns the PDF file as a direct download (application/pdf).
+        """
+        from students.models import Student
+        from django.http import HttpResponse
+        from .utils_cards import generate_student_cards_pdf
+
+        student_ids = request.data.get('student_ids', [])
+        group_id    = request.data.get('group_id', None)
+
+        if not student_ids and not group_id:
+            return Response(
+                {'error': 'Provide at least one of: student_ids or group_id.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Build queryset — always scoped to the requesting teacher
+        qs = Student.objects.filter(
+            teacher=request.user, is_active=True
+        ).prefetch_related(
+            'student_groups__group',
+            'parent_links__parent',
+        ).select_related('teacher', 'teacher__teacher_profile')
+
+        if group_id:
+            qs = qs.filter(student_groups__group_id=group_id, student_groups__is_active=True)
+
+        if student_ids:
+            qs = qs.filter(id__in=student_ids)
+
+        students = qs.distinct()
+
+        if not students.exists():
+            return Response(
+                {'error': 'No students found with the provided IDs.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            pdf_bytes = generate_student_cards_pdf(students)
+        except Exception as e:
+            return Response(
+                {'error': f'PDF generation failed: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        response = HttpResponse(pdf_bytes, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="student_cards.pdf"'
+        response['Content-Length'] = len(pdf_bytes)
+        return response
+
+    @action(detail=False, methods=['post'])
+    def student_report(self, request):
+        """
+        Generate a comprehensive PDF report for a single student.
+
+        POST body (JSON) — one of:
+          { "student_code": "ST-000001" }
+          { "student_id":   "uuid" }
+
+        Returns: PDF file download (application/pdf)
+        """
+        from students.models import Student
+        from django.http import HttpResponse
+        from .utils_student_report import generate_student_report_pdf
+
+        student_code = request.data.get('student_code')
+        student_id   = request.data.get('student_id')
+
+        if not student_code and not student_id:
+            return Response(
+                {'error': 'Provide student_code or student_id.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        qs = Student.objects.filter(
+            teacher=request.user
+        ).prefetch_related(
+            'student_groups__group',
+            'parent_links__parent',
+        ).select_related('teacher', 'teacher__teacher_profile')
+
+        try:
+            if student_code:
+                student = qs.get(code=student_code)
+            else:
+                student = qs.get(id=student_id)
+        except Student.DoesNotExist:
+            return Response(
+                {'error': 'Student not found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            pdf_bytes = generate_student_report_pdf(student)
+        except Exception as e:
+            return Response(
+                {'error': f'PDF generation failed: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        safe_name = (student.name or 'student').replace(' ', '_')
+        filename = f"report_{safe_name}_{student.code or student.id}.pdf"
+        response = HttpResponse(pdf_bytes, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response['Content-Length'] = len(pdf_bytes)
+        return response
