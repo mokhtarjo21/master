@@ -3,13 +3,13 @@
     "name": "Smart Teacher Assistant - Complete API",
     "description": "Comprehensive Postman collection for all Smart Teacher Assistant APIs.\nBase URL variable: base_url = http://127.0.0.1:8000\nAuth: set access_token after login.\n\nv2.0 — includes: Admin Login, Subscription Plans, Teacher Subscriptions, Behavior Assessment, Student Cards PDF, Comprehensive Student Report PDF, Weekly Schedule.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "9e4a63a5-3882-47c7-b75a-3ed9795aeaf4",
+    "_postman_id": "5b6ab1bf-f3e0-462d-a751-61a18360e5ca",
     "version": "2.0.0"
   },
   "variable": [
     {
       "key": "base_url",
-      "value": "https://master-productio.up.railway.app/",
+      "value": "http://127.0.0.1:8000",
       "type": "string"
     },
     {
@@ -103,11 +103,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -127,6 +122,9 @@
               "query": []
             },
             "description": "",
+            "auth": {
+              "type": "noauth"
+            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"username\": \"teacher1\",\n  \"email\": \"teacher@example.com\",\n  \"password\": \"Pass1234!\",\n  \"first_name\": \"أحمد\",\n  \"last_name\": \"محمد\",\n  \"phone\": \"01012345678\",\n  \"center_name\": \"مركز الأستاذ أحمد\",\n  \"teacher_pin\": \"1234\"\n}",
@@ -137,18 +135,13 @@
               }
             }
           },
-          "_id": "07614760-8b17-47d7-a9ad-9fda48f1b3df"
+          "_id": "86a46238-a782-400c-8b34-dc171fc520c6"
         },
         {
           "name": "Teacher Login (PIN)",
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -169,6 +162,9 @@
               "query": []
             },
             "description": "",
+            "auth": {
+              "type": "noauth"
+            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"username\": \"teacher1\",\n  \"teacher_pin\": \"1234\"\n}",
@@ -179,18 +175,13 @@
               }
             }
           },
-          "_id": "2dc14330-6a81-4181-861e-626feb96b1f5"
+          "_id": "54f09074-2c58-4736-900e-1897fa32ee6f"
         },
         {
           "name": "Teacher Google Login",
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -211,6 +202,9 @@
               "query": []
             },
             "description": "",
+            "auth": {
+              "type": "noauth"
+            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"id_token\": \"{{google_id_token}}\",\n  \"device_info\": {}\n}",
@@ -221,18 +215,13 @@
               }
             }
           },
-          "_id": "286c30ef-eebc-4925-ba63-b8ebd6490104"
+          "_id": "edf4c485-165f-4720-8c2b-ea25ce614862"
         },
         {
           "name": "Student Login",
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -253,6 +242,9 @@
               "query": []
             },
             "description": "",
+            "auth": {
+              "type": "noauth"
+            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"student_code\": \"ST-000001\"\n}",
@@ -263,7 +255,7 @@
               }
             }
           },
-          "_id": "9e1f0c76-f4d4-4fe5-afce-7b00d3e72e25"
+          "_id": "219b72dd-d815-4c3a-a331-6b8fac7d8f0c"
         },
         {
           "name": "Logout",
@@ -296,7 +288,7 @@
             },
             "description": ""
           },
-          "_id": "c4f6c340-17cf-48ab-b36e-e3228c31b384"
+          "_id": "cd29a524-b587-47da-ab23-0c6261f5ea71"
         },
         {
           "name": "Get Profile",
@@ -329,7 +321,7 @@
             },
             "description": ""
           },
-          "_id": "ccf17c84-f20c-4129-a4c4-0b1af455ce7c"
+          "_id": "b6ed4e74-0ad0-4175-80c8-62f4e9442665"
         },
         {
           "name": "Update Profile",
@@ -372,7 +364,7 @@
               }
             }
           },
-          "_id": "e391c733-0772-4eee-97f5-e3ff8e963fa6"
+          "_id": "54af8bd0-4b04-433b-80bc-772f7e00ae2e"
         },
         {
           "name": "Generate Student QR",
@@ -414,7 +406,7 @@
               }
             }
           },
-          "_id": "dafefe7a-1962-424f-8c84-0e65d78e1840"
+          "_id": "6d3b2924-fd11-4244-afde-e81f761f6e43"
         },
         {
           "name": "Session Status",
@@ -447,7 +439,7 @@
             },
             "description": ""
           },
-          "_id": "709875da-b1c2-4e86-ab14-a067aeb82cca"
+          "_id": "5e6c8788-6f2b-4bdb-80ba-2f6611b98d2a"
         },
         {
           "name": "Extend Session",
@@ -480,10 +472,10 @@
             },
             "description": ""
           },
-          "_id": "1d6318df-037a-4e1e-bd66-1ca77173a43f"
+          "_id": "47f02259-a1fd-4385-9cad-e696d063ed9b"
         }
       ],
-      "_id": "0927a007-7ff1-4c84-a8a6-a1170ef99055"
+      "_id": "92f2dfa5-e5fe-4dae-8662-92634897b515"
     },
     {
       "name": "👨‍🎓 Students",
@@ -561,7 +553,7 @@
             },
             "description": "GET all Student"
           },
-          "_id": "3e80dc54-625a-4d09-852a-31a114eb3b9b"
+          "_id": "ea597e66-425a-4878-bfe8-0ec5f0f00af9"
         },
         {
           "name": "Create Student",
@@ -602,7 +594,7 @@
               }
             }
           },
-          "_id": "bbde5fd0-5810-4f40-bbd3-6506f4701994"
+          "_id": "89ede3ef-cdfc-4d30-aaec-6c65d52f8a02"
         },
         {
           "name": "Get Student",
@@ -635,7 +627,7 @@
             },
             "description": "GET single Student"
           },
-          "_id": "12ea26b3-abdf-4c16-85e2-3c82fe85c823"
+          "_id": "9e2418a6-836b-46fa-83bc-debfca4a1c17"
         },
         {
           "name": "Update Student",
@@ -677,7 +669,7 @@
               }
             }
           },
-          "_id": "7c3b4aeb-ac59-4dde-8edc-9eec38f48b8b"
+          "_id": "9faa1340-c8ee-4395-91c4-8897c5a05d56"
         },
         {
           "name": "Partial Update Student",
@@ -710,7 +702,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "c1214803-169c-4957-8b86-b3a16786f6e3"
+          "_id": "470828b1-1948-4912-b056-5682b261392b"
         },
         {
           "name": "Delete Student",
@@ -743,7 +735,7 @@
             },
             "description": "DELETE Student"
           },
-          "_id": "92323fe2-a4bf-41bc-8c58-4f364472bec7"
+          "_id": "4d8ce3d0-76d4-4507-a16a-9fa97a25afb5"
         },
         {
           "name": "Student Profile (Full)",
@@ -777,7 +769,7 @@
             },
             "description": ""
           },
-          "_id": "97d4b003-cb39-443d-94b5-33f5dfb5a169"
+          "_id": "b588762e-8051-4306-b036-97c311953677"
         },
         {
           "name": "Attendance History",
@@ -824,7 +816,7 @@
             },
             "description": ""
           },
-          "_id": "12ed125e-1d6d-46bb-88b1-39c9a42f7349"
+          "_id": "f3b628b9-2bb3-4f47-8825-26e723eca345"
         },
         {
           "name": "Payment History",
@@ -877,7 +869,7 @@
             },
             "description": ""
           },
-          "_id": "b977c9a2-e854-4527-9e35-55f582da456d"
+          "_id": "fbc2e8c9-0a32-4ead-b372-abe4c252362e"
         },
         {
           "name": "Grades History",
@@ -930,7 +922,7 @@
             },
             "description": ""
           },
-          "_id": "5238da47-d1d9-450e-8937-03c9c3a35a20"
+          "_id": "a9f5bc4d-d7a9-42b8-a362-f712c9bd440b"
         },
         {
           "name": "Update Subscription",
@@ -973,7 +965,7 @@
               }
             }
           },
-          "_id": "cf7aaa63-7ed0-444a-9a8c-a5d0737ec285"
+          "_id": "4c1d6c87-c9bb-41dd-b623-210e83025967"
         },
         {
           "name": "Update Remaining Sessions",
@@ -1016,7 +1008,7 @@
               }
             }
           },
-          "_id": "e2ed0c41-2e62-47ce-a018-350d60755cb2"
+          "_id": "5aee060a-9a1a-400e-8859-a8306125d26a"
         },
         {
           "name": "Statistics",
@@ -1049,7 +1041,7 @@
             },
             "description": ""
           },
-          "_id": "3bcab107-bff6-4fdf-8d3b-694c121704f1"
+          "_id": "6d6c3cc9-2022-4def-bcae-9b5f5fdd7ed2"
         },
         {
           "name": "List Parents",
@@ -1089,7 +1081,7 @@
             },
             "description": ""
           },
-          "_id": "77e70651-39ec-49b2-8b5d-5902ed5d7082"
+          "_id": "05708f45-6f2f-4a0e-a597-11ceda3beedc"
         },
         {
           "name": "Create Parent",
@@ -1131,7 +1123,7 @@
               }
             }
           },
-          "_id": "2738af7b-d322-430c-ac96-1c642de4a917"
+          "_id": "5d782ffb-6e6e-4a13-8d53-88ca62c0ac3b"
         },
         {
           "name": "Link Student-Parent",
@@ -1173,7 +1165,7 @@
               }
             }
           },
-          "_id": "da53f65d-5499-4929-afea-711d26a23751"
+          "_id": "1a653f4d-461a-4e94-9775-e4eb64c86a33"
         },
         {
           "name": "List Student-Group Links",
@@ -1206,7 +1198,7 @@
             },
             "description": ""
           },
-          "_id": "947b369d-85e5-40f1-b6ca-87a86c3b821d"
+          "_id": "785598cd-3ed4-40a5-bb24-dc0623c51add"
         },
         {
           "name": "Enroll Student in Group",
@@ -1248,7 +1240,7 @@
               }
             }
           },
-          "_id": "b0da95c1-0117-433f-ac26-7e5c0b4264e4"
+          "_id": "474a30e4-d1ce-4747-81e5-f044c8e24944"
         },
         {
           "name": "Remove Student from Group",
@@ -1282,10 +1274,10 @@
             },
             "description": ""
           },
-          "_id": "5fec683f-6410-4322-9bfa-10ced64823d5"
+          "_id": "0922405c-6edb-4546-aae5-599550a93757"
         }
       ],
-      "_id": "defd0631-a6e3-499f-921c-d4c5f5c3e08c"
+      "_id": "0c428acd-b4d8-4f5a-891d-a19c5eaedec3"
     },
     {
       "name": "👥 Groups",
@@ -1345,7 +1337,7 @@
             },
             "description": "GET all Group"
           },
-          "_id": "e20d8593-57ff-46c3-8092-8c42f9146f8b"
+          "_id": "0ec71dda-cbeb-4c23-a3d5-b23d2442fd04"
         },
         {
           "name": "Create Group",
@@ -1386,7 +1378,7 @@
               }
             }
           },
-          "_id": "d086183c-b7da-47e1-9b5d-1eaad152477e"
+          "_id": "950262bb-e5d9-4f77-9b7e-932dad605647"
         },
         {
           "name": "Get Group",
@@ -1419,7 +1411,7 @@
             },
             "description": "GET single Group"
           },
-          "_id": "18f154a3-86c5-4be0-8ea6-d6707f0de498"
+          "_id": "bc3e9bc9-d822-40ab-a566-cb38539930e3"
         },
         {
           "name": "Update Group",
@@ -1461,7 +1453,7 @@
               }
             }
           },
-          "_id": "63faca14-93ac-4f73-b704-64eda50d1be1"
+          "_id": "28e9229e-2afb-4b59-b56d-0278fef11913"
         },
         {
           "name": "Partial Update Group",
@@ -1494,7 +1486,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "83a9b8c9-35f2-4e0d-9a6f-d2be6c8f00d9"
+          "_id": "775191cd-f170-426d-aab8-49b05eb52b84"
         },
         {
           "name": "Delete Group",
@@ -1527,7 +1519,7 @@
             },
             "description": "DELETE Group"
           },
-          "_id": "60c3b909-a89a-482b-8587-a99568cd3994"
+          "_id": "c8faa369-bb78-48e3-83c9-19fc21448b81"
         },
         {
           "name": "Group Statistics",
@@ -1561,7 +1553,7 @@
             },
             "description": ""
           },
-          "_id": "0929394b-55d6-47af-9a3e-57d439b8c074"
+          "_id": "f751f88f-c748-4429-8a90-dd7d84d347e2"
         },
         {
           "name": "Group Students",
@@ -1595,7 +1587,7 @@
             },
             "description": ""
           },
-          "_id": "26831db5-2277-4052-8293-57a15bb4a507"
+          "_id": "17e5058c-8cfe-4301-b28c-e5eb7c4ae16e"
         },
         {
           "name": "Add Schedule",
@@ -1637,7 +1629,7 @@
               }
             }
           },
-          "_id": "b81f5d46-c601-4ef0-a34e-235ce1c20ee8"
+          "_id": "8c6543d2-f38d-41ac-a4cb-5b3a03073295"
         },
         {
           "name": "List Schedules",
@@ -1677,7 +1669,7 @@
             },
             "description": ""
           },
-          "_id": "13bd2af2-6da5-499a-8e29-fb5053125a08"
+          "_id": "771d2c59-3a0a-4aeb-808d-d3ab15f49343"
         },
         {
           "name": "Add Announcement",
@@ -1719,7 +1711,7 @@
               }
             }
           },
-          "_id": "2a4cf718-aa57-4da7-bf7f-fd4c405ebc30"
+          "_id": "61bb73de-3abe-4f17-ae53-d7f3adadc4a7"
         },
         {
           "name": "List Materials",
@@ -1759,10 +1751,10 @@
             },
             "description": ""
           },
-          "_id": "f3ba3c1d-ac9d-4d66-a672-8261aac7df82"
+          "_id": "a7421e52-4fc3-443f-8a8b-5bd344cbcc82"
         }
       ],
-      "_id": "75cbb481-dc81-4329-bc84-1e36d7ccb387"
+      "_id": "38a64a6e-dd48-4f1e-802a-3629f67082bd"
     },
     {
       "name": "📅 Sessions",
@@ -1840,7 +1832,7 @@
             },
             "description": "GET all Session"
           },
-          "_id": "a60d60e5-56a9-4378-b91c-a99dc9d690c6"
+          "_id": "42b44bed-2d21-4577-ae48-99fe0d6d1002"
         },
         {
           "name": "Create Session",
@@ -1881,7 +1873,7 @@
               }
             }
           },
-          "_id": "a277ba79-70fe-4f6e-9aec-f22a3ae66fdf"
+          "_id": "7418f4a9-ed28-46da-85a3-fc1859a443d5"
         },
         {
           "name": "Get Session",
@@ -1914,7 +1906,7 @@
             },
             "description": "GET single Session"
           },
-          "_id": "ddbfa7f1-c617-4165-bf6f-0966f808683a"
+          "_id": "536ce3cd-bce4-4ab2-94fa-768ab18ce8e9"
         },
         {
           "name": "Update Session",
@@ -1956,7 +1948,7 @@
               }
             }
           },
-          "_id": "00f1f450-8a1d-452b-878b-4ef05e7fecce"
+          "_id": "7f822e39-9089-4d92-bff2-7920b060b29b"
         },
         {
           "name": "Partial Update Session",
@@ -1989,7 +1981,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "7d6fb394-cf29-4f0b-97c9-a2f5c6770610"
+          "_id": "eb5ed18e-53cf-4931-9993-e0176716164c"
         },
         {
           "name": "Delete Session",
@@ -2022,7 +2014,7 @@
             },
             "description": "DELETE Session"
           },
-          "_id": "673b036f-1e21-4d21-9102-47ff7e71e708"
+          "_id": "35fc1adb-7fab-492c-a0fe-65802a9f9085"
         },
         {
           "name": "Today Sessions",
@@ -2055,7 +2047,7 @@
             },
             "description": ""
           },
-          "_id": "ef962323-78d0-495a-b1d8-b6794232594b"
+          "_id": "2bbe5331-8637-47b9-a68f-7c3883745197"
         },
         {
           "name": "Upcoming Sessions",
@@ -2095,7 +2087,7 @@
             },
             "description": ""
           },
-          "_id": "4969db9d-4258-4382-af3e-b05651e1bb67"
+          "_id": "b2e0e553-6030-4dc8-9439-eb819cade92f"
         },
         {
           "name": "Session Statistics",
@@ -2128,7 +2120,7 @@
             },
             "description": ""
           },
-          "_id": "efb3ae33-69f2-464e-affc-3f583028f8cc"
+          "_id": "c4984a86-78d5-4b31-a9fd-43ba796d297e"
         },
         {
           "name": "Mark Complete",
@@ -2171,7 +2163,7 @@
               }
             }
           },
-          "_id": "f1c3a422-1c1d-4ff9-8348-91e1a83e6c0d"
+          "_id": "172e6f1f-1a51-41ec-a833-22361a63c3b0"
         },
         {
           "name": "Cancel Session",
@@ -2214,7 +2206,7 @@
               }
             }
           },
-          "_id": "d7e10989-9e5a-4ac2-84e0-383f17e63b49"
+          "_id": "66f8b1c7-07e5-43e7-82b8-375d05e3d490"
         },
         {
           "name": "Add Session Note",
@@ -2256,7 +2248,7 @@
               }
             }
           },
-          "_id": "7f121d83-51ab-4af3-84fb-a664def5b5b4"
+          "_id": "0be3a60a-0f1d-432c-8b1e-7851a970ce26"
         },
         {
           "name": "Add Reminder",
@@ -2298,10 +2290,10 @@
               }
             }
           },
-          "_id": "e18e9213-8a23-435a-9912-a24faf7a30dc"
+          "_id": "7f9db841-5b02-4192-b077-b3fe38236ada"
         }
       ],
-      "_id": "35b9f924-2555-463c-9afd-49782eef7cd9"
+      "_id": "f3b5617b-9fe2-4a6f-b3e6-956fe2ca74a0"
     },
     {
       "name": "✅ Attendance",
@@ -2385,7 +2377,7 @@
             },
             "description": "GET all Attendance"
           },
-          "_id": "f3df5313-9ad2-49eb-b1d8-b7ba37455085"
+          "_id": "5f5574d9-0dd7-4de9-9c80-0c03e263cc06"
         },
         {
           "name": "Create Attendance",
@@ -2426,7 +2418,7 @@
               }
             }
           },
-          "_id": "5b887662-301a-45aa-a072-31df92207e71"
+          "_id": "d416e19d-63ab-4a2b-8472-7b5c866e958c"
         },
         {
           "name": "Get Attendance",
@@ -2459,7 +2451,7 @@
             },
             "description": "GET single Attendance"
           },
-          "_id": "47dd09de-b2b8-479c-9421-ab9adb8b45bd"
+          "_id": "c539246f-abaa-438c-b438-290c8e28ec62"
         },
         {
           "name": "Update Attendance",
@@ -2501,7 +2493,7 @@
               }
             }
           },
-          "_id": "eb9cb6fa-d1f2-41e5-96d1-23ebdac9f376"
+          "_id": "2b5c903b-1fae-40db-a829-65ead2878c04"
         },
         {
           "name": "Partial Update Attendance",
@@ -2534,7 +2526,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "2bf20f1c-765e-4e7f-a235-377079c6aebe"
+          "_id": "4f90d8e2-d249-4a36-8c12-e03bd3ace4b7"
         },
         {
           "name": "Delete Attendance",
@@ -2567,7 +2559,7 @@
             },
             "description": "DELETE Attendance"
           },
-          "_id": "4310f6cb-3b58-478e-96ee-186b3fa53e2d"
+          "_id": "7bf8b66b-2e62-49f3-b69e-8fe4521268e5"
         },
         {
           "name": "Bulk Mark Attendance",
@@ -2609,7 +2601,7 @@
               }
             }
           },
-          "_id": "f70f10bc-3e17-45bd-8027-1063449359e1"
+          "_id": "88d545f9-599f-4cbb-97d3-0e26084fec32"
         },
         {
           "name": "Session Attendance",
@@ -2649,7 +2641,7 @@
             },
             "description": ""
           },
-          "_id": "3fb6744d-e1e2-47da-a874-661691806f01"
+          "_id": "6a7055c3-2782-481c-8a8e-7f69847c2bca"
         },
         {
           "name": "Scan QR Attendance",
@@ -2691,7 +2683,7 @@
               }
             }
           },
-          "_id": "92199aab-12df-4039-ab15-faee9d719b5a"
+          "_id": "1ba66a3e-7cad-40d1-863d-81b936891e7a"
         },
         {
           "name": "Attendance Summary (Student)",
@@ -2743,7 +2735,7 @@
             },
             "description": ""
           },
-          "_id": "997e89bf-fc5e-4ff2-b3fa-ed19abbd2783"
+          "_id": "61db6654-9553-4014-acec-ded12e543669"
         },
         {
           "name": "Attendance Alerts",
@@ -2789,10 +2781,10 @@
             },
             "description": ""
           },
-          "_id": "a88bb3db-beb2-4159-801f-3e2b021cbed7"
+          "_id": "12e00d50-af79-445d-82f5-b229bd134e78"
         }
       ],
-      "_id": "ffad7db0-63e4-4261-b0ee-577b7310bac4"
+      "_id": "1b90c8b1-c40b-4b39-9612-99c0c27c536e"
     },
     {
       "name": "💰 Payments",
@@ -2876,7 +2868,7 @@
             },
             "description": "GET all Payment"
           },
-          "_id": "2abe4d04-0632-4ca8-b5b2-24d5cbebf0a7"
+          "_id": "675ce64c-46f1-4614-88a0-f2101019a3d3"
         },
         {
           "name": "Create Payment",
@@ -2917,7 +2909,7 @@
               }
             }
           },
-          "_id": "d45fc609-c085-499e-9d05-a1870b2a2452"
+          "_id": "30d974d1-845f-4335-82ed-5d64207fe785"
         },
         {
           "name": "Get Payment",
@@ -2950,7 +2942,7 @@
             },
             "description": "GET single Payment"
           },
-          "_id": "fdd657b2-64d4-42df-992f-e3e15ead0dd1"
+          "_id": "efe1ce3b-3d9f-4e9c-9233-10d7be8bd632"
         },
         {
           "name": "Update Payment",
@@ -2992,7 +2984,7 @@
               }
             }
           },
-          "_id": "e1e8f466-6b3f-4809-8f9f-098600b23168"
+          "_id": "c7e90fc5-8df2-4c05-8415-45b0b69e09b5"
         },
         {
           "name": "Partial Update Payment",
@@ -3025,7 +3017,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "ca84c1e8-a6eb-4f62-b888-1c1db8e9ce0d"
+          "_id": "f6fda9f0-bc7c-4255-ae06-12544a61a0a7"
         },
         {
           "name": "Delete Payment",
@@ -3058,7 +3050,7 @@
             },
             "description": "DELETE Payment"
           },
-          "_id": "cbf77180-b586-40a9-a5d1-124b6d3d4c45"
+          "_id": "de30c620-3451-4903-9548-932fb8c45e38"
         },
         {
           "name": "Payment Statistics",
@@ -3091,7 +3083,7 @@
             },
             "description": ""
           },
-          "_id": "472e232a-ed2c-4f1b-a717-de59c710429a"
+          "_id": "4dc551a4-f54c-4886-b707-0ea3fe7e1b4e"
         },
         {
           "name": "Overdue Payments",
@@ -3124,7 +3116,7 @@
             },
             "description": ""
           },
-          "_id": "0bf085e2-7aff-4a55-b653-ca785dce43fe"
+          "_id": "fb164c81-d844-4eb0-8c08-41786d2338ff"
         },
         {
           "name": "Monthly Summary",
@@ -3170,7 +3162,7 @@
             },
             "description": ""
           },
-          "_id": "54c8aa0c-8491-4577-bf7b-725897dea065"
+          "_id": "03146b77-f444-41e7-969f-18e6ee950583"
         },
         {
           "name": "Mark as Paid",
@@ -3213,7 +3205,7 @@
               }
             }
           },
-          "_id": "b32d70c0-5b5d-47fc-a3ec-2cd8ddf5b364"
+          "_id": "6abb62a1-df98-430d-b956-62ae3a7dd34e"
         },
         {
           "name": "Payment Reminders",
@@ -3246,7 +3238,7 @@
             },
             "description": ""
           },
-          "_id": "a614dfd3-4b41-474a-b63c-d8acc860f796"
+          "_id": "b3649435-cd8c-4216-a8f9-5b54dec4cd37"
         },
         {
           "name": "Add Payment Reminder",
@@ -3288,10 +3280,10 @@
               }
             }
           },
-          "_id": "44995ebf-850b-4662-9c70-8d1c7e6a0552"
+          "_id": "80303c39-5638-40f3-acd3-49e6c190eb02"
         }
       ],
-      "_id": "a2b695a5-b969-4045-ab9a-755037bf2113"
+      "_id": "b5873381-9fb6-45e4-a9b8-0d5ba8a109d9"
     },
     {
       "name": "🧾 Receipts",
@@ -3357,7 +3349,7 @@
             },
             "description": "GET all Receipt"
           },
-          "_id": "87f18232-5319-4955-80b9-ad86509128e6"
+          "_id": "c6f433bb-f40c-4f0c-b159-f2d9d84f1c92"
         },
         {
           "name": "Create Receipt",
@@ -3398,7 +3390,7 @@
               }
             }
           },
-          "_id": "6dfdac81-bd76-4966-943a-06dc2fa918e6"
+          "_id": "e8abd06c-5583-456b-acb5-2c1ee3d29d66"
         },
         {
           "name": "Get Receipt",
@@ -3431,7 +3423,7 @@
             },
             "description": "GET single Receipt"
           },
-          "_id": "1990450f-b9f1-4770-be23-bf068247b6c4"
+          "_id": "f8025636-d682-4cfa-8092-9f32f504f6be"
         },
         {
           "name": "Update Receipt",
@@ -3473,7 +3465,7 @@
               }
             }
           },
-          "_id": "67ee9503-8cd3-4ba7-9c3e-bf604647e8a0"
+          "_id": "b6f7baac-3fe6-4a40-80e1-77b5cd3220b3"
         },
         {
           "name": "Partial Update Receipt",
@@ -3506,7 +3498,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "2f843c20-3692-4d79-a669-576d0069324e"
+          "_id": "97f3526e-2f84-4914-90bb-5ec457c4470d"
         },
         {
           "name": "Delete Receipt",
@@ -3539,7 +3531,7 @@
             },
             "description": "DELETE Receipt"
           },
-          "_id": "e709b7d6-5598-40a2-98c9-110d76a3f432"
+          "_id": "93c736ca-080b-48de-8f40-ee7ba950fed2"
         },
         {
           "name": "Generate PDF",
@@ -3573,7 +3565,7 @@
             },
             "description": ""
           },
-          "_id": "ea26ed79-dc5d-4438-bcef-0e25b03bb5a2"
+          "_id": "937378fe-b15c-46cc-bf05-feb16951dddc"
         },
         {
           "name": "Send Receipt",
@@ -3616,7 +3608,7 @@
               }
             }
           },
-          "_id": "56d25d44-1c12-4bcd-8969-8203bfa72731"
+          "_id": "6dd03b55-16cb-4caf-b932-743bad3311f4"
         },
         {
           "name": "Bulk Generate",
@@ -3658,7 +3650,7 @@
               }
             }
           },
-          "_id": "444f8665-eacc-4c12-8795-05be2b61f8f7"
+          "_id": "a85a8e33-f55b-4ecb-8a24-fd845fe89195"
         },
         {
           "name": "Receipt Templates",
@@ -3691,7 +3683,7 @@
             },
             "description": ""
           },
-          "_id": "09d57718-6589-4ed2-b2c9-12c328ddad8b"
+          "_id": "2bb36563-e730-4b00-8e66-729a0c60bb57"
         },
         {
           "name": "Create Template",
@@ -3733,10 +3725,10 @@
               }
             }
           },
-          "_id": "334b344a-0984-4e83-86ec-729169a26bc7"
+          "_id": "9cf3a4d2-ff8c-40f8-9d8e-16a77e028841"
         }
       ],
-      "_id": "9431a0bd-d6f6-4b7e-a22a-702772469a4b"
+      "_id": "f1187317-80f7-4a56-ad29-37e77c99a6e3"
     },
     {
       "name": "📊 Grades",
@@ -3814,7 +3806,7 @@
             },
             "description": "GET all Grade"
           },
-          "_id": "21b5c287-332c-43ef-b866-3d6e0ba1e274"
+          "_id": "10e5aa70-5650-4877-8908-2a769eaa8168"
         },
         {
           "name": "Create Grade",
@@ -3855,7 +3847,7 @@
               }
             }
           },
-          "_id": "fded809f-c0f9-455e-a883-8ac0ac361786"
+          "_id": "79ee7b96-b992-4b6c-b610-ae22a12ef0af"
         },
         {
           "name": "Get Grade",
@@ -3888,7 +3880,7 @@
             },
             "description": "GET single Grade"
           },
-          "_id": "7aa7b82f-ff95-4683-bbd2-bc61063eb316"
+          "_id": "65d8c661-c16e-4cd1-b2d5-fb281268da5f"
         },
         {
           "name": "Update Grade",
@@ -3930,7 +3922,7 @@
               }
             }
           },
-          "_id": "2ef0b5c6-e6ee-4401-97f8-b0463cfc1086"
+          "_id": "7cfc4d8d-2e8a-48c0-a494-bc1d3a763976"
         },
         {
           "name": "Partial Update Grade",
@@ -3963,7 +3955,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "60ec1343-5f0a-48c7-b913-77a47d5438bf"
+          "_id": "c6fa127c-c565-4ce9-8783-ac8efd53edd3"
         },
         {
           "name": "Delete Grade",
@@ -3996,7 +3988,7 @@
             },
             "description": "DELETE Grade"
           },
-          "_id": "83f4561a-e163-4922-8ff6-77697c4f3665"
+          "_id": "affe938e-18e6-478f-9f06-b9e05da9f455"
         },
         {
           "name": "Grade Statistics",
@@ -4029,7 +4021,7 @@
             },
             "description": ""
           },
-          "_id": "73ad61b0-5b0f-4db2-b161-830845fdc08d"
+          "_id": "68ef9172-91dd-48c6-bd1c-81e34abb9632"
         },
         {
           "name": "Student Average",
@@ -4069,7 +4061,7 @@
             },
             "description": ""
           },
-          "_id": "b478b859-a0a1-4656-9208-b2c041882135"
+          "_id": "8e486fce-44ab-4c94-b9d7-e5583684a740"
         },
         {
           "name": "Grade Alert",
@@ -4115,7 +4107,7 @@
             },
             "description": ""
           },
-          "_id": "866fb61f-10dd-4bf1-9403-5359f0acb1b4"
+          "_id": "34db1efa-7c09-4ef0-89bd-f9e4f3f290cb"
         },
         {
           "name": "Grade Types",
@@ -4148,7 +4140,7 @@
             },
             "description": ""
           },
-          "_id": "e0f1cf06-811d-488a-83fa-d0866f10c93d"
+          "_id": "027d3038-2257-4ed1-98da-499f2325c5a1"
         },
         {
           "name": "Create Grade Type",
@@ -4190,7 +4182,7 @@
               }
             }
           },
-          "_id": "c1b5176b-8450-4037-a223-60ac63261fa4"
+          "_id": "dcd1546d-5bf2-4724-97b7-ebb2352ede3b"
         },
         {
           "name": "Grade Summary",
@@ -4242,10 +4234,10 @@
             },
             "description": ""
           },
-          "_id": "fbdec385-e344-4cd0-b16e-e2bfabcb2633"
+          "_id": "24ad35c9-3b73-42a4-a4d8-2392e683a5c2"
         }
       ],
-      "_id": "e6afbbbf-ae03-49f1-81c7-c5972e76ac02"
+      "_id": "6693962e-5cfb-4fa9-bb34-bfa766f0d601"
     },
     {
       "name": "🔔 Notifications",
@@ -4317,7 +4309,7 @@
             },
             "description": "GET all Notification"
           },
-          "_id": "97c20663-df4f-4c0a-a868-834227fa6b49"
+          "_id": "895317b8-badc-4f96-b22f-d55d94977ffc"
         },
         {
           "name": "Create Notification",
@@ -4358,7 +4350,7 @@
               }
             }
           },
-          "_id": "53cfdef1-c967-437e-a02b-e92e0eeffa45"
+          "_id": "659b3142-b80f-4261-9781-858554ef6ded"
         },
         {
           "name": "Get Notification",
@@ -4391,7 +4383,7 @@
             },
             "description": "GET single Notification"
           },
-          "_id": "154c7d2e-7470-4c6b-9ddc-131e6895fcfe"
+          "_id": "cbf3eea5-4c5d-40fd-81b0-6326186a16f3"
         },
         {
           "name": "Update Notification",
@@ -4433,7 +4425,7 @@
               }
             }
           },
-          "_id": "4a301c56-7c40-4224-867a-10951362df97"
+          "_id": "715d4741-4fb3-4f0d-861e-33dde5dcf510"
         },
         {
           "name": "Partial Update Notification",
@@ -4466,7 +4458,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "c2ff9898-8095-4b8f-8317-9da77709a2c5"
+          "_id": "d3123486-d26b-4cd4-b0ff-1a881b9a02ac"
         },
         {
           "name": "Delete Notification",
@@ -4499,7 +4491,7 @@
             },
             "description": "DELETE Notification"
           },
-          "_id": "842f6e50-4c1e-4c38-b5df-6f686f2f659d"
+          "_id": "232b984c-ccaa-41fc-8e96-c13f2731919a"
         },
         {
           "name": "Send Notification",
@@ -4533,7 +4525,7 @@
             },
             "description": ""
           },
-          "_id": "1c22cfb4-7b72-4c06-bc98-8248dd59dd73"
+          "_id": "f0b11504-8f06-4578-9ec5-86190732d31b"
         },
         {
           "name": "Bulk Send",
@@ -4575,7 +4567,7 @@
               }
             }
           },
-          "_id": "3189f94f-58b1-42ec-b1a2-8208dd265a14"
+          "_id": "b94a6ca8-79de-43ce-a38b-49affb9c408e"
         },
         {
           "name": "Pending Notifications",
@@ -4608,7 +4600,7 @@
             },
             "description": ""
           },
-          "_id": "299cbebb-4fb7-447e-ad57-f1128d633db2"
+          "_id": "53fc39f6-bb43-46f9-8eee-76b89d5a6ad0"
         },
         {
           "name": "Notification Templates",
@@ -4641,7 +4633,7 @@
             },
             "description": ""
           },
-          "_id": "55d5b5ee-f213-4e7c-b152-78488dc1d084"
+          "_id": "9a61d79e-902f-49aa-9344-0b3306f8c01b"
         },
         {
           "name": "Create Template",
@@ -4683,7 +4675,7 @@
               }
             }
           },
-          "_id": "dc4b473b-6887-4be5-a6bf-3e14062f3b6b"
+          "_id": "6a2c1b96-4898-4925-97cb-d6b218b3ad19"
         },
         {
           "name": "Notification Stats",
@@ -4716,10 +4708,10 @@
             },
             "description": ""
           },
-          "_id": "6c50abe6-a234-479a-935f-fe3e85ba4f1e"
+          "_id": "71125eda-293f-4942-9add-71b9dd94309b"
         }
       ],
-      "_id": "5be6b97c-eb0d-44e1-9c72-7b6d3699cb88"
+      "_id": "e03e0a66-9f44-457c-995a-1425bccdb42b"
     },
     {
       "name": "🧠 Behavior Assessment",
@@ -4810,7 +4802,7 @@
             },
             "description": "GET all Behavior Record"
           },
-          "_id": "17b2583f-3cd0-448f-831b-16d7912a51e4"
+          "_id": "f1e93e58-121c-4627-b34f-99f05e4dcd59"
         },
         {
           "name": "Create Behavior Record",
@@ -4852,7 +4844,7 @@
               }
             }
           },
-          "_id": "407b5eb8-6702-48ab-aa11-365490899ebd"
+          "_id": "31178206-479f-4ef0-b742-1ac46a29ce5c"
         },
         {
           "name": "Get Behavior Record",
@@ -4886,7 +4878,7 @@
             },
             "description": "GET single Behavior Record"
           },
-          "_id": "2618bbd3-48b4-482e-ac4d-3450479a351e"
+          "_id": "56d3d287-3b1f-44ee-97d3-730c1689405d"
         },
         {
           "name": "Update Behavior Record",
@@ -4929,7 +4921,7 @@
               }
             }
           },
-          "_id": "e5109cbe-8655-47b0-88fc-0a970589bbc7"
+          "_id": "d417aed6-1894-4dea-86c1-968e333741f1"
         },
         {
           "name": "Partial Update Behavior Record",
@@ -4963,7 +4955,7 @@
             },
             "description": "PATCH partial update"
           },
-          "_id": "661b7220-5e5b-4b86-98eb-9f7e09867654"
+          "_id": "51b3b248-ae5a-4b75-bf63-51d89e693532"
         },
         {
           "name": "Delete Behavior Record",
@@ -4997,7 +4989,7 @@
             },
             "description": "DELETE Behavior Record"
           },
-          "_id": "8dacefd8-c015-4b25-94b8-b1667fa6b61d"
+          "_id": "ed260e36-81de-483a-8d3a-f57117dc1d4a"
         },
         {
           "name": "Notify Parent",
@@ -5032,7 +5024,7 @@
             },
             "description": ""
           },
-          "_id": "e33ecad5-0425-4a80-af9c-a84de54e3f79"
+          "_id": "91577517-d350-49a7-b0ce-3ec5c55d6ef1"
         },
         {
           "name": "Bulk Create Records",
@@ -5075,7 +5067,7 @@
               }
             }
           },
-          "_id": "a9ed421e-9ed1-4a82-aca0-9a7fcc4bd347"
+          "_id": "6e6d7271-be2d-4c64-86fb-ca02bb081373"
         },
         {
           "name": "Statistics",
@@ -5134,7 +5126,7 @@
             },
             "description": ""
           },
-          "_id": "91dba728-a813-4751-aaa0-c312a65bf822"
+          "_id": "c5e076d6-8b4b-49cc-932c-2ac79e25a6eb"
         },
         {
           "name": "List Categories",
@@ -5167,7 +5159,7 @@
             },
             "description": ""
           },
-          "_id": "2dcefbf4-fcbd-458d-b7bd-316aa75ef866"
+          "_id": "00edd420-a295-49ee-ad12-f7fcd98917c6"
         },
         {
           "name": "Create Category",
@@ -5209,7 +5201,7 @@
               }
             }
           },
-          "_id": "c58daccb-fb40-4968-b0f6-ed44c8ad862f"
+          "_id": "5af54680-3055-436f-a2b2-57c61c33d352"
         },
         {
           "name": "Get Category",
@@ -5243,7 +5235,7 @@
             },
             "description": ""
           },
-          "_id": "a9de2bdb-f9ef-4e10-8082-7536789261e1"
+          "_id": "f67577c0-40dd-423b-8bb8-acaa965b2abd"
         },
         {
           "name": "Update Category",
@@ -5286,7 +5278,7 @@
               }
             }
           },
-          "_id": "4ae5b30d-5fc4-4e5f-8ead-3707ec551094"
+          "_id": "2f0bedd6-d706-4ee1-a6b8-a4a039079312"
         },
         {
           "name": "Delete Category",
@@ -5320,7 +5312,7 @@
             },
             "description": ""
           },
-          "_id": "c4d41e0d-729d-4010-9db9-91e3ba410e96"
+          "_id": "78b015f9-e552-4d2c-87d7-cba1742021c0"
         },
         {
           "name": "List Summaries",
@@ -5366,7 +5358,7 @@
             },
             "description": ""
           },
-          "_id": "2adfd1d7-1721-4cde-a18b-c86a2c8a44d3"
+          "_id": "8a099a25-ac5d-4fe6-805a-5e013108495b"
         },
         {
           "name": "Generate Summary",
@@ -5409,10 +5401,10 @@
               }
             }
           },
-          "_id": "1ea45669-5973-422e-9d64-33ba7bcccd64"
+          "_id": "402db8e1-9da0-4f4f-90ba-de3115f4d3ad"
         }
       ],
-      "_id": "2c27f9c9-7182-45a9-84bb-fdd1ff3a92ea"
+      "_id": "6cbb5c5e-e35b-40d1-aab5-a5c3b6213755"
     },
     {
       "name": "📄 Exports & PDFs",
@@ -5458,7 +5450,7 @@
               }
             }
           },
-          "_id": "40a76b14-5cef-4622-a01d-028e832d3bc2"
+          "_id": "fd417caa-7369-4677-99fb-5188ef5bca74"
         },
         {
           "name": "Export Payments CSV",
@@ -5501,7 +5493,7 @@
               }
             }
           },
-          "_id": "2e252bbc-c862-48c4-a23a-ddd1f3e47044"
+          "_id": "2d160c58-7365-4154-9b91-2139ef97c50c"
         },
         {
           "name": "Export Attendance CSV",
@@ -5544,7 +5536,7 @@
               }
             }
           },
-          "_id": "ddcc257d-c5e2-4b6c-ae60-0d7042534ab4"
+          "_id": "7aa9033f-0d2a-4ecc-9c7f-614b522f68ff"
         },
         {
           "name": "Export Grades CSV",
@@ -5587,7 +5579,7 @@
               }
             }
           },
-          "_id": "8a26a00b-fe8f-4cf7-843a-dcf4c864ee37"
+          "_id": "ac9b29e9-32bc-4bc7-a294-8683eb06b056"
         },
         {
           "name": "Export Groups CSV",
@@ -5630,7 +5622,7 @@
               }
             }
           },
-          "_id": "82e1e3da-d388-4003-95ea-14580c760d46"
+          "_id": "14c4f002-a76c-49cc-8d45-e398a2c1e9df"
         },
         {
           "name": "📇 Generate Student Cards PDF",
@@ -5673,7 +5665,7 @@
               }
             }
           },
-          "_id": "98d6f1f4-9be8-424f-a4f1-73e074ce489c"
+          "_id": "5f88a54e-a3ab-4bdf-9ef7-38e65bcc42f9"
         },
         {
           "name": "📇 Generate Cards by Group",
@@ -5716,7 +5708,7 @@
               }
             }
           },
-          "_id": "b5263745-d6fe-4a64-9b09-8bdd73c343a7"
+          "_id": "f9b33a49-81e9-4c8d-a4b4-79a114559ef4"
         },
         {
           "name": "📋 Comprehensive Student Report PDF",
@@ -5759,7 +5751,7 @@
               }
             }
           },
-          "_id": "0ac1aabe-810a-4fc4-b226-7f3217ec3ec8"
+          "_id": "3416656e-4dd2-44a9-84c7-07d65e4195e0"
         },
         {
           "name": "📋 Student Report by ID",
@@ -5802,7 +5794,7 @@
               }
             }
           },
-          "_id": "93586dbf-f25a-4634-8d60-122454aed5f4"
+          "_id": "fcb813c9-434a-4f65-a145-d9b4cf430915"
         },
         {
           "name": "Download Export",
@@ -5837,7 +5829,7 @@
             },
             "description": ""
           },
-          "_id": "2aea7176-3076-4aae-bbd8-36086076b0ef"
+          "_id": "c9357fbc-c28d-4f9a-80af-e8235ea619d2"
         },
         {
           "name": "Export Status",
@@ -5872,7 +5864,7 @@
             },
             "description": ""
           },
-          "_id": "ac75a7ae-66af-453d-ba1e-19bef247f979"
+          "_id": "c3ae289a-7320-4235-8e99-5201ced3a853"
         },
         {
           "name": "List Exports",
@@ -5905,10 +5897,10 @@
             },
             "description": ""
           },
-          "_id": "54311209-5c19-495f-ac35-b70e3beecf1d"
+          "_id": "d50c04a7-8bef-44f7-b959-1e88d8610cc4"
         }
       ],
-      "_id": "a3d1a199-a1fd-4bf0-b5be-5dccf6210cb9"
+      "_id": "2551ada0-fb9b-4d90-9ea8-d880b11b371c"
     },
     {
       "name": "💡 Smart Insights",
@@ -5963,7 +5955,7 @@
             },
             "description": ""
           },
-          "_id": "7a769075-f717-4907-85e3-8f93d7fb9fff"
+          "_id": "98f7b630-be25-47d2-983b-350a458afb76"
         },
         {
           "name": "Create Insight",
@@ -6005,7 +5997,7 @@
               }
             }
           },
-          "_id": "4961bd84-a90d-421c-8e3b-f886464ba458"
+          "_id": "7530a055-cbb7-478c-bd09-3469a2eadb62"
         },
         {
           "name": "Dismiss Insight",
@@ -6040,7 +6032,7 @@
             },
             "description": ""
           },
-          "_id": "c12ee44d-2ce5-427e-9c12-bee90a5a5b6b"
+          "_id": "6d7d8c7d-1516-49d0-816b-c8b98fa25064"
         },
         {
           "name": "List Alerts",
@@ -6086,7 +6078,7 @@
             },
             "description": ""
           },
-          "_id": "fcf64638-1133-4f24-8d14-1452825b9fe4"
+          "_id": "727444e1-4004-4aba-bb5c-ff3dafd21a2c"
         },
         {
           "name": "Resolve Alert",
@@ -6121,7 +6113,7 @@
             },
             "description": ""
           },
-          "_id": "ece40b24-fe7b-4f92-ab65-15d7cbcdb057"
+          "_id": "d3feb582-f43a-4b34-8d3c-d7c8c26206e5"
         },
         {
           "name": "List Suggestions",
@@ -6154,7 +6146,7 @@
             },
             "description": ""
           },
-          "_id": "dc952d1c-dad1-4eec-a29a-afde717bc1f2"
+          "_id": "40a8c9ac-e4b0-40e2-8f99-eadb35002cde"
         },
         {
           "name": "Apply Suggestion",
@@ -6189,7 +6181,7 @@
             },
             "description": ""
           },
-          "_id": "444a059e-4b75-42f7-b7e6-15b38a33281b"
+          "_id": "b545f94c-695b-453c-871d-046eeba05b68"
         },
         {
           "name": "Analytics Snapshot",
@@ -6235,7 +6227,7 @@
             },
             "description": ""
           },
-          "_id": "ba3ef854-68ec-4cf7-bbed-6c30e0d2259c"
+          "_id": "93f42d85-b21b-4a3c-a4f6-c9f6fb2310cb"
         },
         {
           "name": "Generate Snapshot",
@@ -6278,7 +6270,7 @@
               }
             }
           },
-          "_id": "77984809-9347-4869-a93b-f0e1784e739e"
+          "_id": "66af0b8a-1cf8-4dd9-9769-2a936abf420b"
         },
         {
           "name": "Dashboard Widgets",
@@ -6311,10 +6303,10 @@
             },
             "description": ""
           },
-          "_id": "cd31fd33-6de8-4987-b556-fb06ef8352d7"
+          "_id": "1f3b971a-6c97-47bf-b59f-a51398d327e3"
         }
       ],
-      "_id": "fb1bd435-d491-486d-9f52-1182a5c338ec"
+      "_id": "fa8add1c-c422-4faf-ae11-ddac93d11e28"
     },
     {
       "name": "📈 Reports",
@@ -6369,7 +6361,7 @@
             },
             "description": ""
           },
-          "_id": "9ead4ee2-05ef-478a-8200-c606fbe94f36"
+          "_id": "87fcc9ad-2076-43a6-afd3-d05bdf80ecf7"
         },
         {
           "name": "Generate Report",
@@ -6411,7 +6403,7 @@
               }
             }
           },
-          "_id": "442f0c31-9657-4edf-a079-cc515f773053"
+          "_id": "636bdcb3-caaf-4be1-b975-15adcbadd2f4"
         },
         {
           "name": "Download Report",
@@ -6446,7 +6438,7 @@
             },
             "description": ""
           },
-          "_id": "28719135-ce5f-4573-ad0c-5f5a54e88858"
+          "_id": "03289075-5541-493b-9393-4e51e8c9dbaa"
         },
         {
           "name": "Report Templates",
@@ -6479,10 +6471,10 @@
             },
             "description": ""
           },
-          "_id": "fbef04e1-906a-4d9d-88d1-219961442d1f"
+          "_id": "69bb67d5-fb64-4425-a8b3-cc28c525cd8a"
         }
       ],
-      "_id": "a57f7c73-adbf-4e94-af2a-5b5a47b3431b"
+      "_id": "e5c19be3-1e8d-46e8-8bb6-a7f3a6ae2a15"
     },
     {
       "name": "⚙️ Settings",
@@ -6518,7 +6510,7 @@
             },
             "description": ""
           },
-          "_id": "4fcb3807-be6f-4355-b065-da85fb681296"
+          "_id": "1e7c87d6-81b8-45cb-a862-55ff32cfb0e4"
         },
         {
           "name": "Update Settings",
@@ -6561,7 +6553,7 @@
               }
             }
           },
-          "_id": "d90c1b8b-f909-4322-9323-7dd124e67318"
+          "_id": "354e702d-8efa-405b-92c9-c58e56c44e11"
         },
         {
           "name": "Danger Zone Actions Log",
@@ -6594,7 +6586,7 @@
             },
             "description": ""
           },
-          "_id": "a879cd58-5e02-4fb0-9dc9-31ec03f448cb"
+          "_id": "d1212745-f9b4-432c-a8e9-a59ec6eca45f"
         },
         {
           "name": "Reset Data",
@@ -6636,10 +6628,10 @@
               }
             }
           },
-          "_id": "c946ab54-29a2-445b-916c-453f6cae6446"
+          "_id": "31e001a8-f64d-41db-9adf-7693487af1ef"
         }
       ],
-      "_id": "79b77fc2-0d96-44f9-b7a0-8f58f793fef5"
+      "_id": "c93dd9ae-b9a6-47d8-8a46-71c5ab44dd6a"
     },
     {
       "name": "💳 Teacher Subscriptions",
@@ -6676,7 +6668,7 @@
             },
             "description": ""
           },
-          "_id": "58e89186-0299-4f8e-b1c9-d19883c06778"
+          "_id": "94cacc94-9941-467c-aed4-83ade92435a0"
         },
         {
           "name": "List Plans",
@@ -6709,7 +6701,7 @@
             },
             "description": ""
           },
-          "_id": "6cd9b233-be78-4b6c-a902-8ad6ff0a334d"
+          "_id": "64ba6547-bb89-4db1-9bfb-29493249bb88"
         },
         {
           "name": "Upgrade Plan",
@@ -6752,10 +6744,10 @@
               }
             }
           },
-          "_id": "9bb536c0-3d0d-4581-b69f-f32c424ce09f"
+          "_id": "30ea59bb-984c-4ecf-92b2-390224e2458f"
         }
       ],
-      "_id": "fe0903e6-eec5-4ea1-8a46-6f0f2faaab51"
+      "_id": "17d9437a-7e89-45fc-b33c-ac365b0eee60"
     },
     {
       "name": "👨‍🏫 Teacher Profile",
@@ -6791,7 +6783,7 @@
             },
             "description": ""
           },
-          "_id": "e17a7ec5-c2cc-47d2-889b-0f1cb7766b3c"
+          "_id": "8f942cf2-1ab1-4635-a21a-31448376e433"
         },
         {
           "name": "Update Teacher Profile",
@@ -6834,7 +6826,7 @@
               }
             }
           },
-          "_id": "89b66d82-1972-4c7e-926a-ad48be82d682"
+          "_id": "95e8c0c9-4a01-482b-b183-7dd8852547f4"
         },
         {
           "name": "Teacher Statistics",
@@ -6868,7 +6860,7 @@
             },
             "description": ""
           },
-          "_id": "8642aad7-453f-4d00-a2b0-8714989d8926"
+          "_id": "9d8cf2e5-9e0d-479b-810c-7617c5a9bb1c"
         },
         {
           "name": "Notification Settings",
@@ -6901,7 +6893,7 @@
             },
             "description": ""
           },
-          "_id": "d1bad7f7-8ec5-4b09-a793-595418535b6e"
+          "_id": "f12d9aa0-1fd2-41e2-8881-6f9f2a2c8c7a"
         },
         {
           "name": "Update Notification Settings",
@@ -6944,10 +6936,10 @@
               }
             }
           },
-          "_id": "e00b96c3-1e81-4e6b-b740-d290f91ffaad"
+          "_id": "88f93869-30f5-4114-a2df-b99a036d9315"
         }
       ],
-      "_id": "a4ab7649-ccff-4b67-a46c-ba9085768c91"
+      "_id": "5ca4906f-6c6a-420c-ba82-e83f4a2df898"
     },
     {
       "name": "⚡ Rules Engine",
@@ -6996,7 +6988,7 @@
             },
             "description": ""
           },
-          "_id": "c6b7fcbe-5bb3-4f63-8a8b-45ee41fc6bb4"
+          "_id": "7bb7ec05-7b8f-40d7-baf5-5504c7128c93"
         },
         {
           "name": "Create Rule",
@@ -7038,7 +7030,7 @@
               }
             }
           },
-          "_id": "9815f99f-e060-4206-927b-ff0f633dc8de"
+          "_id": "01820cc9-d8d3-4108-a0a8-7b16f3493b43"
         },
         {
           "name": "Toggle Rule",
@@ -7073,7 +7065,7 @@
             },
             "description": ""
           },
-          "_id": "b175b99d-e763-4e13-aec7-168c5de96786"
+          "_id": "f4e12dae-b3be-46d6-8e2e-3b081a07ccab"
         },
         {
           "name": "Run Rules Now",
@@ -7106,10 +7098,10 @@
             },
             "description": ""
           },
-          "_id": "6af73916-0e1a-4845-a8d7-d155441d8b16"
+          "_id": "4b47c5e9-6032-409f-9dae-395d28c0f307"
         }
       ],
-      "_id": "d95973d1-0777-4b5c-a01a-d5655858bbdc"
+      "_id": "6a264b1d-c4b2-41c4-aeed-4cd96ecd8ccf"
     },
     {
       "name": "📋 Audit Logs",
@@ -7182,10 +7174,10 @@
             },
             "description": ""
           },
-          "_id": "cb318fc3-d610-4d79-9065-f9b56c483969"
+          "_id": "1768910c-0158-4df3-8561-c46d9dd25013"
         }
       ],
-      "_id": "7882dd4f-a70b-4a6c-9736-1e89f18a2bc6"
+      "_id": "c497e933-d17b-4d2a-bd7c-ce99a669aa15"
     },
     {
       "name": "🔄 Sync",
@@ -7221,7 +7213,7 @@
             },
             "description": ""
           },
-          "_id": "6ab91d9e-f0bc-444a-882e-3578a4359156"
+          "_id": "6f4056fe-d592-4e1f-a32c-da605a3b04c8"
         },
         {
           "name": "Push Sync",
@@ -7263,7 +7255,7 @@
               }
             }
           },
-          "_id": "8a64edc8-6479-4200-b014-d2b02b2e4690"
+          "_id": "dd108cb9-451a-4d85-b95b-a56de4833d22"
         },
         {
           "name": "Pull Sync",
@@ -7305,10 +7297,10 @@
               }
             }
           },
-          "_id": "f5710ddc-eb6e-4211-be80-2a2b4fa6e8b2"
+          "_id": "cecf5b11-a299-4dfe-8099-46f742eb805d"
         }
       ],
-      "_id": "8902b491-f691-4ae6-957e-51955a7b50b5"
+      "_id": "5ff3c335-7c36-4786-9baa-95805e92666f"
     },
     {
       "name": "🛡️ Admin",
@@ -7318,11 +7310,6 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json",
@@ -7343,6 +7330,9 @@
               "query": []
             },
             "description": "No Authorization header required. Returns JWT + platform stats.",
+            "auth": {
+              "type": "noauth"
+            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin1234!\"\n}",
@@ -7353,7 +7343,7 @@
               }
             }
           },
-          "_id": "811ef263-9a4f-4f8e-a880-57e5b7702f8f"
+          "_id": "5c74d30d-120b-45d3-8dbc-19a9b4a05ce8"
         },
         {
           "name": "List All Teachers",
@@ -7405,7 +7395,7 @@
             },
             "description": ""
           },
-          "_id": "fb0261f7-8dce-44e8-87ff-8e638bde4a3a"
+          "_id": "5098b97f-a6fa-4148-a32d-a98ee9922c33"
         },
         {
           "name": "Teacher Details",
@@ -7439,7 +7429,7 @@
             },
             "description": ""
           },
-          "_id": "a23561a7-3e40-4c0a-8045-2352b61e2110"
+          "_id": "81604319-9f8d-4fd2-a5d2-b31cfeb35044"
         },
         {
           "name": "Toggle Teacher Active",
@@ -7474,7 +7464,7 @@
             },
             "description": ""
           },
-          "_id": "7a0deb8b-902c-4852-b66e-b0fb0a2b8377"
+          "_id": "d129c149-46c1-4e33-9f7a-b42bbe1d9095"
         },
         {
           "name": "Platform Stats",
@@ -7508,7 +7498,7 @@
             },
             "description": ""
           },
-          "_id": "c893c9ba-2ef9-4c75-a6bd-bf2a97a85919"
+          "_id": "a5f7593e-6939-401e-8948-1a7c76b58e24"
         },
         {
           "name": "List Plans",
@@ -7554,7 +7544,7 @@
             },
             "description": ""
           },
-          "_id": "368dbc0c-2a2c-4e9f-ad21-e10db675afe1"
+          "_id": "2d751aa3-e532-4e1d-a851-9c88539bafb4"
         },
         {
           "name": "Create Plan",
@@ -7596,7 +7586,7 @@
               }
             }
           },
-          "_id": "5c58bf6c-4f19-4b94-9936-cd90a347bf31"
+          "_id": "1825b624-3bc3-4a9c-9ecb-c24a00afb1b0"
         },
         {
           "name": "Get Plan",
@@ -7630,7 +7620,7 @@
             },
             "description": ""
           },
-          "_id": "ea687c42-690b-40dd-b0ef-44da0068e51d"
+          "_id": "743bb4f3-7368-41c5-8a01-6d9570ac7b1e"
         },
         {
           "name": "Update Plan",
@@ -7673,7 +7663,7 @@
               }
             }
           },
-          "_id": "6ac97ea5-d513-47d0-9fc5-113e536f403c"
+          "_id": "73e80eb9-538a-44c0-ad05-7f9a655e040e"
         },
         {
           "name": "Partial Update Plan",
@@ -7716,7 +7706,7 @@
               }
             }
           },
-          "_id": "f923c381-3c32-4068-975c-d12c19a4738e"
+          "_id": "72f6466c-fea1-404d-bd5a-fcc3eaaa0334"
         },
         {
           "name": "Delete Plan",
@@ -7750,7 +7740,7 @@
             },
             "description": "Only succeeds if plan has 0 active subscribers."
           },
-          "_id": "76bc2cdf-6f34-460f-be01-a83abd3080d5"
+          "_id": "8b844137-72ce-479e-8cfb-3e1781ec3f42"
         },
         {
           "name": "Toggle Plan Active",
@@ -7785,7 +7775,7 @@
             },
             "description": "Activates plan if inactive, deactivates if active."
           },
-          "_id": "57551567-4be9-43aa-afaf-ca3cd2d07d80"
+          "_id": "eaeb0e6a-5987-4444-98d9-25c77201a221"
         },
         {
           "name": "List Teacher Subscriptions",
@@ -7843,7 +7833,7 @@
             },
             "description": ""
           },
-          "_id": "fa18315e-d053-44e7-b817-46a91432a4d2"
+          "_id": "ec9a1217-15d2-4423-8213-4e6eb7f64504"
         },
         {
           "name": "Assign Plan to Teacher",
@@ -7885,7 +7875,7 @@
               }
             }
           },
-          "_id": "267b389e-0b7a-45b1-a01d-d9a6ad061527"
+          "_id": "bdd369be-69ea-4991-967e-48eab22fc152"
         },
         {
           "name": "Get Teacher Subscription",
@@ -7919,7 +7909,7 @@
             },
             "description": ""
           },
-          "_id": "e0751561-6afd-40ea-ab0d-fef45207e275"
+          "_id": "f91b7a99-1d9c-464f-a715-1671ee7052b0"
         },
         {
           "name": "Update Subscription",
@@ -7962,7 +7952,7 @@
               }
             }
           },
-          "_id": "c52deff0-1fd2-4689-a769-360bd1643f41"
+          "_id": "1a771d7c-9838-4587-9b91-b36da96e513a"
         },
         {
           "name": "Extend Subscription",
@@ -8006,7 +7996,7 @@
               }
             }
           },
-          "_id": "359984ac-341b-4773-9b9c-ef0a9021ee5b"
+          "_id": "9685ac6e-66e2-4583-b546-c396f67c82ab"
         },
         {
           "name": "Revoke Subscription",
@@ -8041,7 +8031,7 @@
             },
             "description": "Cancels subscription immediately."
           },
-          "_id": "bc9c9446-0b9a-40a4-90a9-dd923fcc5947"
+          "_id": "96d15fc4-c882-4dc3-af6d-d1b431777c33"
         },
         {
           "name": "Expiring Soon",
@@ -8082,10 +8072,10 @@
             },
             "description": ""
           },
-          "_id": "1d82ccc7-741c-476a-b72b-6cbe5e9d5771"
+          "_id": "3fcc47a4-73c7-4aa9-ac4f-7ae96dacbf0d"
         }
       ],
-      "_id": "83e28ceb-7240-4904-8f54-c4743011c3f1"
+      "_id": "f5f4eb3b-cfa8-47d7-942a-676af1e771da"
     },
     {
       "name": "📆 Weekly Schedule",
@@ -8122,7 +8112,7 @@
             },
             "description": "Returns 7-day calendar view with sessions grouped by Arabic day name."
           },
-          "_id": "79509d33-4dc7-4889-8ef4-0cd889853b14"
+          "_id": "027c98bf-4f2a-48bd-b3bb-c653f2916e9f"
         },
         {
           "name": "Specific Week Schedule",
@@ -8169,7 +8159,7 @@
             },
             "description": ""
           },
-          "_id": "e1b3b726-e320-4373-a613-4fdd1b9627e4"
+          "_id": "ab179758-31bd-4127-a784-097cbb8db234"
         },
         {
           "name": "Group Week Schedule",
@@ -8216,10 +8206,10 @@
             },
             "description": ""
           },
-          "_id": "8eab38de-8093-4342-92bf-8626764de517"
+          "_id": "fde81f4d-a9b9-493e-9d47-db223f40ebe4"
         }
       ],
-      "_id": "d53b7245-2524-43f2-b177-1f3d4ff4b60a"
+      "_id": "56f2c414-a7e7-4c2f-9b20-ac65e2f05915"
     }
   ]
 }

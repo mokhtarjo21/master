@@ -42,9 +42,9 @@ class Student(models.Model):
     # Basic Information
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=20, unique=True)  # ST-XXXXXXX format
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    whatsapp_number = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True,unique=True, null=True)
+    whatsapp_number = models.CharField(max_length=20, blank=True,unique=True, null=True)
+    email = models.EmailField(blank=True,unique=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)

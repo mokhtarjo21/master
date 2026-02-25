@@ -17,12 +17,17 @@ AUTH_HEADER = {"key": "Authorization", "value": "Bearer {{access_token}}", "type
 def uid():
     return str(uuid.uuid4())
 
-def item(name, method, url_path, body=None, params=None, description=""):
+NO_AUTH = {"type": "noauth"}  # Used for public endpoints
+
+def item(name, method, url_path, body=None, params=None, description="", no_auth=False):
+    headers = [{"key": "Content-Type", "value": "application/json", "type": "text"}]
+    if not no_auth:
+        headers.insert(0, AUTH_HEADER)
     r = {
         "name": name,
         "request": {
             "method": method,
-            "header": [AUTH_HEADER, {"key": "Content-Type", "value": "application/json", "type": "text"}],
+            "header": headers,
             "url": {
                 "raw": f"{BASE}/api/{url_path}",
                 "host": ["{{base_url}}"],
@@ -34,6 +39,8 @@ def item(name, method, url_path, body=None, params=None, description=""):
         },
         "_id": uid(),
     }
+    if no_auth:
+        r["request"]["auth"] = NO_AUTH
     if body:
         r["request"]["body"] = {"mode": "raw", "raw": json.dumps(body, ensure_ascii=False, indent=2),
                                  "options": {"raw": {"language": "json"}}}
@@ -80,16 +87,16 @@ folders.append(folder("🔐 Authentication", [
         "password": "Pass1234!", "first_name": "أحمد", "last_name": "محمد",
         "phone": "01012345678", "center_name": "مركز الأستاذ أحمد",
         "teacher_pin": "1234"
-    }),
+    }, no_auth=True),
     item("Teacher Login (PIN)", "POST", "auth/teacher-login/", {
         "username": "teacher1", "teacher_pin": "1234"
-    }),
+    }, no_auth=True),
     item("Teacher Google Login", "POST", "auth/teacher-google-login/", {
         "id_token": "{{google_id_token}}", "device_info": {}
-    }),
+    }, no_auth=True),
     item("Student Login", "POST", "auth/student-login/", {
         "student_code": "ST-000001"
-    }),
+    }, no_auth=True),
     item("Logout", "POST", "auth/logout/"),
     item("Get Profile", "GET", "auth/profile/"),
     item("Update Profile", "PUT", "auth/profile/update/", {
@@ -647,7 +654,8 @@ folders.append(folder("🛡️ Admin", [
     # ── Admin Auth ──────────────────────────────────────────────────────────
     item("Admin Login", "POST", "admin/login/",
          body={"username": "admin", "password": "Admin1234!"},
-         description="No Authorization header required. Returns JWT + platform stats."),
+         description="No Authorization header required. Returns JWT + platform stats.",
+         no_auth=True),
 
     # ── Teacher management ──────────────────────────────────────────────────
     item("List All Teachers", "GET", "admin/teachers/",
