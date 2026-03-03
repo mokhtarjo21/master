@@ -17,6 +17,11 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 # ALLOWED_HOSTS = ['mekhotek.pythonanywhere.com', 'testserver', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://127.0.0.1",
+    "https://*.railway.app",
+]
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,6 +58,7 @@ INSTALLED_APPS = [
     'sync',
     'audit_logs',
     'behavior',
+    'points',
 ]
 
 MIDDLEWARE = [

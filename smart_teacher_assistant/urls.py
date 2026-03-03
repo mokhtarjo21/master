@@ -37,6 +37,7 @@ urlpatterns = [
     path('api/sync/', include('sync.urls')),
     path('api/audit/', include('audit_logs.urls')),
     path('api/behavior/', include('behavior.urls')),
+    path('api/points/', include('points.urls')),
 ]
 
 # Serve media files in development
