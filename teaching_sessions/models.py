@@ -154,11 +154,51 @@ class Session(models.Model):
         return self.status in ['scheduled', 'in_progress', 'completed']
     
     def start_session(self):
-        """Mark session as started"""
+        """Mark session as started and auto-mark all students as absent"""
         if self.status == 'scheduled':
             self.status = 'in_progress'
             self.actual_start_time = timezone.now().time()
             self.save(update_fields=['status', 'actual_start_time'])
+            
+            # Auto-create absent records for all enrolled students
+            self._initialize_attendance_as_absent()
+    
+    def _initialize_attendance_as_absent(self):
+        """Create absent attendance records for all active students in the group"""
+        from attendance.models import Attendance
+        from students.models import StudentGroup
+        
+        # Get all active students in this group
+        student_ids = StudentGroup.objects.filter(
+            group=self.group,
+            is_active=True
+        ).values_list('student_id', flat=True)
+        
+        now = timezone.now()
+        records_to_create = []
+        
+        for student_id in student_ids:
+            # Only create if no record exists yet (don't overwrite existing)
+            exists = Attendance.objects.filter(
+                session=self,
+                student_id=student_id
+            ).exists()
+            
+            if not exists:
+                records_to_create.append(
+                    Attendance(
+                        session=self,
+                        student_id=student_id,
+                        status='absent',
+                        method='auto',
+                        marked_at=now,
+                    )
+                )
+        
+        if records_to_create:
+            Attendance.objects.bulk_create(records_to_create, ignore_conflicts=True)
+            # Update the session attendance summary
+            self.update_attendance_summary()
     
     def end_session(self):
         """Mark session as completed"""

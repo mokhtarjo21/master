@@ -1,0 +1,388 @@
+{
+  "info": {
+    "name": "📊 Statistics APIs - Smart Teacher Assistant",
+    "description": "Standalone collection containing all Statistics endpoints.\nBase URL variable: base_url = http://127.0.0.1:8000\nAuth: set access_token after teacher login.\n\nEndpoints:\n  GET /api/students/statistics/\n  GET /api/groups/{id}/statistics/\n  GET /api/sessions/statistics/\n  GET /api/payments/statistics/\n  GET /api/grades/statistics/\n  GET /api/notifications/statistics/\n  GET /api/behavior/records/statistics/\n  GET /api/teachers/profile/statistics/\n  GET /api/admin/teachers/statistics/\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "f9131d9e-8831-453b-a076-a0e61f115e49",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "student_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "group_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "📊 Statistics APIs",
+      "_id": "c17d8f90-1c7b-4473-8a80-5d86614dff43",
+      "item": [
+        {
+          "name": "Students Statistics",
+          "_id": "ed22f85c-323c-4d68-829d-643f1a71c1a9",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/students/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Total students, active/inactive counts, breakdown by subscription type, financial summary."
+          }
+        },
+        {
+          "name": "Group Statistics",
+          "_id": "ba30e690-3cc0-4426-9a3e-21d7c707df2b",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/groups/{{id}}/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "groups",
+                "{{id}}",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Session stats, attendance rates, and financial data for a specific group."
+          }
+        },
+        {
+          "name": "Sessions Statistics",
+          "_id": "5b7d09f5-973e-43b5-b121-f7fd66f76f7f",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/sessions/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "sessions",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Total sessions, completed / cancelled / upcoming counts."
+          }
+        },
+        {
+          "name": "Payments Statistics",
+          "_id": "2c870aee-7fd6-4dbc-b863-8c8382d27108",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payments/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Total income collected, pending and overdue amounts, payment method breakdown."
+          }
+        },
+        {
+          "name": "Grades Statistics",
+          "_id": "a2acd51d-8661-446a-b2f6-8f83d443d999",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/grades/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Average scores, top performers, students below threshold."
+          }
+        },
+        {
+          "name": "Notifications Statistics",
+          "_id": "5b4cdce9-9cfa-4f48-a065-0d41fd2d34fc",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications",
+                "statistics",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "",
+                  "description": "pending | sent | failed | cancelled",
+                  "disabled": true
+                },
+                {
+                  "key": "channel",
+                  "value": "",
+                  "description": "whatsapp | email | push | sms",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Notification delivery stats grouped by status and channel."
+          }
+        },
+        {
+          "name": "Behavior Statistics",
+          "_id": "add140ac-a84e-4585-ab6b-36af0acbe0d2",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/behavior/records/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "behavior",
+                "records",
+                "statistics",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "student_id",
+                  "value": "{{student_id}}",
+                  "description": "Filter by student",
+                  "disabled": true
+                },
+                {
+                  "key": "group_id",
+                  "value": "{{group_id}}",
+                  "description": "Filter by group",
+                  "disabled": true
+                },
+                {
+                  "key": "start_date",
+                  "value": "",
+                  "description": "YYYY-MM-DD",
+                  "disabled": true
+                },
+                {
+                  "key": "end_date",
+                  "value": "",
+                  "description": "YYYY-MM-DD",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Behavior rating breakdown (excellent / good / needs_improvement …) per student or group."
+          }
+        },
+        {
+          "name": "Teacher Profile Statistics",
+          "_id": "96648814-ed48-4ca3-9db6-8b02f88e559a",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/profile/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "teachers",
+                "profile",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Teacher snapshot: total students, groups, sessions held, income totals."
+          }
+        },
+        {
+          "name": "Platform Statistics (Admin)",
+          "_id": "54ffab25-4fba-45cd-bca2-606c92a481a1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/teachers/statistics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "teachers",
+                "statistics",
+                ""
+              ],
+              "query": []
+            },
+            "description": "Platform-wide stats for platform admins: total teachers, students, revenue."
+          }
+        }
+      ]
+    }
+  ]
+}
